@@ -19,11 +19,50 @@ public class Project {
         tasks.add(task);
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public int getTasksCount() {
+        return tasks.size();
+    }
+
+    public int getFinishedTasksCount() {
+        int finishedTasksCount = 0;
+        for (Task task : tasks) {
+            if (task.getDone()) {
+                finishedTasksCount += 1;
+            }
+        }
+        return finishedTasksCount;
+    }
+
+    public void setName(String new_project_name) {
+        name = new_project_name;
+    }
+
+    public void deleteAllTasks() {
+        int i = tasks.size()-1;
+        while (tasks.size() > 0){
+            tasks.remove(i--);
+        }
+    }
+
+    public int getUnfinishedTasksCount() {
+        return tasks.size() - getFinishedTasksCount();
+    }
+
+    public void deleteFinishedTasks() {
+        int i = tasks.size()-1;
+        while (i > 0){
+            if(tasks.get(i).getDone()){
+                tasks.remove(i);
+            }
+            i--;
+        }
     }
 }

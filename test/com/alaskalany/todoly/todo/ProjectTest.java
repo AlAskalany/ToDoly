@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 
@@ -50,9 +52,76 @@ class ProjectTest {
     }
 
     @Test
+    void setName(){
+        project.setName("New Project Name");
+        assertEquals("New Project Name", project.getName());
+    }
+
+    @Test
     @DisplayName("Get tasks")
     void getTasks() {
         project.addTask("Task label", "2018-09-15");
         assertNotNull(project.getTasks());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints ={0,10,1000})
+    void getTasksCountInProject(int numTasks) {
+        for (int i = 0; i < numTasks; i++) {
+            project.addTask(Integer.toString(i), "2018-09-15");
+        }
+        assertEquals(numTasks, project.getTasksCount());
+    }
+
+    @Test
+    void getFinishedTasksCount() {
+        for (int i = 0; i < 50; i++) {
+            project.addTask(Integer.toString(i), "2018-09-05");
+            if ((i % 2) == 0) {
+                project.getTasks().get(i).setDone();
+            }
+        }
+        assertEquals(25, project.getFinishedTasksCount());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints ={0, 10, 100, 1000})
+    void deleteAllTasks(int numTasks){
+        for (int i = 0; i < numTasks; i++) {
+            project.addTask(Integer.toString(i), "2018-09-15");
+        }
+        assertEquals(numTasks, project.getTasksCount());
+        project.deleteAllTasks();
+        assertEquals(0, project.getTasksCount());
+    }
+
+    @Test
+    void removeFinishedTasks(){
+        for (int i = 0; i < 50; i++) {
+            project.addTask(Integer.toString(i), "2018-09-05");
+            if ((i % 2) == 0) {
+                project.getTasks().get(i).setDone();
+            }
+        }
+        assertEquals(25, project.getFinishedTasksCount());
+        project.deleteFinishedTasks();
+        assertEquals(25, project.getUnfinishedTasksCount());
+    }
+
+    @Test
+    void getUnfinishedTasksCount(){
+        for (int i = 0; i < 50; i++) {
+            project.addTask(Integer.toString(i), "2018-09-05");
+            if ((i % 2) == 0) {
+                project.getTasks().get(i).setDone();
+            }
+        }
+        assertEquals(25, project.getUnfinishedTasksCount());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 5})
+    void testParametersHere(int numTasks){
+
     }
 }

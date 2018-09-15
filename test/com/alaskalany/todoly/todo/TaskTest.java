@@ -2,14 +2,13 @@ package com.alaskalany.todoly.todo;
 
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Task Test")
 class TaskTest {
 
     private Task task;
+    private Project project;
 
 
     /**
@@ -25,7 +24,7 @@ class TaskTest {
      */
     @BeforeEach
     void setUp() {
-        Project project = Project.createProject("Test project");
+        project = Project.createProject("Test project");
         task = Task.createTask("Test task", "2018-09-15", project);
     }
 
@@ -100,8 +99,45 @@ class TaskTest {
      */
     @Test
     @DisplayName("Finish task")
-    void finish(){
+    void finish() {
         task.setDone();
         assertTrue(task.getDone());
+    }
+
+    @Test
+    void setDone() {
+        task.setDone();
+        assertTrue(task.getDone());
+    }
+
+    @Test
+    void getDoneUnfinishedTask() {
+        task.setDone();
+        assertTrue(task.getDone());
+    }
+
+    @Test
+    void getDoneFinishedTask() {
+        task.setDone();
+        assertTrue(task.getDone());
+        task.setUnfinished();
+        assertFalse(task.getDone());
+    }
+
+    @Test
+    void getProjectNotNull() {
+        assertNotNull(task.getProject());
+    }
+
+    @Test
+    void getProject() {
+        assertSame(project, task.getProject());
+    }
+
+    @Test
+    void setProject() {
+        Project newProject = Project.createProject("New Project");
+        task.setProject(newProject);
+        assertSame(newProject, task.getProject());
     }
 }

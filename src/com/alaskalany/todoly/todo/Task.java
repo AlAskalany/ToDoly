@@ -42,4 +42,16 @@ public class Task {
     public boolean getDone() {
         return done;
     }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public void setUnfinished() {
+        done = false;
+    }
 }
