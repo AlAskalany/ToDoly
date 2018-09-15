@@ -101,27 +101,27 @@ class TaskTest {
     @DisplayName("Finish task")
     void finish() {
         task.setDone();
-        assertTrue(task.getDone());
+        assertTrue(task.isFinished());
     }
 
     @Test
     void setDone() {
         task.setDone();
-        assertTrue(task.getDone());
+        assertTrue(task.isFinished());
     }
 
     @Test
     void getDoneUnfinishedTask() {
         task.setDone();
-        assertTrue(task.getDone());
+        assertTrue(task.isFinished());
     }
 
     @Test
     void getDoneFinishedTask() {
         task.setDone();
-        assertTrue(task.getDone());
+        assertTrue(task.isFinished());
         task.setUnfinished();
-        assertFalse(task.getDone());
+        assertFalse(task.isFinished());
     }
 
     @Test

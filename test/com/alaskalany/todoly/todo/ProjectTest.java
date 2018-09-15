@@ -51,7 +51,7 @@ class ProjectTest {
     }
 
     @Test
-    void setName(){
+    void setName() {
         project.setName("New Project Name");
         assertEquals("New Project Name", project.getName());
     }
@@ -64,12 +64,12 @@ class ProjectTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints ={0,10,1000})
+    @ValueSource(ints = {0, 10, 1000})
     void getTasksCountInProject(int numTasks) {
         for (int i = 0; i < numTasks; i++) {
             project.addTask(Integer.toString(i), "2018-09-15");
         }
-        assertEquals(numTasks, project.getTasksCount());
+        assertEquals(numTasks, project.numTasks());
     }
 
     @Test
@@ -80,35 +80,35 @@ class ProjectTest {
                 project.getTasks().get(i).setDone();
             }
         }
-        assertEquals(25, project.getFinishedTasksCount());
+        assertEquals(25, project.numFinishedTasks());
     }
 
     @ParameterizedTest
-    @ValueSource(ints ={0, 10, 100, 1000})
-    void deleteAllTasks(int numTasks){
+    @ValueSource(ints = {0, 10, 100, 1000})
+    void deleteAllTasks(int numTasks) {
         for (int i = 0; i < numTasks; i++) {
             project.addTask(Integer.toString(i), "2018-09-15");
         }
-        assertEquals(numTasks, project.getTasksCount());
+        assertEquals(numTasks, project.numTasks());
         project.deleteAllTasks();
-        assertEquals(0, project.getTasksCount());
+        assertEquals(0, project.numTasks());
     }
 
     @Test
-    void removeFinishedTasks(){
+    void removeFinishedTasks() {
         for (int i = 0; i < 50; i++) {
             project.addTask(Integer.toString(i), "2018-09-05");
             if ((i % 2) == 0) {
                 project.getTasks().get(i).setDone();
             }
         }
-        assertEquals(25, project.getFinishedTasksCount());
+        assertEquals(25, project.numFinishedTasks());
         project.deleteFinishedTasks();
         assertEquals(25, project.getUnfinishedTasksCount());
     }
 
     @Test
-    void getUnfinishedTasksCount(){
+    void getUnfinishedTasksCount() {
         for (int i = 0; i < 50; i++) {
             project.addTask(Integer.toString(i), "2018-09-05");
             if ((i % 2) == 0) {
@@ -120,7 +120,25 @@ class ProjectTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 5})
-    void testParametersHere(@SuppressWarnings("unused") int numTasks){
+    void testParametersHere(@SuppressWarnings("unused") int numTasks) {
 
+    }
+
+    @Test
+    void removeTask() {
+        int numTasks = 3;
+        for (int i = 0; i < numTasks; i++) {
+            project.addTask(Integer.toString(i), "2018-09-15");
+        }
+        project.removeTask(2);
+        assertEquals(2, project.numTasks());
+    }
+
+    @Test
+    void getTask() {
+        project.addTask("I am a task", "2018-09-15");
+        Task task = project.getTask(0);
+        assertEquals("I am a task", task.getLabel());
+        assertEquals("2018-09-15", task.getDate());
     }
 }

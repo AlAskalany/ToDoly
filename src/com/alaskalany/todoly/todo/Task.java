@@ -40,7 +40,7 @@ class Task {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public boolean getDone() {
+    public boolean isFinished() {
         return done;
     }
 
