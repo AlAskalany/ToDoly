@@ -2,7 +2,7 @@ package com.alaskalany.todoly.todo;
 
 import java.util.ArrayList;
 
-public class Project {
+class Project {
     private String name;
     private ArrayList<Task> tasks = new ArrayList<>();
 
@@ -10,28 +10,28 @@ public class Project {
         this.name = name;
     }
 
-    public static Project createProject(String name) {
+    static Project createProject(String name) {
         return new Project(name);
     }
 
-    public void addTask(String label, String date) {
+    void addTask(String label, String date) {
         Task task = Task.createTask(label, date, this);
         tasks.add(task);
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public ArrayList<Task> getTasks() {
+    ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public int getTasksCount() {
+    int getTasksCount() {
         return tasks.size();
     }
 
-    public int getFinishedTasksCount() {
+    int getFinishedTasksCount() {
         int finishedTasksCount = 0;
         for (Task task : tasks) {
             if (task.getDone()) {
@@ -41,22 +41,22 @@ public class Project {
         return finishedTasksCount;
     }
 
-    public void setName(String new_project_name) {
+    void setName(@SuppressWarnings("SameParameterValue") String new_project_name) {
         name = new_project_name;
     }
 
-    public void deleteAllTasks() {
+    void deleteAllTasks() {
         int i = tasks.size()-1;
         while (tasks.size() > 0){
             tasks.remove(i--);
         }
     }
 
-    public int getUnfinishedTasksCount() {
+    int getUnfinishedTasksCount() {
         return tasks.size() - getFinishedTasksCount();
     }
 
-    public void deleteFinishedTasks() {
+    void deleteFinishedTasks() {
         int i = tasks.size()-1;
         while (i > 0){
             if(tasks.get(i).getDone()){

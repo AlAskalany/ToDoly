@@ -1,6 +1,6 @@
 package com.alaskalany.todoly.todo;
 
-public class Task {
+class Task {
     private String label;
     private String date;
     private Project project;
@@ -17,19 +17,20 @@ public class Task {
         return new Task(label, date, project);
     }
 
-    public String getLabel() {
+    String getLabel() {
         return label;
     }
 
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
-    public void setLabel(String label) {
+    void setLabel(@SuppressWarnings("SameParameterValue") String label) {
         this.label = label;
     }
 
-    public void setDate(String date) {
+    @SuppressWarnings("SameParameterValue")
+    void setDate(String date) {
         this.date = date;
     }
 
@@ -43,15 +44,15 @@ public class Task {
         return done;
     }
 
-    public Project getProject() {
+    Project getProject() {
         return project;
     }
 
-    public void setProject(Project project) {
+    void setProject(Project project) {
         this.project = project;
     }
 
-    public void setUnfinished() {
+    void setUnfinished() {
         done = false;
     }
 }
