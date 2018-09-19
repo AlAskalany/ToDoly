@@ -3,7 +3,7 @@ package com.alaskalany.todoly;
 /**
  *
  */
-public class Main {
+public class ToDoly {
 
     /**
      * @param args Arguments
