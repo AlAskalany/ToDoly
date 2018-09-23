@@ -24,8 +24,9 @@ class TaskTest {
      */
     @BeforeEach
     void setUp() {
-        project = Project.createProject("Test project");
-        task = Task.createTask("Test task", "2018-09-15", project);
+        project = new Project.Builder().title("Test project").id(1L).build();
+        task = new Task.Builder().title("Test task").id(2L).status(false).dueDate("2018-09-15")
+                .projectId(project.getId()).build();
     }
 
     /**
@@ -58,7 +59,7 @@ class TaskTest {
     @Test
     @DisplayName("Display task label")
     void getLabel() {
-        String taskLabel = task.getLabel();
+        String taskLabel = task.getTitle();
         assertEquals("Test task", taskLabel);
     }
 
@@ -68,7 +69,7 @@ class TaskTest {
     @Test
     @DisplayName("Get task date")
     void getDate() {
-        String taskDate = task.getDate();
+        String taskDate = task.getDueDate();
         assertEquals("2018-09-15", taskDate);
     }
 
@@ -78,8 +79,8 @@ class TaskTest {
     @Test
     @DisplayName("Set task label")
     void setLabel() {
-        task.setLabel("Test task 2");
-        String taskLabel = task.getLabel();
+        task.setTitle("Test task 2");
+        String taskLabel = task.getTitle();
         assertEquals("Test task 2", taskLabel);
     }
 
@@ -89,8 +90,8 @@ class TaskTest {
     @Test
     @DisplayName("Set task date")
     void setDate() {
-        task.setDate("2018-09-20");
-        String taskDate = task.getDate();
+        task.setDueDate("2018-09-20");
+        String taskDate = task.getDueDate();
         assertEquals("2018-09-20", taskDate);
     }
 
@@ -100,44 +101,45 @@ class TaskTest {
     @Test
     @DisplayName("Finish task")
     void finish() {
-        task.setDone();
-        assertTrue(task.isFinished());
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
     }
 
     @Test
     void setDone() {
-        task.setDone();
-        assertTrue(task.isFinished());
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
     }
 
     @Test
     void getDoneUnfinishedTask() {
-        task.setDone();
-        assertTrue(task.isFinished());
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
     }
 
     @Test
     void getDoneFinishedTask() {
-        task.setDone();
-        assertTrue(task.isFinished());
-        task.setUnfinished();
-        assertFalse(task.isFinished());
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
+        task.setStatusFalse();
+        assertFalse(task.getStatus());
     }
 
     @Test
     void getProjectNotNull() {
-        assertNotNull(task.getProject());
+        assertNotNull(task.getProjectId());
     }
 
     @Test
-    void getProject() {
-        assertSame(project, task.getProject());
+    void getProjectId() {
+        assertSame(project.getId(), task.getProjectId());
     }
 
     @Test
     void setProject() {
-        Project newProject = Project.createProject("New Project");
-        task.setProject(newProject);
-        assertSame(newProject, task.getProject());
+        Project newProject = new Project.Builder().title("New project").id(1L).build();
+        ;
+        task.setProjectId(newProject.getId());
+        assertSame(newProject.getId(), task.getProjectId());
     }
 }

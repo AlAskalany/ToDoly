@@ -18,7 +18,7 @@ class ProjectTest {
 
     @BeforeEach
     void setUp() {
-        project = Project.createProject("My Project");
+        project = new Project.Builder().title("My Project").id(1L).build();
     }
 
     @AfterEach
@@ -47,13 +47,13 @@ class ProjectTest {
     @Test
     @DisplayName("Get project name")
     void getName() {
-        assertEquals("My Project", project.getName());
+        assertEquals("My Project", project.getTitle());
     }
 
     @Test
     void setName() {
-        project.setName("New Project Name");
-        assertEquals("New Project Name", project.getName());
+        project.setTitle("New Project Name");
+        assertEquals("New Project Name", project.getTitle());
     }
 
     @Test
@@ -77,7 +77,7 @@ class ProjectTest {
         for (int i = 0; i < 50; i++) {
             project.addTask(Integer.toString(i), "2018-09-05");
             if ((i % 2) == 0) {
-                project.getTasks().get(i).setDone();
+                project.getTasks().get(i).setStatusTrue();
             }
         }
         assertEquals(25, project.numFinishedTasks());
@@ -99,7 +99,7 @@ class ProjectTest {
         for (int i = 0; i < 50; i++) {
             project.addTask(Integer.toString(i), "2018-09-05");
             if ((i % 2) == 0) {
-                project.getTasks().get(i).setDone();
+                project.getTasks().get(i).setStatusTrue();
             }
         }
         assertEquals(25, project.numFinishedTasks());
@@ -112,7 +112,7 @@ class ProjectTest {
         for (int i = 0; i < 50; i++) {
             project.addTask(Integer.toString(i), "2018-09-05");
             if ((i % 2) == 0) {
-                project.getTasks().get(i).setDone();
+                project.getTasks().get(i).setStatusTrue();
             }
         }
         assertEquals(25, project.getUnfinishedTasksCount());
@@ -138,7 +138,7 @@ class ProjectTest {
     void getTask() {
         project.addTask("I am a task", "2018-09-15");
         Task task = project.getTask(0);
-        assertEquals("I am a task", task.getLabel());
-        assertEquals("2018-09-15", task.getDate());
+        assertEquals("I am a task", task.getTitle());
+        assertEquals("2018-09-15", task.getDueDate());
     }
 }

@@ -1,58 +1,108 @@
 package com.alaskalany.todoly.todo;
 
-class Task {
-    private String label;
-    private String date;
-    private Project project;
-    private boolean done;
+import java.io.Serializable;
 
-    private Task(String label, String date, Project project) {
-        this.label = label;
-        this.date = date;
-        this.project = project;
+public class Task implements Serializable {
+    public static final String TITLE = "title";
+    public static final String ID = "id";
+    public static final String STATUS = "status";
+    public static final String PROJECT_ID = "project-id";
+    public static final String DUE_DATE = "due-date";
+    private String dueDate;
+    private Long projectId;
+    private Boolean status;
+    private Long id;
+    private String title;
+
+    public Task(Builder builder) {
+        this.title = builder.title;
+        this.id = builder.id;
+        this.status = builder.status;
+        this.dueDate = builder.dueDate;
+        this.projectId = builder.projectId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public static Task createTask(String label, String date, Project project) {
-        return new Task(label, date, project);
+    String getTitle() {
+        return title;
     }
 
-    String getLabel() {
-        return label;
+    String getDueDate() {
+        return dueDate;
     }
 
-    String getDate() {
-        return date;
-    }
-
-    void setLabel(@SuppressWarnings("SameParameterValue") String label) {
-        this.label = label;
+    void setTitle(@SuppressWarnings("SameParameterValue") String label) {
+        this.title = label;
     }
 
     @SuppressWarnings("SameParameterValue")
-    void setDate(String date) {
-        this.date = date;
+    void setDueDate(String date) {
+        this.dueDate = date;
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setDone() {
-        done = true;
+    public void setStatusTrue() {
+        status = true;
     }
 
     @SuppressWarnings("WeakerAccess")
-    public boolean isFinished() {
-        return done;
+    public boolean getStatus() {
+        return status;
     }
 
-    Project getProject() {
-        return project;
+    void setStatusFalse() {
+        status = false;
     }
 
-    void setProject(Project project) {
-        this.project = project;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    void setUnfinished() {
-        done = false;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public static class Builder {
+        private String title;
+        private Long id;
+        private Boolean status;
+        private Long projectId;
+        private String dueDate;
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder status(Boolean status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder projectId(Long projectId) {
+            this.projectId = projectId;
+            return this;
+        }
+
+        public Task build() {
+            return new Task(this);
+        }
+
+        public Builder dueDate(String dueDate) {
+            this.dueDate = dueDate;
+            return this;
+        }
     }
 }

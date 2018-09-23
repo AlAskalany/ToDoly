@@ -1,33 +1,31 @@
 package com.alaskalany.todoly.todo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  */
-class Project {
+public class Project implements Serializable {
+    private static final long serialVersionUID = 1L;
+    public static final String TITLE = "title";
+    public static final String ID = "id";
+    private Long id;
     /**
-     * Project name
+     * Project title
      */
-    private String name;
+    private String title;
     /**
      * List of tasks in the project
      */
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    /**
-     * @param name {@link String} Project name
-     */
-    private Project(String name) {
-        this.name = name;
+    public Project() {
     }
 
-    /**
-     * @param name {@link String} Project name
-     * @return {@link Project} Project instance
-     */
-    static Project createProject(String name) {
-        return new Project(name);
+    public Project(Builder builder) {
+        this.title = builder.title;
+        this.id = builder.id;
     }
 
     /**
@@ -35,15 +33,17 @@ class Project {
      * @param date  {@link String Due date for the task}
      */
     void addTask(String label, String date) {
-        Task task = Task.createTask(label, date, this);
+        // TODO how and where to create task id?
+        Long taskId = 1L;
+        Task task = new Task.Builder().title(label).dueDate(date).id(taskId).status(false).projectId(this.id).build();
         tasks.add(task);
     }
 
     /**
      * @return {@link String} Name of the project
      */
-    String getName() {
-        return name;
+    String getTitle() {
+        return title;
     }
 
     /**
@@ -66,7 +66,7 @@ class Project {
     int numFinishedTasks() {
         int finishedTasksCount = 0;
         for (Task task : tasks) {
-            if (task.isFinished()) {
+            if (task.getStatus()) {
                 finishedTasksCount += 1;
             }
         }
@@ -74,10 +74,10 @@ class Project {
     }
 
     /**
-     * @param new_project_name {@link String} New project name
+     * @param new_project_name {@link String} New project title
      */
-    void setName(@SuppressWarnings("SameParameterValue") String new_project_name) {
-        name = new_project_name;
+    void setTitle(@SuppressWarnings("SameParameterValue") String new_project_name) {
+        title = new_project_name;
     }
 
     /**
@@ -108,7 +108,7 @@ class Project {
         // Start from the last task in the tasks list
         int i = getLastTask(tasks);
         while (i > 0) {
-            if (getTask(i).isFinished()) {
+            if (getTask(i).getStatus()) {
                 removeTask(i);
             }
             i--;
@@ -126,4 +126,37 @@ class Project {
     private static int getLastTask(ArrayList<Task> tasks) {
         return tasks.size() - 1;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Builder class for the Project class
+     */
+    // [START builder]
+    public static class Builder {
+        private String title;
+        private Long id;
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder id(Long projectId) {
+            this.id = projectId;
+            return this;
+        }
+
+        public Project build() {
+            return new Project(this);
+        }
+    }
+    // [END builder]
+
+    /*@Override
+    public String toString() {
+        return new StringBuffer(" id: ").append(this.id).append(" title: ").append(this.title).toString();
+    }*/
 }
