@@ -43,7 +43,7 @@ public class Project implements Serializable {
     /**
      * @return {@link String} Name of the project
      */
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -77,7 +77,7 @@ public class Project implements Serializable {
     /**
      * @param new_project_name {@link String} New project title
      */
-    void setTitle(@SuppressWarnings("SameParameterValue") String new_project_name) {
+    public void setTitle(@SuppressWarnings("SameParameterValue") String new_project_name) {
         title = new_project_name;
     }
 
