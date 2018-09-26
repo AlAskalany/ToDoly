@@ -3,7 +3,7 @@ package com.alaskalany.todoly.todo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Task implements Serializable {
+public class Task implements Serializable, Comparable<Task> {
     public static final String TITLE = "title";
     public static final String ID = "id";
     public static final String STATUS = "status";
@@ -23,11 +23,11 @@ public class Task implements Serializable {
         this.projectId = builder.projectId;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    Date getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
@@ -68,6 +68,11 @@ public class Task implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        return getDueDate().compareTo(otherTask.getDueDate());
     }
 
     public static class Builder {
