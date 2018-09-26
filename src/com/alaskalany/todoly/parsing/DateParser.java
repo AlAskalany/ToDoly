@@ -8,7 +8,7 @@ public class DateParser {
     public DateParser() {
     }
 
-    public Date getDateFromString(String inputDate) throws ParseException {
+    public Date getDateFromString(String inputDate) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
