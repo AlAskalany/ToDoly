@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FileDao implements ProjectDao, TaskDao {
 
@@ -60,7 +61,7 @@ public class FileDao implements ProjectDao, TaskDao {
     // TODO
     public Task entityToTask(JSONObject jsonObject) {
         return new Task.Builder().title((String) jsonObject.get(Task.TITLE)).id((Long) jsonObject.get(Task.ID))
-                .status((Boolean) jsonObject.get(Task.STATUS)).dueDate((String) jsonObject.get(Task.DUE_DATE))
+                .status((Boolean) jsonObject.get(Task.STATUS)).dueDate((Date) jsonObject.get(Task.DUE_DATE))
                 .projectId((Long) jsonObject.get(Task.PROJECT_ID)).build();
     }
 

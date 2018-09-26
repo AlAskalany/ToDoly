@@ -1,6 +1,7 @@
 package com.alaskalany.todoly.todo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Task implements Serializable {
     public static final String TITLE = "title";
@@ -8,7 +9,7 @@ public class Task implements Serializable {
     public static final String STATUS = "status";
     public static final String PROJECT_ID = "project-id";
     public static final String DUE_DATE = "due-date";
-    private String dueDate;
+    private Date dueDate;
     private Long projectId;
     private Boolean status;
     private Long id;
@@ -26,7 +27,7 @@ public class Task implements Serializable {
         return title;
     }
 
-    String getDueDate() {
+    Date getDueDate() {
         return dueDate;
     }
 
@@ -35,7 +36,7 @@ public class Task implements Serializable {
     }
 
     @SuppressWarnings("SameParameterValue")
-    void setDueDate(String date) {
+    void setDueDate(Date date) {
         this.dueDate = date;
     }
 
@@ -74,7 +75,7 @@ public class Task implements Serializable {
         private Long id;
         private Boolean status;
         private Long projectId;
-        private String dueDate;
+        private Date dueDate;
 
         public Builder title(String title) {
             this.title = title;
@@ -100,7 +101,7 @@ public class Task implements Serializable {
             return new Task(this);
         }
 
-        public Builder dueDate(String dueDate) {
+        public Builder dueDate(Date dueDate) {
             this.dueDate = dueDate;
             return this;
         }

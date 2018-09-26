@@ -2,6 +2,7 @@ package com.alaskalany.todoly.todo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Project implements Serializable {
      * @param label {@link String Label of the task}
      * @param date  {@link String Due date for the task}
      */
-    void addTask(String label, String date) {
+    void addTask(String label, Date date) {
         // TODO how and where to create task id?
         Long taskId = 1L;
         Task task = new Task.Builder().title(label).dueDate(date).id(taskId).status(false).projectId(this.id).build();

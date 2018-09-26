@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -15,6 +18,7 @@ class ProjectTest {
 
     @SuppressWarnings("WeakerAccess")
     Project project;
+    Date date = new Date(0,0,0);
 
     @BeforeEach
     void setUp() {
@@ -40,7 +44,8 @@ class ProjectTest {
     @Test
     @DisplayName("Add a task to the project")
     void addTask() {
-        project.addTask("Task label", "2018-09-15");
+
+        project.addTask("Task label", date);
         assertEquals(1, project.getTasks().size());
     }
 
@@ -59,7 +64,7 @@ class ProjectTest {
     @Test
     @DisplayName("Get tasks")
     void getTasks() {
-        project.addTask("Task label", "2018-09-15");
+        project.addTask("Task label", date);
         assertNotNull(project.getTasks());
     }
 
@@ -67,7 +72,7 @@ class ProjectTest {
     @ValueSource(ints = {0, 10, 1000})
     void getTasksCountInProject(int numTasks) {
         for (int i = 0; i < numTasks; i++) {
-            project.addTask(Integer.toString(i), "2018-09-15");
+            project.addTask(Integer.toString(i), date);
         }
         assertEquals(numTasks, project.numTasks());
     }
@@ -75,7 +80,7 @@ class ProjectTest {
     @Test
     void getFinishedTasksCount() {
         for (int i = 0; i < 50; i++) {
-            project.addTask(Integer.toString(i), "2018-09-05");
+            project.addTask(Integer.toString(i), date);
             if ((i % 2) == 0) {
                 project.getTasks().get(i).setStatusTrue();
             }
@@ -87,7 +92,7 @@ class ProjectTest {
     @ValueSource(ints = {0, 10, 100, 1000})
     void deleteAllTasks(int numTasks) {
         for (int i = 0; i < numTasks; i++) {
-            project.addTask(Integer.toString(i), "2018-09-15");
+            project.addTask(Integer.toString(i), date);
         }
         assertEquals(numTasks, project.numTasks());
         project.deleteAllTasks();
@@ -97,7 +102,7 @@ class ProjectTest {
     @Test
     void removeFinishedTasks() {
         for (int i = 0; i < 50; i++) {
-            project.addTask(Integer.toString(i), "2018-09-05");
+            project.addTask(Integer.toString(i), date);
             if ((i % 2) == 0) {
                 project.getTasks().get(i).setStatusTrue();
             }
@@ -110,7 +115,7 @@ class ProjectTest {
     @Test
     void getUnfinishedTasksCount() {
         for (int i = 0; i < 50; i++) {
-            project.addTask(Integer.toString(i), "2018-09-05");
+            project.addTask(Integer.toString(i), date);
             if ((i % 2) == 0) {
                 project.getTasks().get(i).setStatusTrue();
             }
@@ -128,7 +133,7 @@ class ProjectTest {
     void removeTask() {
         int numTasks = 3;
         for (int i = 0; i < numTasks; i++) {
-            project.addTask(Integer.toString(i), "2018-09-15");
+            project.addTask(Integer.toString(i), date);
         }
         project.removeTask(2);
         assertEquals(2, project.numTasks());
@@ -136,9 +141,9 @@ class ProjectTest {
 
     @Test
     void getTask() {
-        project.addTask("I am a task", "2018-09-15");
+        project.addTask("I am a task", date);
         Task task = project.getTask(0);
         assertEquals("I am a task", task.getTitle());
-        assertEquals("2018-09-15", task.getDueDate());
+        assertEquals(date, task.getDueDate());
     }
 }

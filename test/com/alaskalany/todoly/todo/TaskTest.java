@@ -2,6 +2,8 @@ package com.alaskalany.todoly.todo;
 
 import org.junit.jupiter.api.*;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Task Test")
@@ -9,6 +11,7 @@ class TaskTest {
 
     private Task task;
     private Project project;
+    Date date = new Date(0,0,0);
 
 
     /**
@@ -25,7 +28,7 @@ class TaskTest {
     @BeforeEach
     void setUp() {
         project = new Project.Builder().title("Test project").id(1L).build();
-        task = new Task.Builder().title("Test task").id(2L).status(false).dueDate("2018-09-15")
+        task = new Task.Builder().title("Test task").id(2L).status(false).dueDate(date)
                 .projectId(project.getId()).build();
     }
 
@@ -69,8 +72,7 @@ class TaskTest {
     @Test
     @DisplayName("Get task date")
     void getDate() {
-        String taskDate = task.getDueDate();
-        assertEquals("2018-09-15", taskDate);
+        assertEquals(date, task.getDueDate());
     }
 
     /**
@@ -90,9 +92,8 @@ class TaskTest {
     @Test
     @DisplayName("Set task date")
     void setDate() {
-        task.setDueDate("2018-09-20");
-        String taskDate = task.getDueDate();
-        assertEquals("2018-09-20", taskDate);
+        task.setDueDate(date);
+        assertEquals(date, task.getDueDate());
     }
 
     /**
