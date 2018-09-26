@@ -21,29 +21,36 @@ class CliTest {
 
     @Test
     void getTaskTitleFromUser() {
+        fail();
     }
 
     @Test
     void getTaskDueDateFromUser() {
+        fail();
     }
 
     @Test
     void getProjectTitleFromUser() {
+        fail();
     }
 
     @Test
     void getTaskStatusFromUser() {
+        fail();
     }
 
     @Test
     void getSelectedOptionFromUser() {
+        fail();
     }
 
     @Test
     void getSelectedProjectFromUser() {
+        fail();
     }
 
     @Test
     void showProjectsListToUser() {
+        fail();
     }
 }
