@@ -27,7 +27,7 @@ public class FileDao implements ProjectDao, TaskDao {
         fileOutputStream = new FileOutputStream(this.outputFileName);
     }
 
-    // ToDo
+    // ToDoApplication
     public Project entityToProject(JSONObject jsonObject) {
         return new Project.Builder().title((String) jsonObject.get(Project.TITLE)).id((Long) jsonObject.get(Project.ID))
                 .build();
