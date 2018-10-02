@@ -35,12 +35,12 @@ public class TaskManager {
 
     public String getTaskTitle(Integer valueOf) {
 
-        return tasks.get(valueOf).getTitle();
+        return tasks.get(valueOf-1).getTitle();
     }
 
     public Task getTask(Integer taskIndex) {
 
-        return tasks.get(taskIndex);
+        return tasks.get(taskIndex-1);
     }
 
     public boolean doesProjectExist(String input) {
@@ -55,7 +55,7 @@ public class TaskManager {
 
     public void addTaskToProject(Integer taskIndex, String input) {
 
-        projects.get(input).addTask(tasks.get(taskIndex));
+        projects.get(input).addTask(tasks.get(taskIndex-1));
     }
 
     public ArrayList<String> getAllWithNoProject() {
