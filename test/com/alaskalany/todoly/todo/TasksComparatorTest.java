@@ -5,12 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TasksSorterTest {
+class TasksComparatorTest {
 
     @BeforeEach
     void setUp() {
@@ -58,7 +57,7 @@ class TasksSorterTest {
                 .add(new Task.Builder().title("task1").id(1L).dueDate(new Date(0, 3, 0)).projectId(1L).status(false)
                         .build());
 
-        TasksSorter sorter = new TasksSorter();
+        TasksComparator sorter = new TasksComparator();
         ArrayList<Task> resultTasksList = sorter.sortTasks(inputTaskList);
 
         resultTasksList.forEach(resultTask -> {

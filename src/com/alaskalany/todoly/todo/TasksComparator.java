@@ -3,9 +3,9 @@ package com.alaskalany.todoly.todo;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class TasksSorter implements Comparator<Task> {
+public class TasksComparator implements Comparator<Task> {
     public ArrayList<Task> sortTasks(ArrayList<Task> inputTasks) {
-        inputTasks.sort(new TasksSorter());
+        inputTasks.sort(new TasksComparator());
         return inputTasks;
     }
 
