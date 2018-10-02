@@ -5,6 +5,7 @@ import com.alaskalany.todoly.todo.Task;
 import com.alaskalany.todoly.todo.TasksComparator;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class TaskManager {
@@ -35,12 +36,12 @@ public class TaskManager {
 
     public String getTaskTitle(Integer valueOf) {
 
-        return tasks.get(valueOf-1).getTitle();
+        return tasks.get(valueOf - 1).getTitle();
     }
 
     public Task getTask(Integer taskIndex) {
 
-        return tasks.get(taskIndex-1);
+        return tasks.get(taskIndex - 1);
     }
 
     public boolean doesProjectExist(String input) {
@@ -55,7 +56,7 @@ public class TaskManager {
 
     public void addTaskToProject(Integer taskIndex, String input) {
 
-        projects.get(input).addTask(tasks.get(taskIndex-1));
+        projects.get(input).addTask(tasks.get(taskIndex - 1));
     }
 
     public ArrayList<String> getAllWithNoProject() {
@@ -67,5 +68,15 @@ public class TaskManager {
             }
         });
         return taskTitles;
+    }
+
+    public ArrayList<Project> getAllProjects() {
+
+        ArrayList<Project> projectsList = new ArrayList<>();
+        projects.forEach((s, project) -> {
+            projectsList.add(project);
+        });
+        projectsList.sort(Comparator.comparing(Project::getTitle));
+        return projectsList;
     }
 }

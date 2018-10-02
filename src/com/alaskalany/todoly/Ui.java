@@ -1,6 +1,8 @@
 package com.alaskalany.todoly;
 
 import com.alaskalany.todoly.parsing.DateParser;
+import com.alaskalany.todoly.todo.Project;
+import com.alaskalany.todoly.todo.Task;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +43,9 @@ public class Ui {
                 saveAndQuit();
                 break;
             default:
+                System.out.println("Enter a valid input.");
+                System.out.print("Enter a choice: ");
+                mainMenu();
                 break;
         }
     }
@@ -70,7 +75,7 @@ public class Ui {
         System.out.print("Enter a choice: ");
         Scanner scanner = new Scanner(System.in);
         String input;
-        input = scanner.next();
+        input = scanner.nextLine();
         handleListAllTasksInput(input);
     }
 
@@ -92,9 +97,21 @@ public class Ui {
 
         System.out.println("All Tasks List - By Project");
         System.out.println();
-        ArrayList<String> tasksWithProject = taskManager.getAllTasksWithAProject();
+        ArrayList<Project> projects;
+        projects = taskManager.getAllProjects();
+        projects.forEach(project -> {
+            String projectTitle = project.getTitle();
+            System.out.println(projectTitle);
+            System.out.println();
+            ArrayList<Task> allTasks = project.getAllTasks();
+            allTasks
+                    .forEach(task -> {
+                        int indexOfTask = allTasks.indexOf(task);
+                        int taskNumber = indexOfTask + 1;
+                        System.out.println(taskNumber + "- " + task);
+                    });
+        });
         ArrayList<String> tasksWithNoProject = taskManager.getAllWithNoProject();
-        tasksWithProject.forEach(task -> System.out.println((tasksWithProject.indexOf(task) + 1) + "- " + task));
         System.out.println();
         System.out.println("Tasks with no project:");
         System.out.println();

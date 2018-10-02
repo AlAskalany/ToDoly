@@ -115,7 +115,12 @@ public class Task implements Serializable, Comparable<Task> {
     @NotNull
     private String getTaskString() {
 
-        return title + " | " + getDueDateOrNoDueDateString() + " | " + getProjectOrNoProjectString();
+        return title + " | " + getDueDateOrNoDueDateString() + " | " + getProjectOrNoProjectString() + " | " + getStatusString();
+    }
+
+    private String getStatusString() {
+
+        return getStatus() ? "Done" : "To do";
     }
 
     private String getProjectOrNoProjectString() {
