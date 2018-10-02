@@ -67,7 +67,7 @@ public class Task implements Serializable, Comparable<Task> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public boolean getStatus() {
+    public Boolean getStatus() {
 
         return status;
     }
@@ -120,7 +120,7 @@ public class Task implements Serializable, Comparable<Task> {
 
     private String getStatusString() {
 
-        return getStatus() ? "Done" : "To do";
+        return (getStatus() != null && getStatus()) ? "Done" : "To do";
     }
 
     private String getProjectOrNoProjectString() {
