@@ -1,4 +1,4 @@
-package com.alaskalany.todoly.screens;
+package com.alaskalany.todoly.cli.screens;
 
 import com.alaskalany.todoly.cli.Screen;
 

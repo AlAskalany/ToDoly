@@ -1,6 +1,6 @@
-package com.alaskalany.todoly.daos.tasks;
+package com.alaskalany.todoly.todo.task;
 
-import com.alaskalany.todoly.todo.Task;
+import com.alaskalany.todoly.todo.task.Task;
 
 import java.io.IOException;
 

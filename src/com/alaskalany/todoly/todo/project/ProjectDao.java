@@ -1,6 +1,6 @@
-package com.alaskalany.todoly.daos.projects;
+package com.alaskalany.todoly.todo.project;
 
-import com.alaskalany.todoly.todo.Project;
+import com.alaskalany.todoly.todo.project.Project;
 
 import java.io.IOException;
 import java.util.ArrayList;

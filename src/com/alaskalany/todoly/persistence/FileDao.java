@@ -1,9 +1,9 @@
-package com.alaskalany.todoly.daos;
+package com.alaskalany.todoly.persistence;
 
-import com.alaskalany.todoly.daos.projects.ProjectDao;
-import com.alaskalany.todoly.daos.tasks.TaskDao;
-import com.alaskalany.todoly.todo.Project;
-import com.alaskalany.todoly.todo.Task;
+import com.alaskalany.todoly.todo.project.ProjectDao;
+import com.alaskalany.todoly.todo.task.TaskDao;
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
 import org.json.simple.JSONObject;
 
 import java.io.FileInputStream;

@@ -1,5 +1,7 @@
 package com.alaskalany.todoly.todo;
 
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
 import org.junit.jupiter.api.*;
 
 import java.util.Date;

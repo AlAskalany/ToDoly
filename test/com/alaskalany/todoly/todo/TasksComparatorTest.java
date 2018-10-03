@@ -1,5 +1,7 @@
 package com.alaskalany.todoly.todo;
 
+import com.alaskalany.todoly.todo.task.Task;
+import com.alaskalany.todoly.todo.task.TasksComparator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

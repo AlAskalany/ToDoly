@@ -1,8 +1,7 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.todo;
 
-import com.alaskalany.todoly.todo.Project;
-import com.alaskalany.todoly.todo.Task;
-import com.alaskalany.todoly.todo.TasksComparator;
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
 
 import java.util.ArrayList;
 import java.util.Comparator;

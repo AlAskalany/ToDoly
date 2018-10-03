@@ -1,8 +1,9 @@
 package com.alaskalany.todoly;
 
-import com.alaskalany.todoly.parsing.DateParser;
-import com.alaskalany.todoly.todo.Project;
-import com.alaskalany.todoly.todo.Task;
+import com.alaskalany.todoly.cli.parsing.DateParser;
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
+import com.alaskalany.todoly.todo.TaskManager;
 
 import java.util.ArrayList;
 import java.util.Date;

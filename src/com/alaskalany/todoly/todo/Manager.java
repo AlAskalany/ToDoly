@@ -1,4 +1,4 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.todo;
 
 public class Manager {
 

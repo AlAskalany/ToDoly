@@ -1,5 +1,6 @@
-package com.alaskalany.todoly.todo;
+package com.alaskalany.todoly.todo.task;
 
+import com.alaskalany.todoly.todo.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -17,7 +18,7 @@ public class Task implements Serializable, Comparable<Task> {
     private Boolean status;
     private Long id;
     private String title;
-    private Project project;
+    private transient Project project;
 
     public Task(Builder builder) {
 
@@ -72,7 +73,7 @@ public class Task implements Serializable, Comparable<Task> {
         return status;
     }
 
-    void setStatusFalse() {
+    public void setStatusFalse() {
 
         status = false;
     }
@@ -195,7 +196,11 @@ public class Task implements Serializable, Comparable<Task> {
 
         public Task build() {
 
-            return new Task(this);
+            Task task = new Task(this);
+            if (project != null) {
+                project.addTask(task);
+            }
+            return task;
         }
 
         public Builder dueDate(Date dueDate) {

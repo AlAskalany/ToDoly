@@ -1,4 +1,6 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.cli;
+
+import com.alaskalany.todoly.todo.TaskManager;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.alaskalany.todoly.parsing;
+package com.alaskalany.todoly.cli.parsing;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

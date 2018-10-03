@@ -1,4 +1,4 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.cli;
 
 import java.util.ArrayList;
 import java.util.Scanner;

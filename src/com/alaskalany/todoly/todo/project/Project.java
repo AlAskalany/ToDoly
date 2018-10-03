@@ -1,4 +1,6 @@
-package com.alaskalany.todoly.todo;
+package com.alaskalany.todoly.todo.project;
+
+import com.alaskalany.todoly.todo.task.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class Project implements Serializable {
      * @param label {@link String Label of the task}
      * @param date  {@link String Due date for the task}
      */
-    void addTask(String label, Date date) {
+    public void addTask(String label, Date date) {
         // TODO how and where to create task id?
         Long taskId = 1L;
         Task task = new Task.Builder().title(label).dueDate(date).id(taskId).status(false).projectId(this.id).build();
@@ -59,7 +61,7 @@ public class Project implements Serializable {
     /**
      * @return {@link ArrayList<Task>} Tasks in the project
      */
-    ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
 
         return tasks;
     }
@@ -67,7 +69,7 @@ public class Project implements Serializable {
     /**
      * @return {int} Number of tasks in the project
      */
-    int numTasks() {
+    public int numTasks() {
 
         return tasks.size();
     }
@@ -75,7 +77,7 @@ public class Project implements Serializable {
     /**
      * @return {int} Number of finished tasks in the project
      */
-    int numFinishedTasks() {
+    public int numFinishedTasks() {
 
         int finishedTasksCount = 0;
         for (Task task : tasks) {
@@ -101,7 +103,7 @@ public class Project implements Serializable {
     /**
      * Deletes all tasks in the project
      */
-    void deleteAllTasks() {
+    public void deleteAllTasks() {
         // Start from the last task in the tasks list
         int i = getLastTask(tasks);
         // Remove every task
@@ -113,7 +115,7 @@ public class Project implements Serializable {
     /**
      * @return int Number of unfinished tasks in the project
      */
-    int getUnfinishedTasksCount() {
+    public int getUnfinishedTasksCount() {
         //noinspection UnnecessaryLocalVariable
         int numUnfinishedTasks = numTasks() - numFinishedTasks();
         return numUnfinishedTasks;
@@ -122,7 +124,7 @@ public class Project implements Serializable {
     /**
      * Deletes all finished tasks in the project
      */
-    void deleteFinishedTasks() {
+    public void deleteFinishedTasks() {
         // Start from the last task in the tasks list
         int i = getLastTask(tasks);
         while (i > 0) {

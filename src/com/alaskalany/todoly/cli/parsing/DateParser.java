@@ -1,4 +1,4 @@
-package com.alaskalany.todoly.parsing;
+package com.alaskalany.todoly.cli.parsing;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
