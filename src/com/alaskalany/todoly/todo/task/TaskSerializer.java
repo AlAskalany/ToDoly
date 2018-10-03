@@ -1,14 +1,13 @@
 package com.alaskalany.todoly.todo.task;
 
-import com.alaskalany.todoly.todo.task.Task;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.alaskalany.todoly.todo.project.Project;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TaskSerializer {
 
@@ -31,6 +30,18 @@ public class TaskSerializer {
         return new TypeToken<ArrayList<Task>>() {
 
         }.getType();
+    }
+
+    public String makeJson(Task task) {
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        gsonBuilder.registerTypeAdapter(getTaskArrayListType(), new TaskSerializer().getValue());
+
+        Gson gson = gsonBuilder.create();
+        String taskJson = gson.toJson(task);
+        System.out.println(taskJson);
+        return taskJson;
     }
 
     public @NotNull JsonSerializer<ArrayList<Task>> getValue() {
