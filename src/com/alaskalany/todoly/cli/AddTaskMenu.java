@@ -1,13 +1,15 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.cli;
+
+import com.alaskalany.todoly.todo.TaskManager;
 
 import java.util.ArrayList;
 
 public class AddTaskMenu extends Menu {
 
-    private MainMenu mainMenu;
-    private TaskManager taskManager;
+    private final MainMenu mainMenu;
+    private final TaskManager taskManager;
 
-    public AddTaskMenu(MainMenu mainMenu, TaskManager taskManager) {
+    AddTaskMenu(MainMenu mainMenu, TaskManager taskManager) {
 
         super("Add new Task:");
         this.mainMenu = mainMenu;
@@ -28,11 +30,6 @@ public class AddTaskMenu extends Menu {
     protected String setPrompt() {
 
         return "Enter task name";
-    }
-
-    @Override
-    public void setActions() {
-
     }
 
     @Override

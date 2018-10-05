@@ -1,18 +1,19 @@
 package com.alaskalany.todoly;
 
 import com.alaskalany.todoly.parsing.DateParser;
-import com.alaskalany.todoly.todo.Project;
-import com.alaskalany.todoly.todo.Task;
+import com.alaskalany.todoly.todo.TaskManager;
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
-public class Ui {
+class Ui {
 
     private final TaskManager taskManager;
 
-    public Ui(TaskManager taskManager) {
+    Ui(@SuppressWarnings("SameParameterValue") TaskManager taskManager) {
 
         this.taskManager = taskManager;
     }
@@ -30,7 +31,7 @@ public class Ui {
         handleMainMenuInput(input);
     }
 
-    void handleMainMenuInput(String input) {
+    private void handleMainMenuInput(String input) {
 
         switch (Integer.valueOf(input)) {
             case 1:
@@ -50,7 +51,7 @@ public class Ui {
         }
     }
 
-    void addTask() {
+    private void addTask() {
 
         Scanner scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
@@ -62,12 +63,12 @@ public class Ui {
         mainMenu();
     }
 
-    String getTaskTitle(String input) {
+    private String getTaskTitle(String input) {
 
         return input;
     }
 
-    void listAllTasks() {
+    private void listAllTasks() {
 
         System.out.println("List all tasks by:");
         System.out.println("1- Due date");
@@ -79,7 +80,7 @@ public class Ui {
         handleListAllTasksInput(input);
     }
 
-    void handleListAllTasksInput(String input) {
+    private void handleListAllTasksInput(String input) {
 
         switch (Integer.valueOf(input)) {
             case 1:
@@ -93,7 +94,7 @@ public class Ui {
         }
     }
 
-    void listAllTasksByProject() {
+    private void listAllTasksByProject() {
 
         System.out.println("All Tasks List - By Project");
         System.out.println();
@@ -120,7 +121,7 @@ public class Ui {
         selectTaskOrMainMenu();
     }
 
-    void selectTaskOrMainMenu() {
+    private void selectTaskOrMainMenu() {
 
         System.out.print("Enter task number to edit or 0 for main menu");
         Scanner scanner = new Scanner(System.in);
@@ -128,7 +129,7 @@ public class Ui {
         handleSelectTaskOrMainMenu(input);
     }
 
-    void handleSelectTaskOrMainMenu(String input) {
+    private void handleSelectTaskOrMainMenu(String input) {
 
         switch (Integer.valueOf(input)) {
             case 0:
@@ -140,7 +141,7 @@ public class Ui {
         }
     }
 
-    void editSelectedTask(Integer valueOf) {
+    private void editSelectedTask(Integer valueOf) {
 
         System.out.println("Editing Task:" + taskManager.getTaskTitle(valueOf));
         System.out.println("1- Title");
@@ -153,7 +154,7 @@ public class Ui {
         handleEditSelectedTask(input, valueOf);
     }
 
-    void handleEditSelectedTask(String input, Integer taskIndex) {
+    private void handleEditSelectedTask(String input, Integer taskIndex) {
 
         switch (Integer.valueOf(input)) {
             case 0:
@@ -176,19 +177,19 @@ public class Ui {
         }
     }
 
-    void editTaskDueDate(Integer taskIndex) {
+    private void editTaskDueDate(Integer taskIndex) {
 
         System.out.print("New Due date: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         DateParser dateParser = new DateParser();
-        Date dueDate = dateParser.getDateFromString(input);
+        LocalDate dueDate = dateParser.getDateFromString(input);
         taskManager.getTask(taskIndex).setDueDate(dueDate);
         System.out.println("Task Due date modified");
         editSelectedTask(taskIndex);
     }
 
-    void editTaskProject(Integer taskIndex) {
+    private void editTaskProject(Integer taskIndex) {
 
         System.out.print("New Project: ");
         Scanner scanner = new Scanner(System.in);
@@ -201,7 +202,7 @@ public class Ui {
         editSelectedTask(taskIndex);
     }
 
-    void editTaskStatus(Integer taskIndex) {
+    private void editTaskStatus(Integer taskIndex) {
 
         System.out.print("New Status: ");
         Scanner scanner = new Scanner(System.in);
@@ -211,7 +212,7 @@ public class Ui {
         editSelectedTask(taskIndex);
     }
 
-    void editTaskTitle(Integer taskIndex) {
+    private void editTaskTitle(Integer taskIndex) {
 
         System.out.print("New title: ");
         Scanner scanner = new Scanner(System.in);
@@ -221,7 +222,7 @@ public class Ui {
         editSelectedTask(taskIndex);
     }
 
-    void listAllTasksByDueDate() {
+    private void listAllTasksByDueDate() {
 
         System.out.println("All Tasks List - By Due Date");
         System.out.println();
@@ -231,7 +232,7 @@ public class Ui {
         selectTaskOrMainMenu();
     }
 
-    void saveAndQuit() {
+    private void saveAndQuit() {
 
         System.exit(0);
     }

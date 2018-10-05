@@ -1,17 +1,17 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.cli;
+
+import com.alaskalany.todoly.todo.TaskManager;
 
 import java.util.ArrayList;
 
 public class ListTasksMenu extends Menu {
 
-    private final TaskManager taskManager;
-    TaskListDueDateMenu taskListDueDateMenu;
-    MainMenu mainMenu;
+    private final TaskListDueDateMenu taskListDueDateMenu;
+    private final MainMenu mainMenu;
 
-    public ListTasksMenu(MainMenu mainMenu, TaskManager taskManager) {
+    ListTasksMenu(MainMenu mainMenu, TaskManager taskManager) {
 
         super("List All Tasks by:");
-        this.taskManager = taskManager;
         this.taskListDueDateMenu = new TaskListDueDateMenu(mainMenu, taskManager);
         this.mainMenu = mainMenu;
     }
@@ -35,18 +35,19 @@ public class ListTasksMenu extends Menu {
     }
 
     @Override
-    public void setActions() {
-
-    }
-
-    @Override
     public void onInput(String input) {
 
-        if (input.equals("0")) {
-            displayMenu(mainMenu);
-        } else if (input.equals("1")) {
-            taskListDueDateMenu.display();
-        } else if (input.equals("2")) {
+        switch (input) {
+            case "0":
+                displayMenu(mainMenu);
+                break;
+            case "1":
+                taskListDueDateMenu.display();
+                break;
+//noinspection StatementWithEmptyBody
+            case "2":
+                // TODO: 2018-10-05
+                break;
         }
     }
 }

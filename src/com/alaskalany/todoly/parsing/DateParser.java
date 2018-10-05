@@ -1,21 +1,16 @@
 package com.alaskalany.todoly.parsing;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DateParser {
+
     public DateParser() {
+
     }
 
-    public Date getDateFromString(String inputDate) {
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            date = simpleDateFormat.parse(inputDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
+    public LocalDate getDateFromString(String inputDate) {
+
+        return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 }

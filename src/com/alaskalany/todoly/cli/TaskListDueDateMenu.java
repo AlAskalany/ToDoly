@@ -1,16 +1,15 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.cli;
 
-import com.alaskalany.todoly.todo.Task;
-import jdk.jshell.execution.Util;
+import com.alaskalany.todoly.todo.TaskManager;
 
 import java.util.ArrayList;
 
 public class TaskListDueDateMenu extends Menu {
 
-    private TaskManager taskManager;
-    private MainMenu mainMenu;
+    private final TaskManager taskManager;
+    private final MainMenu mainMenu;
 
-    public TaskListDueDateMenu(MainMenu mainMenu, TaskManager taskManager) {
+    TaskListDueDateMenu(MainMenu mainMenu, TaskManager taskManager) {
 
         super("Tasks by due date");
         this.taskManager = taskManager;
@@ -28,13 +27,11 @@ public class TaskListDueDateMenu extends Menu {
         taskManager.getAllProjects().forEach(project -> {
             System.out.println(project.getTitle());
             System.out.println();
-            project.getAllTasks().forEach(task -> {
-                System.out.println(project.getAllTasks().indexOf(task) + "- " + task);
-            });
+            project.getAllTasks()
+                    .forEach(task -> System.out.println(project.getAllTasks().indexOf(task) + "- " + task));
         });
-        taskManager.getAllWithNoProject().forEach(task -> {
-            System.out.println((1 + taskManager.getAllWithNoProject().indexOf(task)) + "- " + task);
-        });
+        taskManager.getAllWithNoProject().forEach(task -> System.out
+                .println((1 + taskManager.getAllWithNoProject().indexOf(task)) + "- " + task));
     }
 
     @Override
@@ -44,17 +41,10 @@ public class TaskListDueDateMenu extends Menu {
     }
 
     @Override
-    public void setActions() {
-
-    }
-
-    @Override
     public void onInput(String input) {
 
         if (input.equals("0")) {
             mainMenu.display();
-        } else {
-            int taskNumber = Integer.valueOf(input);
         }
     }
 }

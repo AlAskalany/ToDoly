@@ -1,8 +1,11 @@
-package com.alaskalany.todoly.todo;
+package com.alaskalany.todoly.todo.project;
+
+import com.alaskalany.todoly.todo.task.Task;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -10,9 +13,7 @@ import java.util.Date;
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String TITLE = "title";
-    public static final String ID = "id";
-    private Long id;
+    private UUID id;
     /**
      * Project title
      */
@@ -20,16 +21,12 @@ public class Project implements Serializable {
     /**
      * List of tasks in the project
      */
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
-    public Project() {
-
-    }
-
-    public Project(Builder builder) {
+    private Project(Builder builder) {
 
         this.title = builder.title;
-        this.id = builder.id;
+        this.id = UUID.randomUUID();
     }
 
     public Project(String input) {
@@ -41,10 +38,9 @@ public class Project implements Serializable {
      * @param label {@link String Label of the task}
      * @param date  {@link String Due date for the task}
      */
-    void addTask(String label, Date date) {
+    public void addTask(String label, LocalDate date) {
         // TODO how and where to create task id?
-        Long taskId = 1L;
-        Task task = new Task.Builder().title(label).dueDate(date).id(taskId).status(false).projectId(this.id).build();
+        Task task = new Task.Builder().title(label).dueDate(date).status(false).projectId(this.id).build();
         tasks.add(task);
     }
 
@@ -59,7 +55,7 @@ public class Project implements Serializable {
     /**
      * @return {@link ArrayList<Task>} Tasks in the project
      */
-    ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
 
         return tasks;
     }
@@ -67,7 +63,7 @@ public class Project implements Serializable {
     /**
      * @return {int} Number of tasks in the project
      */
-    int numTasks() {
+    public int numTasks() {
 
         return tasks.size();
     }
@@ -75,7 +71,7 @@ public class Project implements Serializable {
     /**
      * @return {int} Number of finished tasks in the project
      */
-    int numFinishedTasks() {
+    public int numFinishedTasks() {
 
         int finishedTasksCount = 0;
         for (Task task : tasks) {
@@ -94,14 +90,15 @@ public class Project implements Serializable {
         title = new_project_name;
     }
 
-    public ArrayList<Task> getAllTasks(){
+    public ArrayList<Task> getAllTasks() {
+
         return tasks;
     }
 
     /**
      * Deletes all tasks in the project
      */
-    void deleteAllTasks() {
+    public void deleteAllTasks() {
         // Start from the last task in the tasks list
         int i = getLastTask(tasks);
         // Remove every task
@@ -113,7 +110,7 @@ public class Project implements Serializable {
     /**
      * @return int Number of unfinished tasks in the project
      */
-    int getUnfinishedTasksCount() {
+    public int getUnfinishedTasksCount() {
         //noinspection UnnecessaryLocalVariable
         int numUnfinishedTasks = numTasks() - numFinishedTasks();
         return numUnfinishedTasks;
@@ -122,7 +119,7 @@ public class Project implements Serializable {
     /**
      * Deletes all finished tasks in the project
      */
-    void deleteFinishedTasks() {
+    public void deleteFinishedTasks() {
         // Start from the last task in the tasks list
         int i = getLastTask(tasks);
         while (i > 0) {
@@ -148,7 +145,7 @@ public class Project implements Serializable {
         return tasks.size() - 1;
     }
 
-    public Long getId() {
+    public UUID getId() {
 
         return id;
     }
@@ -166,17 +163,10 @@ public class Project implements Serializable {
     public static class Builder {
 
         private String title;
-        private Long id;
 
         public Builder title(String title) {
 
             this.title = title;
-            return this;
-        }
-
-        public Builder id(Long projectId) {
-
-            this.id = projectId;
             return this;
         }
 

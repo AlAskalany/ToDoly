@@ -1,4 +1,4 @@
-package com.alaskalany.todoly.todo;
+package com.alaskalany.todoly.todo.task;
 
 import java.util.ArrayList;
 import java.util.Comparator;

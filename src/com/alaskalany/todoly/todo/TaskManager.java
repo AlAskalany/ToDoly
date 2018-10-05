@@ -1,8 +1,7 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.todo;
 
-import com.alaskalany.todoly.todo.Project;
-import com.alaskalany.todoly.todo.Task;
-import com.alaskalany.todoly.todo.TasksComparator;
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,8 +9,8 @@ import java.util.HashMap;
 
 public class TaskManager {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private HashMap<String, Project> projects = new HashMap<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final HashMap<String, Project> projects = new HashMap<>();
 
     public void addTask(String taskTitle) {
 
@@ -24,13 +23,6 @@ public class TaskManager {
         orderedTasks.sort(Task::compareTo);
         ArrayList<String> taskTitles = new ArrayList<>();
         orderedTasks.forEach(task -> taskTitles.add(task.toString()));
-        return taskTitles;
-    }
-
-    public ArrayList<String> getAllTasksWithAProject() {
-
-        ArrayList<String> taskTitles = new ArrayList<>();
-        projects.forEach((s, project) -> project.getAllTasks().forEach(task -> taskTitles.add(task.toString())));
         return taskTitles;
     }
 
@@ -73,9 +65,7 @@ public class TaskManager {
     public ArrayList<Project> getAllProjects() {
 
         ArrayList<Project> projectsList = new ArrayList<>();
-        projects.forEach((s, project) -> {
-            projectsList.add(project);
-        });
+        projects.forEach((s, project) -> projectsList.add(project));
         projectsList.sort(Comparator.comparing(Project::getTitle));
         return projectsList;
     }
