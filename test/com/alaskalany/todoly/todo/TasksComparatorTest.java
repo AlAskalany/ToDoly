@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.DayOfWeek;
+import java.time.Month;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,46 +31,46 @@ class TasksComparatorTest {
         ArrayList<Task> expectedTasksList = new ArrayList<>();
 
         expectedTasksList
-                .add(new Task.Builder().title("task2").id().dueDate(DateHelper.getDate(0, 0, 0)).projectId(1L)
+                .add(new Task.Builder().title("task2").dueDate(DateHelper.getDate(0, Month.JANUARY, 1))
                         .status(false)
                         .build());
         expectedTasksList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 0, 2)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.JANUARY, 2))
                         .status(false)
                         .build());
         expectedTasksList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 0, 6)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.JANUARY, 6))
                         .status(false)
                         .build());
         expectedTasksList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 3, 0)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.MARCH, 1))
                         .status(false)
                         .build());
         expectedTasksList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 4, 5)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.APRIL, 5))
                         .status(false)
                         .build());
 
         ArrayList<Task> inputTaskList = new ArrayList<>();
 
         inputTaskList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 0, 0)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.JANUARY, 1))
                         .status(false)
                         .build());
         inputTaskList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 0, 2)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.JANUARY, 2))
                         .status(false)
                         .build());
         inputTaskList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 4, 5)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.APRIL, 5))
                         .status(false)
                         .build());
         inputTaskList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 0, 6)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.JANUARY, 6))
                         .status(false)
                         .build());
         inputTaskList
-                .add(new Task.Builder().title("task1").id().dueDate(DateHelper.getDate(0, 3, 0)).projectId(1L)
+                .add(new Task.Builder().title("task1").dueDate(DateHelper.getDate(0, Month.MARCH, 1))
                         .status(false)
                         .build());
 

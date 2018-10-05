@@ -5,6 +5,7 @@ import com.alaskalany.todoly.todo.task.Task;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private UUID id;
     /**
      * Project title
      */
@@ -25,7 +26,7 @@ public class Project implements Serializable {
     private Project(Builder builder) {
 
         this.title = builder.title;
-        this.id = builder.id;
+        this.id = UUID.randomUUID();
     }
 
     public Project(String input) {
@@ -39,7 +40,7 @@ public class Project implements Serializable {
      */
     public void addTask(String label, LocalDate date) {
         // TODO how and where to create task id?
-        Task task = new Task.Builder().title(label).dueDate(date).id().status(false).projectId(this.id).build();
+        Task task = new Task.Builder().title(label).dueDate(date).status(false).projectId(this.id).build();
         tasks.add(task);
     }
 
@@ -89,7 +90,8 @@ public class Project implements Serializable {
         title = new_project_name;
     }
 
-    public ArrayList<Task> getAllTasks(){
+    public ArrayList<Task> getAllTasks() {
+
         return tasks;
     }
 
@@ -143,7 +145,7 @@ public class Project implements Serializable {
         return tasks.size() - 1;
     }
 
-    public Long getId() {
+    public UUID getId() {
 
         return id;
     }
@@ -161,17 +163,10 @@ public class Project implements Serializable {
     public static class Builder {
 
         private String title;
-        private Long id;
 
         public Builder title(String title) {
 
             this.title = title;
-            return this;
-        }
-
-        public Builder id(Long projectId) {
-
-            this.id = projectId;
             return this;
         }
 

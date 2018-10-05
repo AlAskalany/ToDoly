@@ -1,28 +1,29 @@
 package com.alaskalany.todoly.date;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.ranges.RangeException;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 
 public class DateHelper {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    public static String getFormattedDate(LocalDate date) {
+    public static String getFormattedDateFromLocalDate(LocalDate date) {
 
-        return new SimpleDateFormat(DATE_FORMAT).format(date);
+        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    public static LocalDate getDate(int year, int month, int date) {
+    public static LocalDate getDate(int year, Month month, int date) {
 
         return LocalDate.of(year, month, date);
     }
 
-    @SuppressWarnings("SameParameterValue")
     @NotNull
-    static String getFormattedDate(int year, int month, int date) {
+    public static String getLocalDateString(int year, Month month, int date) {
 
-        return getFormattedDate(getDate(year, month, date));
+        return getFormattedDateFromLocalDate(getDate(year, month, date));
     }
 }

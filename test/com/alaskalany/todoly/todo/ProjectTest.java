@@ -25,7 +25,7 @@ class ProjectTest {
     @BeforeEach
     void setUp() {
 
-        project = new Project.Builder().title("My Project").id(1L).build();
+        project = new Project.Builder().title("My Project").build();
     }
 
     @AfterEach

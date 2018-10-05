@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,7 +30,7 @@ class DateParserTest {
     @Test
     void getDateFromString() {
 
-        LocalDate expectedDate = LocalDate.of(1898, Calendar.DECEMBER, 31);
+        LocalDate expectedDate = LocalDate.of(1898, Month.DECEMBER, 31);
         LocalDate resultDate = dateParser.getDateFromString("1898-12-31");
         assertEquals(0, expectedDate.compareTo(resultDate));
     }

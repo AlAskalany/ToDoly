@@ -6,11 +6,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Task implements Serializable, Comparable<Task> {
 
     private LocalDate dueDate;
-    private Long projectId;
+    private UUID projectId;
     private Boolean status;
     private String title;
     private transient Project project;
@@ -27,6 +28,7 @@ public class Task implements Serializable, Comparable<Task> {
     public void setProject(Project project) {
 
         this.project = project;
+        this.projectId = project.getId();
     }
 
     public String getTitle() {
@@ -67,12 +69,12 @@ public class Task implements Serializable, Comparable<Task> {
         status = false;
     }
 
-    public Long getProjectId() {
+    public UUID getProjectId() {
 
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(UUID projectId) {
 
         this.projectId = projectId;
     }
@@ -105,7 +107,7 @@ public class Task implements Serializable, Comparable<Task> {
 
     private String getDueDateOrNoDueDateString() {
 
-        return (dueDate != null) ? DateHelper.getFormattedDate(dueDate) : "No due date";
+        return (dueDate != null) ? DateHelper.getFormattedDateFromLocalDate(dueDate) : "No due date";
     }
 
     private String getTitleString() {
@@ -123,17 +125,12 @@ public class Task implements Serializable, Comparable<Task> {
         Project project;
         private String title;
         private Boolean status;
-        private Long projectId;
+        private UUID projectId;
         private LocalDate dueDate;
 
         public Builder title(String title) {
 
             this.title = title;
-            return this;
-        }
-
-        public Builder id() {
-
             return this;
         }
 
@@ -143,7 +140,7 @@ public class Task implements Serializable, Comparable<Task> {
             return this;
         }
 
-        public Builder projectId(Long projectId) {
+        public Builder projectId(UUID projectId) {
 
             this.projectId = projectId;
             return this;

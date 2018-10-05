@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,17 +26,18 @@ class DateHelperTest {
         // Arrange
         String expectedDateString = "2014-02-19";
         // Act
-        String actualDateString = DateHelper.getFormattedDate(2014, 2, 19);
+        String actualDateString = DateHelper.getLocalDateString(2014, Month.FEBRUARY, 19);
         // Assert
+        System.out.println(expectedDateString + " " + actualDateString);
         assertEquals(expectedDateString, actualDateString);
     }
 
     @Test
     void getDate() {
         // Arrange
-        LocalDate expectedDate = LocalDate.of(2014, Calendar.FEBRUARY, 19);
+        LocalDate expectedDate = LocalDate.of(2014, Month.FEBRUARY, 19);
         // Act
-        LocalDate actualDate = DateHelper.getDate(2014, Calendar.FEBRUARY, 19);
+        LocalDate actualDate = DateHelper.getDate(2014, Month.FEBRUARY, 19);
         // Assert
         assertEquals(0, expectedDate.compareTo(actualDate));
     }

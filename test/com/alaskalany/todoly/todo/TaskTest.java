@@ -6,6 +6,7 @@ import com.alaskalany.todoly.todo.task.Task;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,7 @@ class TaskTest {
 
     private Task task;
     private Project project;
-    private LocalDate date = DateHelper.getDate(0, 0, 0);
+    private LocalDate date = DateHelper.getDate(0, Month.JANUARY, 1);
 
     /**
      *
@@ -30,8 +31,8 @@ class TaskTest {
     @BeforeEach
     void setUp() {
 
-        project = new Project.Builder().title("Test project").id(1L).build();
-        task = new Task.Builder().title("Test task").id().status(false).dueDate(date)
+        project = new Project.Builder().title("Test project").build();
+        task = new Task.Builder().title("Test task").status(false).dueDate(date)
                 .projectId(project.getId()).build();
     }
 
@@ -120,7 +121,7 @@ class TaskTest {
     void setDone() {
 
         task.setStatusTrue();
-        assertTrue(task.getStatus());
+        assertTrue(task.getStatus().booleanValue());
     }
 
     @Test
@@ -142,6 +143,8 @@ class TaskTest {
     @Test
     void getProjectNotNull() {
 
+        Project project = new Project.Builder().title("Some Project").build();
+        task.setProject(project);
         assertNotNull(task.getProjectId());
     }
 
@@ -154,7 +157,7 @@ class TaskTest {
     @Test
     void setProject() {
 
-        Project newProject = new Project.Builder().title("New project").id(1L).build();
+        Project newProject = new Project.Builder().title("New project").build();
         task.setProjectId(newProject.getId());
         assertSame(newProject.getId(), task.getProjectId());
     }
