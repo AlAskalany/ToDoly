@@ -3,8 +3,8 @@ package com.alaskalany.todoly.todo.project;
 import com.alaskalany.todoly.todo.task.Task;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -12,8 +12,6 @@ import java.util.Date;
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String TITLE = "title";
-    public static final String ID = "id";
     private Long id;
     /**
      * Project title
@@ -22,13 +20,9 @@ public class Project implements Serializable {
     /**
      * List of tasks in the project
      */
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
-    public Project() {
-
-    }
-
-    public Project(Builder builder) {
+    private Project(Builder builder) {
 
         this.title = builder.title;
         this.id = builder.id;
@@ -43,10 +37,9 @@ public class Project implements Serializable {
      * @param label {@link String Label of the task}
      * @param date  {@link String Due date for the task}
      */
-    public void addTask(String label, Date date) {
+    public void addTask(String label, LocalDate date) {
         // TODO how and where to create task id?
-        Long taskId = 1L;
-        Task task = new Task.Builder().title(label).dueDate(date).id(taskId).status(false).projectId(this.id).build();
+        Task task = new Task.Builder().title(label).dueDate(date).id().status(false).projectId(this.id).build();
         tasks.add(task);
     }
 

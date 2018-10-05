@@ -3,28 +3,23 @@ package com.alaskalany.todoly.cli;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Menu {
+abstract class Menu {
 
-    protected String title;
-    protected ArrayList<String> options;
-    private String prompt;
+    private final String title;
+    private final ArrayList<String> options;
+    private final String prompt;
 
-    public Menu(String title) {
+    Menu(String title) {
 
         options = new ArrayList<>();
         this.title = title;
         prompt = setPrompt();
         setOptions(options);
-        setActions();
-    }
-
-    protected Menu() {
-
     }
 
     protected abstract void setOptions(ArrayList<String> options);
 
-    public void display() {
+    void display() {
 
         System.out.println();
         displayTitle();
@@ -39,7 +34,7 @@ public abstract class Menu {
 
     protected abstract void displayBody();
 
-    protected void displayPrompt() {
+    private void displayPrompt() {
 
         System.out.print(prompt);
         System.out.print(":> ");
@@ -62,17 +57,15 @@ public abstract class Menu {
 
     protected abstract String setPrompt();
 
-    public abstract void setActions();
-
-    public void getInput() {
+    private void getInput() {
 
         Scanner scanner = new Scanner(System.in);
         onInput(scanner.nextLine());
     }
 
-    public abstract void onInput(String string);
+    protected abstract void onInput(String string);
 
-    protected void displayMenu(Menu menu) {
+    void displayMenu(Menu menu) {
 
         menu.display();
     }

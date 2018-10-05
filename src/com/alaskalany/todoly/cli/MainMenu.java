@@ -6,16 +6,15 @@ import java.util.ArrayList;
 
 public class MainMenu extends Menu {
 
-    private TaskManager taskManager;
-    private AddTaskMenu addTaskMenu;
-    private ListTasksMenu listTasksMenu;
+    private final AddTaskMenu addTaskMenu;
+    private final ListTasksMenu listTasksMenu;
 
+    @SuppressWarnings("unused")
     public MainMenu(TaskManager taskManager) {
 
         super("ToDoly");
-        this.taskManager = taskManager;
         this.addTaskMenu = new AddTaskMenu(this, taskManager);
-        this.listTasksMenu = new ListTasksMenu(this, this.taskManager);
+        this.listTasksMenu = new ListTasksMenu(this, taskManager);
     }
 
     @Override
@@ -38,19 +37,18 @@ public class MainMenu extends Menu {
     }
 
     @Override
-    public void setActions() {
-
-    }
-
-    @Override
     public void onInput(String input) {
 
-        if (input.equals("0")) {
-            displayMenu(this);
-        } else if (input.equals("1")) {
-            displayMenu(addTaskMenu);
-        } else if (input.equals("2")) {
-            displayMenu(listTasksMenu);
+        switch (input) {
+            case "0":
+                displayMenu(this);
+                break;
+            case "1":
+                displayMenu(addTaskMenu);
+                break;
+            case "2":
+                displayMenu(listTasksMenu);
+                break;
         }
     }
 }

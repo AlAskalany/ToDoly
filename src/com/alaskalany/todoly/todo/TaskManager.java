@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class TaskManager {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private HashMap<String, Project> projects = new HashMap<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final HashMap<String, Project> projects = new HashMap<>();
 
     public void addTask(String taskTitle) {
 
@@ -23,13 +23,6 @@ public class TaskManager {
         orderedTasks.sort(Task::compareTo);
         ArrayList<String> taskTitles = new ArrayList<>();
         orderedTasks.forEach(task -> taskTitles.add(task.toString()));
-        return taskTitles;
-    }
-
-    public ArrayList<String> getAllTasksWithAProject() {
-
-        ArrayList<String> taskTitles = new ArrayList<>();
-        projects.forEach((s, project) -> project.getAllTasks().forEach(task -> taskTitles.add(task.toString())));
         return taskTitles;
     }
 
@@ -72,9 +65,7 @@ public class TaskManager {
     public ArrayList<Project> getAllProjects() {
 
         ArrayList<Project> projectsList = new ArrayList<>();
-        projects.forEach((s, project) -> {
-            projectsList.add(project);
-        });
+        projects.forEach((s, project) -> projectsList.add(project));
         projectsList.sort(Comparator.comparing(Project::getTitle));
         return projectsList;
     }

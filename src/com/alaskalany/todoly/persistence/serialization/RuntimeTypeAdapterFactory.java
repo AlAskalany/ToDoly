@@ -121,6 +121,7 @@ import com.google.gson.stream.JsonWriter;
  *       .registerSubtype(Diamond.class);
  * }</pre>
  */
+@SuppressWarnings("ALL")
 public final class RuntimeTypeAdapterFactory<T> implements TypeAdapterFactory {
 
     private final Class<?> baseType;

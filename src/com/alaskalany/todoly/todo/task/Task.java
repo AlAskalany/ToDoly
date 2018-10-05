@@ -1,29 +1,23 @@
 package com.alaskalany.todoly.todo.task;
 
+import com.alaskalany.todoly.date.DateHelper;
 import com.alaskalany.todoly.todo.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Task implements Serializable, Comparable<Task> {
 
-    public static final String TITLE = "title";
-    public static final String ID = "id";
-    public static final String STATUS = "status";
-    public static final String PROJECT_ID = "project-id";
-    public static final String DUE_DATE = "due-date";
-    private Date dueDate;
+    private LocalDate dueDate;
     private Long projectId;
     private Boolean status;
-    private Long id;
     private String title;
     private transient Project project;
 
-    public Task(Builder builder) {
+    private Task(Builder builder) {
 
         this.title = builder.title;
-        this.id = builder.id;
         this.status = builder.status;
         this.dueDate = builder.dueDate;
         this.projectId = builder.projectId;
@@ -35,17 +29,12 @@ public class Task implements Serializable, Comparable<Task> {
         this.project = project;
     }
 
-    public Project getProject() {
-
-        return project;
-    }
-
     public String getTitle() {
 
         return title;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
 
         return dueDate;
     }
@@ -56,7 +45,7 @@ public class Task implements Serializable, Comparable<Task> {
     }
 
     @SuppressWarnings("SameParameterValue")
-    public void setDueDate(Date date) {
+    public void setDueDate(LocalDate date) {
 
         this.dueDate = date;
     }
@@ -88,87 +77,54 @@ public class Task implements Serializable, Comparable<Task> {
         this.projectId = projectId;
     }
 
-    public Long getId() {
-
-        return id;
-    }
-
-    public void setId(Long id) {
-
-        this.id = id;
-    }
-
     @Override
     public int compareTo(@NotNull Task otherTask) {
 
-        if (getDueDate() == null || otherTask.getDueDate() == null) {
+        if (dueDate == null || otherTask.getDueDate() == null) {
             return 0;
         }
-        return getDueDate().compareTo(otherTask.getDueDate());
+        return dueDate.compareTo(otherTask.getDueDate());
     }
 
     @Override
     public String toString() {
 
-        return getTaskString();
-    }
-
-    @NotNull
-    private String getTaskString() {
-
-        return title + " | " + getDueDateOrNoDueDateString() + " | " + getProjectOrNoProjectString() + " | " + getStatusString();
+        return String
+                .format("%s | %s | %s | %s", title, getDueDateOrNoDueDateString(), getProjectOrNoProjectString(), getStatusString());
     }
 
     private String getStatusString() {
 
-        return (getStatus() != null && getStatus()) ? "Done" : "To do";
+        return (status != null && status) ? "Done" : "To do";
     }
 
     private String getProjectOrNoProjectString() {
 
-        return hasProject() ? getTitleString() : "No project";
+        return (project != null) ? getTitleString() : "No project";
     }
 
     private String getDueDateOrNoDueDateString() {
 
-        return hasDueDate() ? getDueDateString() : "No due date";
+        return (dueDate != null) ? DateHelper.getFormattedDate(dueDate) : "No due date";
     }
 
     private String getTitleString() {
 
-        return getProject().getTitle();
-    }
-
-    private String getDueDateString() {
-
-        return getDueDate()
-                .toString();
+        return project.getTitle();
     }
 
     public boolean hasProject() {
 
-        return getProject() != null;
-    }
-
-    private boolean hasDueDate() {
-
-        return getDueDate() != null;
+        return project != null;
     }
 
     public static class Builder {
 
-        public Project project;
+        Project project;
         private String title;
-        private Long id;
         private Boolean status;
         private Long projectId;
-        private Date dueDate;
-
-        public Builder project(Project project) {
-
-            this.project = project;
-            return this;
-        }
+        private LocalDate dueDate;
 
         public Builder title(String title) {
 
@@ -176,9 +132,8 @@ public class Task implements Serializable, Comparable<Task> {
             return this;
         }
 
-        public Builder id(Long id) {
+        public Builder id() {
 
-            this.id = id;
             return this;
         }
 
@@ -203,7 +158,7 @@ public class Task implements Serializable, Comparable<Task> {
             return task;
         }
 
-        public Builder dueDate(Date dueDate) {
+        public Builder dueDate(LocalDate dueDate) {
 
             this.dueDate = dueDate;
             return this;
@@ -212,7 +167,7 @@ public class Task implements Serializable, Comparable<Task> {
         @Override
         public String toString() {
 
-            return title + " | ";
+            return String.format("%s | ", title);
         }
     }
 }
