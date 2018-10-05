@@ -1,16 +1,21 @@
 package com.alaskalany.todoly.todo;
 
+import com.alaskalany.todoly.date.DateHelper;
+import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.task.Task;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.time.LocalDate;
+import java.time.Month;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Task Test")
 class TaskTest {
 
     private Task task;
-
+    private Project project;
+    private LocalDate date = DateHelper.getDate(0, Month.JANUARY, 1);
 
     /**
      *
@@ -25,8 +30,10 @@ class TaskTest {
      */
     @BeforeEach
     void setUp() {
-        Project project = Project.createProject("Test project");
-        task = Task.createTask("Test task", "2018-09-15", project);
+
+        project = new Project.Builder().title("Test project").build();
+        task = new Task.Builder().title("Test task").status(false).dueDate(date)
+                .projectId(project.getId()).build();
     }
 
     /**
@@ -34,6 +41,7 @@ class TaskTest {
      */
     @AfterEach
     void tearDown() {
+
     }
 
     /**
@@ -50,6 +58,7 @@ class TaskTest {
     @Test
     @DisplayName("Create a task")
     void createTask() {
+
         assertNotNull(task);
     }
 
@@ -59,7 +68,8 @@ class TaskTest {
     @Test
     @DisplayName("Display task label")
     void getLabel() {
-        String taskLabel = task.getLabel();
+
+        String taskLabel = task.getTitle();
         assertEquals("Test task", taskLabel);
     }
 
@@ -69,8 +79,8 @@ class TaskTest {
     @Test
     @DisplayName("Get task date")
     void getDate() {
-        String taskDate = task.getDate();
-        assertEquals("2018-09-15", taskDate);
+
+        assertEquals(date, task.getDueDate());
     }
 
     /**
@@ -79,8 +89,9 @@ class TaskTest {
     @Test
     @DisplayName("Set task label")
     void setLabel() {
-        task.setLabel("Test task 2");
-        String taskLabel = task.getLabel();
+
+        task.setTitle("Test task 2");
+        String taskLabel = task.getTitle();
         assertEquals("Test task 2", taskLabel);
     }
 
@@ -90,9 +101,9 @@ class TaskTest {
     @Test
     @DisplayName("Set task date")
     void setDate() {
-        task.setDate("2018-09-20");
-        String taskDate = task.getDate();
-        assertEquals("2018-09-20", taskDate);
+
+        task.setDueDate(date);
+        assertEquals(date, task.getDueDate());
     }
 
     /**
@@ -100,8 +111,54 @@ class TaskTest {
      */
     @Test
     @DisplayName("Finish task")
-    void finish(){
-        task.setDone();
-        assertTrue(task.getDone());
+    void finish() {
+
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
+    }
+
+    @Test
+    void setDone() {
+
+        task.setStatusTrue();
+        assertTrue(task.getStatus().booleanValue());
+    }
+
+    @Test
+    void getDoneUnfinishedTask() {
+
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
+    }
+
+    @Test
+    void getDoneFinishedTask() {
+
+        task.setStatusTrue();
+        assertTrue(task.getStatus());
+        task.setStatusFalse();
+        assertFalse(task.getStatus());
+    }
+
+    @Test
+    void getProjectNotNull() {
+
+        Project project = new Project.Builder().title("Some Project").build();
+        task.setProject(project);
+        assertNotNull(task.getProjectId());
+    }
+
+    @Test
+    void getProjectId() {
+
+        assertSame(project.getId(), task.getProjectId());
+    }
+
+    @Test
+    void setProject() {
+
+        Project newProject = new Project.Builder().title("New project").build();
+        task.setProjectId(newProject.getId());
+        assertSame(newProject.getId(), task.getProjectId());
     }
 }
