@@ -1,6 +1,7 @@
 package com.alaskalany.todoly.todo.project;
 
 import com.alaskalany.todoly.todo.task.Task;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,17 +14,17 @@ import java.util.UUID;
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * List of tasks in the project
+     */
+    private final ArrayList<Task> tasks = new ArrayList<>();
     private UUID id;
     /**
      * Project title
      */
     private String title;
-    /**
-     * List of tasks in the project
-     */
-    private final ArrayList<Task> tasks = new ArrayList<>();
 
-    private Project(Builder builder) {
+    private Project(@NotNull Builder builder) {
 
         this.title = builder.title;
         this.id = UUID.randomUUID();
@@ -32,6 +33,11 @@ public class Project implements Serializable {
     public Project(String input) {
 
         setTitle(input);
+    }
+
+    private static int getLastTask(@NotNull ArrayList<Task> tasks) {
+
+        return tasks.size() - 1;
     }
 
     /**
@@ -50,6 +56,14 @@ public class Project implements Serializable {
     public String getTitle() {
 
         return title;
+    }
+
+    /**
+     * @param new_project_name {@link String} New project title
+     */
+    public void setTitle(@SuppressWarnings("SameParameterValue") String new_project_name) {
+
+        title = new_project_name;
     }
 
     /**
@@ -80,14 +94,6 @@ public class Project implements Serializable {
             }
         }
         return finishedTasksCount;
-    }
-
-    /**
-     * @param new_project_name {@link String} New project title
-     */
-    public void setTitle(@SuppressWarnings("SameParameterValue") String new_project_name) {
-
-        title = new_project_name;
     }
 
     public ArrayList<Task> getAllTasks() {
@@ -138,11 +144,6 @@ public class Project implements Serializable {
     public Task getTask(int i) {
 
         return tasks.get(i);
-    }
-
-    private static int getLastTask(ArrayList<Task> tasks) {
-
-        return tasks.size() - 1;
     }
 
     public UUID getId() {

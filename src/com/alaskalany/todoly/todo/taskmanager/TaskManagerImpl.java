@@ -1,25 +1,29 @@
-package com.alaskalany.todoly.todo;
+package com.alaskalany.todoly.todo.taskmanager;
 
 import com.alaskalany.todoly.todo.project.Project;
+import com.alaskalany.todoly.todo.projectlist.ProjectList;
 import com.alaskalany.todoly.todo.task.Task;
+import com.alaskalany.todoly.todo.tasklist.TaskList;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 
-public class TaskManager {
+public class TaskManagerImpl extends TaskManager implements Manager {
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
-    private final HashMap<String, Project> projects = new HashMap<>();
+    @Inject
+    private TaskList taskList;
+    @Inject
+    private ProjectList projectList;
 
     public void addTask(String taskTitle) {
 
-        tasks.add(new Task.Builder().title(taskTitle).build());
+        taskList.add(new Task.Builder().title(taskTitle).build());
     }
 
     public ArrayList<String> getAllTasksByDueDate() {
 
-        ArrayList<Task> orderedTasks = new ArrayList<>(tasks);
+        ArrayList<Task> orderedTasks = new ArrayList<>(taskList);
         orderedTasks.sort(Task::compareTo);
         ArrayList<String> taskTitles = new ArrayList<>();
         orderedTasks.forEach(task -> taskTitles.add(task.toString()));
@@ -28,33 +32,33 @@ public class TaskManager {
 
     public String getTaskTitle(Integer valueOf) {
 
-        return tasks.get(valueOf - 1).getTitle();
+        return taskList.get(valueOf - 1).getTitle();
     }
 
     public Task getTask(Integer taskIndex) {
 
-        return tasks.get(taskIndex - 1);
+        return taskList.get(taskIndex - 1);
     }
 
     public boolean doesProjectExist(String input) {
 
-        return projects.containsKey(input);
+        return projectList.containsKey(input);
     }
 
     public void createProject(String input) {
 
-        projects.put(input, new Project(input));
+        projectList.put(input, new Project(input));
     }
 
     public void addTaskToProject(Integer taskIndex, String input) {
 
-        projects.get(input).addTask(tasks.get(taskIndex - 1));
+        projectList.get(input).addTask(taskList.get(taskIndex - 1));
     }
 
     public ArrayList<String> getAllWithNoProject() {
 
         ArrayList<String> taskTitles = new ArrayList<>();
-        tasks.forEach(task -> {
+        taskList.forEach(task -> {
             if (!task.hasProject()) {
                 taskTitles.add(task.toString());
             }
@@ -65,7 +69,7 @@ public class TaskManager {
     public ArrayList<Project> getAllProjects() {
 
         ArrayList<Project> projectsList = new ArrayList<>();
-        projects.forEach((s, project) -> projectsList.add(project));
+        projectList.forEach((s, project) -> projectsList.add(project));
         projectsList.sort(Comparator.comparing(Project::getTitle));
         return projectsList;
     }

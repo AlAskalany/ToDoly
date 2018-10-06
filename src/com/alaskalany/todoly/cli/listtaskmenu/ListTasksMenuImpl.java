@@ -1,19 +1,22 @@
-package com.alaskalany.todoly.cli;
+package com.alaskalany.todoly.cli.listtaskmenu;
 
-import com.alaskalany.todoly.todo.TaskManager;
+import com.alaskalany.todoly.cli.mainmenu.MainMenu;
+import com.alaskalany.todoly.cli.tasklistduedatemenu.TaskListDueDateMenu;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 
-public class ListTasksMenu extends Menu {
+public class ListTasksMenuImpl extends ListTasksMenu {
 
-    private final TaskListDueDateMenu taskListDueDateMenu;
-    private final MainMenu mainMenu;
+    @Inject
+    private TaskListDueDateMenu taskListDueDateMenu;
+    @Inject
+    private MainMenu mainMenu;
 
-    ListTasksMenu(MainMenu mainMenu, TaskManager taskManager) {
+    @Inject
+    public ListTasksMenuImpl(String title) {
 
-        super("List All Tasks by:");
-        this.taskListDueDateMenu = new TaskListDueDateMenu(mainMenu, taskManager);
-        this.mainMenu = mainMenu;
+        super(title);
     }
 
     @Override
