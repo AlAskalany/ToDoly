@@ -1,0 +1,45 @@
+{
+  "tasks": {
+    "task-0": {
+      "title": "first task",
+      "status": false,
+      "due-date": "2014-09-11",
+      "project": "project-0"
+    },
+    "task-1": {
+      "title": "first task",
+      "status": false,
+      "due-date": "2014-09-11",
+      "project": "project-1"
+    },
+    "task-2": {
+      "title": "first task",
+      "status": false,
+      "due-date": "2014-09-11",
+      "project": null
+    }
+  },
+  "projects": {
+    "project-0": {
+      "title": "first project",
+      "tasks": {
+        "task-0": false,
+        "1": false
+      }
+    },
+    "project-1": {
+      "title": "first project",
+      "tasks": {
+        "task-0": true,
+        "task-1": true
+      }
+    },
+    "project-2": {
+      "title": "first project",
+      "tasks": {
+        "task-0": true,
+        "task-1": true
+      }
+    }
+  }
+}
