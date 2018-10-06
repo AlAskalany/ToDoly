@@ -1,7 +1,6 @@
 package com.alaskalany.todoly.date;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.ranges.RangeException;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,11 +10,13 @@ public class DateHelper {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    public static String getFormattedDateFromLocalDate(LocalDate date) {
+    @NotNull
+    public static String getFormattedDateFromLocalDate(@NotNull LocalDate date) {
 
         return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
+    @NotNull
     public static LocalDate getDate(int year, Month month, int date) {
 
         return LocalDate.of(year, month, date);

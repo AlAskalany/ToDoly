@@ -3,13 +3,13 @@ package com.alaskalany.todoly.cli;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-abstract class Menu {
+public abstract class Menu {
 
     private final String title;
     private final ArrayList<String> options;
     private final String prompt;
 
-    Menu(String title) {
+    protected Menu(String title) {
 
         options = new ArrayList<>();
         this.title = title;
@@ -19,7 +19,7 @@ abstract class Menu {
 
     protected abstract void setOptions(ArrayList<String> options);
 
-    void display() {
+    public void display() {
 
         System.out.println();
         displayTitle();
@@ -65,7 +65,7 @@ abstract class Menu {
 
     protected abstract void onInput(String string);
 
-    void displayMenu(Menu menu) {
+    protected void displayMenu(Menu menu) {
 
         menu.display();
     }

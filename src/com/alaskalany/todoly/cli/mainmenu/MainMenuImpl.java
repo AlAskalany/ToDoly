@@ -1,20 +1,22 @@
-package com.alaskalany.todoly.cli;
+package com.alaskalany.todoly.cli.mainmenu;
 
-import com.alaskalany.todoly.todo.TaskManager;
+import com.alaskalany.todoly.cli.addtaskmenu.AddTaskMenu;
+import com.alaskalany.todoly.cli.listtaskmenu.ListTasksMenu;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 
-public class MainMenu extends Menu {
+public class MainMenuImpl extends MainMenu {
 
-    private final AddTaskMenu addTaskMenu;
-    private final ListTasksMenu listTasksMenu;
+    @Inject
+    private AddTaskMenu addTaskMenu;
+    @Inject
+    private ListTasksMenu listTasksMenu;
 
-    @SuppressWarnings("unused")
-    public MainMenu(TaskManager taskManager) {
+    @Inject
+    public MainMenuImpl(String title) {
 
-        super("ToDoly");
-        this.addTaskMenu = new AddTaskMenu(this, taskManager);
-        this.listTasksMenu = new ListTasksMenu(this, taskManager);
+        super(title);
     }
 
     @Override

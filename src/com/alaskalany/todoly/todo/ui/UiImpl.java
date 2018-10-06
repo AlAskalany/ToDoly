@@ -1,24 +1,25 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.todo.ui;
 
 import com.alaskalany.todoly.parsing.DateParser;
-import com.alaskalany.todoly.todo.TaskManager;
 import com.alaskalany.todoly.todo.project.Project;
 import com.alaskalany.todoly.todo.task.Task;
+import com.alaskalany.todoly.todo.taskmanager.TaskManager;
+import org.jetbrains.annotations.Contract;
 
+import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Ui {
+public class UiImpl extends Ui {
 
-    private final TaskManager taskManager;
+    @Inject
+    private TaskManager taskManager;
+    @Inject
+    private DateParser dateParser;
 
-    Ui(@SuppressWarnings("SameParameterValue") TaskManager taskManager) {
-
-        this.taskManager = taskManager;
-    }
-
-    void mainMenu() {
+    @Override
+    public void mainMenu() {
 
         System.out.println("ToDoly");
         System.out.println("1- Add a task");
@@ -63,6 +64,7 @@ class Ui {
         mainMenu();
     }
 
+    @Contract(value = "_ -> param1", pure = true)
     private String getTaskTitle(String input) {
 
         return input;
@@ -182,7 +184,6 @@ class Ui {
         System.out.print("New Due date: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        DateParser dateParser = new DateParser();
         LocalDate dueDate = dateParser.getDateFromString(input);
         taskManager.getTask(taskIndex).setDueDate(dueDate);
         System.out.println("Task Due date modified");

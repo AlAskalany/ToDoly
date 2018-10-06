@@ -2,6 +2,7 @@ package com.alaskalany.todoly.todo.task;
 
 import com.alaskalany.todoly.date.DateHelper;
 import com.alaskalany.todoly.todo.project.Project;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class Task implements Serializable, Comparable<Task> {
     private String title;
     private transient Project project;
 
-    private Task(Builder builder) {
+    private Task(@NotNull Builder builder) {
 
         this.title = builder.title;
         this.status = builder.status;
@@ -36,14 +37,14 @@ public class Task implements Serializable, Comparable<Task> {
         return title;
     }
 
-    public LocalDate getDueDate() {
-
-        return dueDate;
-    }
-
     public void setTitle(@SuppressWarnings("SameParameterValue") String label) {
 
         this.title = label;
+    }
+
+    public LocalDate getDueDate() {
+
+        return dueDate;
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -95,6 +96,8 @@ public class Task implements Serializable, Comparable<Task> {
                 .format("%s | %s | %s | %s", title, getDueDateOrNoDueDateString(), getProjectOrNoProjectString(), getStatusString());
     }
 
+    @NotNull
+    @Contract(pure = true)
     private String getStatusString() {
 
         return (status != null && status) ? "Done" : "To do";
@@ -105,6 +108,7 @@ public class Task implements Serializable, Comparable<Task> {
         return (project != null) ? getTitleString() : "No project";
     }
 
+    @NotNull
     private String getDueDateOrNoDueDateString() {
 
         return (dueDate != null) ? DateHelper.getFormattedDateFromLocalDate(dueDate) : "No due date";
