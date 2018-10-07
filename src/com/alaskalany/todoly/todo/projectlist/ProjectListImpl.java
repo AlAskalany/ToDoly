@@ -5,14 +5,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class ProjectListImpl extends ProjectList {
 
-    public ProjectListImpl() {
+  public ProjectListImpl() {
 
-    }
+  }
 
-    @NotNull
-    @Contract(" -> new")
-    public static ProjectList createProjectList() {
+  @NotNull
+  @Contract(" -> new")
+  public static ProjectList createProjectList() {
 
-        return new ProjectListImpl();
-    }
+    return new ProjectListImpl();
+  }
 }

@@ -2,17 +2,17 @@ package com.alaskalany.todoly.todo.ui.commands;
 
 public class SaveAndQuitCommand {
 
-    private SaveAndQuitCommand() {
+  private SaveAndQuitCommand() {
 
-    }
+  }
 
-    public static SaveAndQuitCommand create() {
+  public static SaveAndQuitCommand create() {
 
-        return new SaveAndQuitCommand();
-    }
+    return new SaveAndQuitCommand();
+  }
 
-    public void invoke() {
+  public void invoke() {
 
-        System.exit(0);
-    }
+    System.exit(0);
+  }
 }

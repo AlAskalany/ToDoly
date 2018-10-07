@@ -5,9 +5,9 @@ import com.alaskalany.todoly.todo.taskmanager.TaskManager;
 
 public abstract class Ui {
 
-    public abstract void mainMenu();
+  public abstract void mainMenu();
 
-    public abstract TaskManager getTaskManager();
+  public abstract TaskManager getTaskManager();
 
-    public abstract DateParser getDateParser();
+  public abstract DateParser getDateParser();
 }

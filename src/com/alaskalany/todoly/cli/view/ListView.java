@@ -1,34 +1,33 @@
 package com.alaskalany.todoly.cli.view;
 
 import com.alaskalany.todoly.cli.View;
-
 import java.util.ArrayList;
 
 public class ListView<V extends View> extends View {
 
-    private ArrayList<V> viewsList;
+  private ArrayList<V> viewsList;
 
-    public ListView() {
+  public ListView() {
 
-        viewsList = new ArrayList<>();
-    }
+    viewsList = new ArrayList<>();
+  }
 
-    public boolean add(V v) {
+  public boolean add(V v) {
 
-        return viewsList.add(v);
-    }
+    return viewsList.add(v);
+  }
 
-    public int size() {
+  public int size() {
 
-        return viewsList.size();
-    }
+    return viewsList.size();
+  }
 
-    @Override
-    public void print() {
+  @Override
+  public void print() {
 
-        viewsList.forEach(v -> {
-            v.print();
-            System.out.print("\n");
-        });
-    }
+    viewsList.forEach(v -> {
+      v.print();
+      System.out.print("\n");
+    });
+  }
 }

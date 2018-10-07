@@ -15,15 +15,16 @@ import com.google.inject.Injector;
  */
 public class ToDoly {
 
-    /**
-     * @param args Arguments
-     */
-    public static void main(String[] args) {
+  /**
+   * @param args Arguments
+   */
+  public static void main(String[] args) {
 
-        Injector injector = Guice
-                .createInjector(new TaskManagerModule(), new TaskListModule(), new ProjectListModule(), new UiModule(), new DateParserModule());
-        TaskManager taskManager = injector.getInstance(TaskManager.class);
-        Ui ui = injector.getInstance(Ui.class);
-        ui.mainMenu();
-    }
+    Injector injector = Guice
+        .createInjector(new TaskManagerModule(), new TaskListModule(), new ProjectListModule(),
+            new UiModule(), new DateParserModule());
+    TaskManager taskManager = injector.getInstance(TaskManager.class);
+    Ui ui = injector.getInstance(Ui.class);
+    ui.mainMenu();
+  }
 }
