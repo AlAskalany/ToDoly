@@ -30,6 +30,12 @@ public class TaskManagerImpl extends TaskManager implements Manager {
         return taskTitles;
     }
 
+    @Override
+    public boolean isTaskIndexValid(Integer taskIndex) {
+
+        return taskList.size() > taskIndex;
+    }
+
     public String getTaskTitle(Integer valueOf) {
 
         return taskList.get(valueOf - 1).getTitle();

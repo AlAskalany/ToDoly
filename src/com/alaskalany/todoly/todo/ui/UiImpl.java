@@ -1,18 +1,28 @@
 package com.alaskalany.todoly.todo.ui;
 
 import com.alaskalany.todoly.parsing.DateParser;
-import com.alaskalany.todoly.todo.project.Project;
-import com.alaskalany.todoly.todo.task.Task;
 import com.alaskalany.todoly.todo.taskmanager.TaskManager;
+import com.alaskalany.todoly.todo.ui.commands.*;
 import org.jetbrains.annotations.Contract;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UiImpl extends Ui {
 
+    public static boolean FROM_LIST_BY_DUE_DATE = false;
+    public static boolean FROM_LIST_BY_PROJECT = true;
+    private final EditTaskTitleCommand editTaskTitleCommand = EditTaskTitleCommand.create(this);
+    private final ListAllTasksByProjectCommand listAllTasksByProjectCommand = ListAllTasksByProjectCommand.create(this);
+    private final EditSelectedTaskCommand editSelectedTaskCommand = EditSelectedTaskCommand.create(this);
+    private final ListAllTasksByDueDateCommand listAllTasksByDueDateCommand = ListAllTasksByDueDateCommand.create(this);
+    private final MainMenuCommand mainMenuCommand = MainMenuCommand.create(this);
+    private final ListAllTasksCommand listAllTasksCommand = ListAllTasksCommand.create(this);
+    private final AddTaskCommand addTaskCommand = AddTaskCommand.create(this);
+    private final EditTaskProjectCommand editTaskProjectCommand = EditTaskProjectCommand.create(this);
+    private final EditTaskDueDateCommand editTaskDueDateCommand = EditTaskDueDateCommand.create(this);
+    private final EditTaskStatusCommand editTaskStatusCommand = EditTaskStatusCommand.create(this);
+    private final SaveAndQuitCommand saveAndQuitCommand = SaveAndQuitCommand.create();
+    private final SelectTaskOrMainMenuCommand selectTaskOrMainMenuCommand = SelectTaskOrMainMenuCommand.create(this);
     @Inject
     private TaskManager taskManager;
     @Inject
@@ -21,220 +31,84 @@ public class UiImpl extends Ui {
     @Override
     public void mainMenu() {
 
-        System.out.println("ToDoly");
-        System.out.println("1- Add a task");
-        System.out.println("2- List all tasks");
-        System.out.println("3- Save and quit");
-        System.out.println();
-        System.out.print("Enter a choice: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.next();
-        handleMainMenuInput(input);
+        mainMenuCommand.invoke();
     }
 
-    private void handleMainMenuInput(String input) {
+    @Override
+    public TaskManager getTaskManager() {
 
-        switch (Integer.valueOf(input)) {
-            case 1:
-                addTask();
-                break;
-            case 2:
-                listAllTasks();
-                break;
-            case 3:
-                saveAndQuit();
-                break;
-            default:
-                System.out.println("Enter a valid input.");
-                System.out.print("Enter a choice: ");
-                mainMenu();
-                break;
-        }
+        return taskManager;
     }
 
-    private void addTask() {
+    @Override
+    public DateParser getDateParser() {
 
-        Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
-        String input;
-        System.out.print("Enter task name:");
-        input = scanner.next();
-        String taskTitle = getTaskTitle(input);
-        taskManager.addTask(taskTitle);
-        mainMenu();
+        return dateParser;
+    }
+
+    public void addTask() {
+
+        addTaskCommand.invoke();
     }
 
     @Contract(value = "_ -> param1", pure = true)
-    private String getTaskTitle(String input) {
+    public String getTaskTitle(String input) {
 
         return input;
     }
 
-    private void listAllTasks() {
+    public void listAllTasks() {
 
-        System.out.println("List all tasks by:");
-        System.out.println("1- Due date");
-        System.out.println("2- Project");
-        System.out.print("Enter a choice: ");
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        input = scanner.nextLine();
-        handleListAllTasksInput(input);
+        listAllTasksCommand.invoke();
     }
 
-    private void handleListAllTasksInput(String input) {
+    public void listAllTasksByProject() {
 
-        switch (Integer.valueOf(input)) {
-            case 1:
-                listAllTasksByDueDate();
-                break;
-            case 2:
-                listAllTasksByProject();
-                break;
-            default:
-                break;
-        }
+        listAllTasksByProjectCommand.invoke();
     }
 
-    private void listAllTasksByProject() {
+    public void selectTaskOrMainMenu() {
 
-        System.out.println("All Tasks List - By Project");
-        System.out.println();
-        ArrayList<Project> projects;
-        projects = taskManager.getAllProjects();
-        projects.forEach(project -> {
-            String projectTitle = project.getTitle();
-            System.out.println(projectTitle);
-            System.out.println();
-            ArrayList<Task> allTasks = project.getAllTasks();
-            allTasks
-                    .forEach(task -> {
-                        int indexOfTask = allTasks.indexOf(task);
-                        int taskNumber = indexOfTask + 1;
-                        System.out.println(taskNumber + "- " + task);
-                    });
-        });
-        ArrayList<String> tasksWithNoProject = taskManager.getAllWithNoProject();
-        System.out.println();
-        System.out.println("Tasks with no project:");
-        System.out.println();
-        tasksWithNoProject.forEach(task -> System.out.println((tasksWithNoProject.indexOf(task) + 1) + "- " + task));
-        System.out.println();
-        selectTaskOrMainMenu();
+        selectTaskOrMainMenuCommand.invoke();
     }
 
-    private void selectTaskOrMainMenu() {
+    public void editSelectedTask(Integer valueOf) {
 
-        System.out.print("Enter task number to edit or 0 for main menu");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        handleSelectTaskOrMainMenu(input);
+        editSelectedTaskCommand.invoke(valueOf);
     }
 
-    private void handleSelectTaskOrMainMenu(String input) {
+    public boolean isTaskIndexValid(Integer taskIndex) {
 
-        switch (Integer.valueOf(input)) {
-            case 0:
-                mainMenu();
-                break;
-            default:
-                editSelectedTask(Integer.valueOf(input));
-                break;
-        }
+        return taskManager.isTaskIndexValid(taskIndex);
     }
 
-    private void editSelectedTask(Integer valueOf) {
+    public void editTaskDueDate(Integer taskIndex) {
 
-        System.out.println("Editing Task:" + taskManager.getTaskTitle(valueOf));
-        System.out.println("1- Title");
-        System.out.println("2- Status");
-        System.out.println("3- Project");
-        System.out.println("4- Due date");
-        System.out.print("Enter a choice or 0 for main menu: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        handleEditSelectedTask(input, valueOf);
+        editTaskDueDateCommand.invoke(taskIndex);
     }
 
-    private void handleEditSelectedTask(String input, Integer taskIndex) {
+    public void editTaskProject(Integer taskIndex) {
 
-        switch (Integer.valueOf(input)) {
-            case 0:
-                mainMenu();
-                break;
-            case 1:
-                editTaskTitle(taskIndex);
-                break;
-            case 2:
-                editTaskStatus(taskIndex);
-                break;
-            case 3:
-                editTaskProject(taskIndex);
-                break;
-            case 4:
-                editTaskDueDate(taskIndex);
-                break;
-            default:
-                break;
-        }
+        editTaskProjectCommand.invoke(taskIndex);
     }
 
-    private void editTaskDueDate(Integer taskIndex) {
+    public void editTaskStatus(Integer taskIndex) {
 
-        System.out.print("New Due date: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        LocalDate dueDate = dateParser.getDateFromString(input);
-        taskManager.getTask(taskIndex).setDueDate(dueDate);
-        System.out.println("Task Due date modified");
-        editSelectedTask(taskIndex);
+        editTaskStatusCommand.invoke(taskIndex);
     }
 
-    private void editTaskProject(Integer taskIndex) {
+    public void editTaskTitle(Integer taskIndex) {
 
-        System.out.print("New Project: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (!taskManager.doesProjectExist(input)) {
-            taskManager.createProject(input);
-        }
-        taskManager.addTaskToProject(taskIndex, input);
-        System.out.println("Task Project modified");
-        editSelectedTask(taskIndex);
+        editTaskTitleCommand.invoke(taskIndex);
     }
 
-    private void editTaskStatus(Integer taskIndex) {
+    public void listAllTasksByDueDate() {
 
-        System.out.print("New Status: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        taskManager.getTask(taskIndex).setTitle(input);
-        System.out.println("Task title modified");
-        editSelectedTask(taskIndex);
+        listAllTasksByDueDateCommand.invoke();
     }
 
-    private void editTaskTitle(Integer taskIndex) {
+    public void saveAndQuit() {
 
-        System.out.print("New title: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        taskManager.getTask(taskIndex).setTitle(input);
-        System.out.println("Task title modified");
-        editSelectedTask(taskIndex);
-    }
-
-    private void listAllTasksByDueDate() {
-
-        System.out.println("All Tasks List - By Due Date");
-        System.out.println();
-        ArrayList<String> tasks = taskManager.getAllTasksByDueDate();
-        tasks.forEach(task -> System.out.println((tasks.indexOf(task) + 1) + "- " + task));
-        System.out.println();
-        selectTaskOrMainMenu();
-    }
-
-    private void saveAndQuit() {
-
-        System.exit(0);
+        saveAndQuitCommand.invoke();
     }
 }

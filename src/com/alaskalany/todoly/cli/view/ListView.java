@@ -18,7 +18,8 @@ public class ListView<V extends View> extends View {
         return viewsList.add(v);
     }
 
-    public int size(){
+    public int size() {
+
         return viewsList.size();
     }
 

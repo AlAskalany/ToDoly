@@ -48,4 +48,6 @@ public abstract class TaskManager {
 
         return null;
     }
+
+    public abstract boolean isTaskIndexValid(Integer taskIndex);
 }
