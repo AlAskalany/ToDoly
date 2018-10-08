@@ -4,16 +4,16 @@ import com.alaskalany.todoly.cli.View;
 
 public class Text extends View {
 
-  private String text;
+    private String text;
 
-  public Text(String text) {
+    public Text(String text) {
 
-    this.text = text;
-  }
+        this.text = text;
+    }
 
-  @Override
-  public void print() {
+    @Override
+    public void print() {
 
-    System.out.print(text);
-  }
+        System.out.print(text);
+    }
 }

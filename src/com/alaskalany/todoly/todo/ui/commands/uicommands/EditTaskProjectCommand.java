@@ -1,33 +1,58 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.UiImpl;
+import com.alaskalany.todoly.todo.ui.Ui;
+
 import java.util.Scanner;
 
-public class EditTaskProjectCommand {
+public class EditTaskProjectCommand extends Command {
 
-  public static final String TASK_PROJECT_MODIFIED = "Task Project modified";
-  private final UiImpl uiImpl;
+    public static final String TASK_PROJECT_MODIFIED = "Task Project modified";
 
-  private EditTaskProjectCommand(UiImpl uiImpl) {
+    private EditTaskProjectCommand(Ui ui) {
 
-    this.uiImpl = uiImpl;
-  }
-
-  public static EditTaskProjectCommand create(UiImpl uiImpl) {
-
-    return new EditTaskProjectCommand(uiImpl);
-  }
-
-  public void invoke(Integer taskIndex) {
-
-    System.out.print("New Project: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
-    if (!uiImpl.getTaskManager().doesProjectExist(input)) {
-      uiImpl.getTaskManager().createProject(input);
+        super(ui);
     }
-    uiImpl.getTaskManager().addTaskToProject(taskIndex, input);
-    System.out.println(TASK_PROJECT_MODIFIED);
-    uiImpl.editSelectedTask(taskIndex);
-  }
+
+    public static EditTaskProjectCommand create(Ui ui) {
+
+        return new EditTaskProjectCommand(ui);
+    }
+
+    public void invoke(Integer taskIndex) {
+
+        System.out.print("New Project: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (!ui.getTaskManager().doesProjectExist(input)) {
+            ui.getTaskManager().createProject(input);
+        }
+        ui.getTaskManager().addTaskToProject(taskIndex, input);
+        System.out.println(TASK_PROJECT_MODIFIED);
+        ui.editSelectedTask(taskIndex);
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex) {
+
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Ui ui) {
+
+    }
 }

@@ -1,39 +1,66 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.UiImpl;
-import java.util.Scanner;
+import com.alaskalany.todoly.todo.ui.Ui;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class AddTaskCommand extends Command{
+import java.util.Scanner;
 
-  public static final String ENTER_TASK_NAME = "Enter task name:";
+public class AddTaskCommand extends Command {
 
-  public AddTaskCommand(UiImpl uiImpl) {
-    super(uiImpl);
-  }
+    public static final String ENTER_TASK_NAME = "Enter task name:";
 
-  @NotNull
-  @Contract("_ -> new")
-  public static AddTaskCommand create(UiImpl uiImpl) {
+    public AddTaskCommand(Ui ui) {
 
-    return new AddTaskCommand(uiImpl);
-  }
+        super(ui);
+    }
 
-  public void invoke() {
+    @NotNull
+    @Contract("_ -> new")
+    public static AddTaskCommand create(Ui ui) {
 
-    Scanner scanner = new Scanner(System.in);
-    scanner.useDelimiter("\n");
-    String input;
-    System.out.print(ENTER_TASK_NAME);
-    input = scanner.next();
-    String taskTitle = uiImpl.getTaskTitle(input);
-    uiImpl.getTaskManager().addTask(taskTitle);
-    uiImpl.mainMenu();
-  }
+        return new AddTaskCommand(ui);
+    }
 
-  @Override
-  public void handleInput(String input) {
+    public void invoke() {
 
-  }
+        Scanner scanner = new Scanner(System.in);
+        scanner.useDelimiter("\n");
+        String input;
+        System.out.print(ENTER_TASK_NAME);
+        input = scanner.next();
+        String taskTitle = ui.getTaskTitle(input);
+        ui.getTaskManager().addTask(taskTitle);
+        ui.mainMenu();
+    }
+
+    @Override
+    public void invoke(Integer valueOf) {
+
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex) {
+
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Ui ui) {
+
+    }
 }

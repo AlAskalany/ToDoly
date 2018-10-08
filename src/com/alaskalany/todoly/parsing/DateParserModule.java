@@ -4,9 +4,9 @@ import com.google.inject.AbstractModule;
 
 public class DateParserModule extends AbstractModule {
 
-  @Override
-  protected void configure() {
+    @Override
+    protected void configure() {
 
-    bind(DateParser.class).to(DateParserImpl.class);
-  }
+        bind(DateParser.class).to(DateParserImpl.class);
+    }
 }

@@ -4,8 +4,8 @@ import com.alaskalany.todoly.cli.Menu;
 
 public abstract class AddTaskMenu extends Menu {
 
-  public AddTaskMenu(String title) {
+    public AddTaskMenu(String title) {
 
-    super(title);
-  }
+        super(title);
+    }
 }

@@ -7,18 +7,21 @@ import com.alaskalany.todoly.abstractfactory.drinks.Tea;
 
 public class BlueDrinkFactory implements DrinkFactory {
 
-  @Override
-  public Coffee createCoffee() {
-    return new BlueCoffee();
-  }
+    @Override
+    public Coffee createCoffee() {
 
-  @Override
-  public Coke createCoke() {
-    return new BlueCoke();
-  }
+        return new BlueCoffee();
+    }
 
-  @Override
-  public Tea createTea() {
-    return new BlueTea();
-  }
+    @Override
+    public Coke createCoke() {
+
+        return new BlueCoke();
+    }
+
+    @Override
+    public Tea createTea() {
+
+        return new BlueTea();
+    }
 }

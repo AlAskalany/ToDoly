@@ -2,51 +2,52 @@ package com.alaskalany.todoly.todo.taskmanager;
 
 import com.alaskalany.todoly.todo.project.Project;
 import com.alaskalany.todoly.todo.task.Task;
+
 import java.util.ArrayList;
 
 public abstract class TaskManager {
 
-  public void addTask(String taskTitle) {
+    public void addTask(String taskTitle) {
 
-  }
+    }
 
-  public ArrayList<Project> getAllProjects() {
+    public ArrayList<Project> getAllProjects() {
 
-    return null;
-  }
+        return null;
+    }
 
-  public ArrayList<String> getAllWithNoProject() {
+    public ArrayList<String> getAllWithNoProject() {
 
-    return null;
-  }
+        return null;
+    }
 
-  public String getTaskTitle(Integer valueOf) {
+    public String getTaskTitle(Integer valueOf) {
 
-    return null;
-  }
+        return null;
+    }
 
-  public Task getTask(Integer taskIndex) {
+    public Task getTask(Integer taskIndex) {
 
-    return null;
-  }
+        return null;
+    }
 
-  public boolean doesProjectExist(String input) {
+    public boolean doesProjectExist(String input) {
 
-    return false;
-  }
+        return false;
+    }
 
-  public void createProject(String input) {
+    public void createProject(String input) {
 
-  }
+    }
 
-  public void addTaskToProject(Integer taskIndex, String input) {
+    public void addTaskToProject(Integer taskIndex, String input) {
 
-  }
+    }
 
-  public ArrayList<String> getAllTasksByDueDate() {
+    public ArrayList<String> getAllTasksByDueDate() {
 
-    return null;
-  }
+        return null;
+    }
 
-  public abstract boolean isTaskIndexValid(Integer taskIndex);
+    public abstract boolean isTaskIndexValid(Integer taskIndex);
 }

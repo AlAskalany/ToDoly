@@ -1,30 +1,51 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.UiImpl;
+import com.alaskalany.todoly.todo.ui.Ui;
 
 public class SaveAndQuitCommand extends Command {
 
-  public SaveAndQuitCommand(UiImpl uiImpl) {
-    super(uiImpl);
-  }
+    public SaveAndQuitCommand(Ui ui) {
 
-  public static SaveAndQuitCommand create(UiImpl uiImpl) {
+        super(ui);
+    }
 
-    return new SaveAndQuitCommand(uiImpl);
-  }
+    public static SaveAndQuitCommand create(Ui ui) {
 
-  public void invoke() {
+        return new SaveAndQuitCommand(ui);
+    }
 
-    System.exit(0);
-  }
+    public void invoke() {
 
-  @Override
-  public void invoke(Integer valueOf) {
+        System.exit(0);
+    }
 
-  }
+    @Override
+    public void invoke(Integer valueOf) {
 
-  @Override
-  public void handleInput(String input, Integer taskIndex, UiImpl ui) {
+    }
 
-  }
+    @Override
+    public void handleInput(Integer taskIndex) {
+
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Ui ui) {
+
+    }
 }

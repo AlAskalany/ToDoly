@@ -1,29 +1,53 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.UiImpl;
+import com.alaskalany.todoly.todo.ui.Ui;
+
 import java.util.Scanner;
 
-public class EditTaskTitleCommand {
+public class EditTaskTitleCommand extends Command {
 
-  private final UiImpl uiImpl;
+    private EditTaskTitleCommand(Ui ui) {
 
-  private EditTaskTitleCommand(UiImpl uiImpl) {
+        super(ui);
+    }
 
-    this.uiImpl = uiImpl;
-  }
+    public static EditTaskTitleCommand create(Ui ui) {
 
-  public static EditTaskTitleCommand create(UiImpl uiImpl) {
+        return new EditTaskTitleCommand(ui);
+    }
 
-    return new EditTaskTitleCommand(uiImpl);
-  }
+    public void invoke(Integer taskIndex) {
 
-  public void invoke(Integer taskIndex) {
+        System.out.print("New title: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        ui.getTaskManager().getTask(taskIndex).setTitle(input);
+        System.out.println("Task title modified");
+        ui.editSelectedTask(taskIndex);
+    }
 
-    System.out.print("New title: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
-    uiImpl.getTaskManager().getTask(taskIndex).setTitle(input);
-    System.out.println("Task title modified");
-    uiImpl.editSelectedTask(taskIndex);
-  }
+    @Override
+    public void handleInput(Integer taskIndex) {
+
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Ui ui) {
+
+    }
 }

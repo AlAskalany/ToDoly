@@ -4,9 +4,9 @@ import com.google.inject.AbstractModule;
 
 public class ListTasskMenuModule extends AbstractModule {
 
-  @Override
-  public void configure() {
+    @Override
+    public void configure() {
 
-    bind(ListTasksMenu.class).to(ListTasksMenuImpl.class);
-  }
+        bind(ListTasksMenu.class).to(ListTasksMenuImpl.class);
+    }
 }

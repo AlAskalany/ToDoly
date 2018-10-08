@@ -7,20 +7,21 @@ import org.jetbrains.annotations.NotNull;
 
 public class FactoryMaker {
 
-  @NotNull
-  @Contract("_ -> new")
-  public static DrinkFactory makeFactory(@NotNull DrinkType type) {
-    switch (type) {
-      case RED:
-        return new RedDrinkFactory();
-      case BLUE:
-        return new BlueDrinkFactory();
-      default:
-        throw new IllegalArgumentException("DrinkType not supported.");
-    }
-  }
+    @NotNull
+    @Contract("_ -> new")
+    public static DrinkFactory makeFactory(@NotNull DrinkType type) {
 
-  public enum DrinkType {
-    RED, BLUE
-  }
+        switch (type) {
+            case RED:
+                return new RedDrinkFactory();
+            case BLUE:
+                return new BlueDrinkFactory();
+            default:
+                throw new IllegalArgumentException("DrinkType not supported.");
+        }
+    }
+
+    public enum DrinkType {
+        RED, BLUE
+    }
 }

@@ -4,8 +4,8 @@ import com.alaskalany.todoly.cli.Menu;
 
 public abstract class MainMenu extends Menu {
 
-  public MainMenu(String title) {
+    public MainMenu(String title) {
 
-    super(title);
-  }
+        super(title);
+    }
 }

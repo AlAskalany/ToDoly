@@ -4,8 +4,8 @@ import com.alaskalany.todoly.cli.Menu;
 
 public abstract class TaskListDueDateMenu extends Menu {
 
-  public TaskListDueDateMenu(String title) {
+    public TaskListDueDateMenu(String title) {
 
-    super(title);
-  }
+        super(title);
+    }
 }

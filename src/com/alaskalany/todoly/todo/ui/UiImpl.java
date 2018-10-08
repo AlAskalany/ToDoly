@@ -2,127 +2,130 @@ package com.alaskalany.todoly.todo.ui;
 
 import com.alaskalany.todoly.parsing.DateParser;
 import com.alaskalany.todoly.todo.taskmanager.TaskManager;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.AddTaskCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.EditSelectedTaskCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.EditTaskDueDateCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.EditTaskProjectCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.EditTaskStatusCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.EditTaskTitleCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.ListAllTasksByDueDateCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.ListAllTasksByProjectCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.ListAllTasksCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.MainMenuCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.SaveAndQuitCommand;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.SelectTaskOrMainMenuCommand;
-import javax.inject.Inject;
+import com.alaskalany.todoly.todo.ui.commands.uicommands.*;
 import org.jetbrains.annotations.Contract;
+
+import javax.inject.Inject;
 
 public class UiImpl extends Ui {
 
-  public static boolean FROM_LIST_BY_DUE_DATE = false;
-  public static boolean FROM_LIST_BY_PROJECT = true;
-  private final EditTaskTitleCommand editTaskTitleCommand = EditTaskTitleCommand.create(this);
-  private final ListAllTasksByProjectCommand listAllTasksByProjectCommand = ListAllTasksByProjectCommand
-      .create(this);
-  private final EditSelectedTaskCommand editSelectedTaskCommand = EditSelectedTaskCommand
-      .create(this);
-  private final ListAllTasksByDueDateCommand listAllTasksByDueDateCommand = ListAllTasksByDueDateCommand
-      .create(this);
-  private final MainMenuCommand mainMenuCommand = MainMenuCommand.create(this);
-  private final ListAllTasksCommand listAllTasksCommand = ListAllTasksCommand.create(this);
-  private final AddTaskCommand addTaskCommand = AddTaskCommand.create(this);
-  private final EditTaskProjectCommand editTaskProjectCommand = EditTaskProjectCommand.create(this);
-  private final EditTaskDueDateCommand editTaskDueDateCommand = EditTaskDueDateCommand.create(this);
-  private final EditTaskStatusCommand editTaskStatusCommand = EditTaskStatusCommand.create(this);
-  private final SaveAndQuitCommand saveAndQuitCommand = SaveAndQuitCommand.create();
-  private final SelectTaskOrMainMenuCommand selectTaskOrMainMenuCommand = SelectTaskOrMainMenuCommand
-      .create(this);
-  @Inject
-  private TaskManager taskManager;
-  @Inject
-  private DateParser dateParser;
+    public static boolean FROM_LIST_BY_DUE_DATE = false;
+    public static boolean FROM_LIST_BY_PROJECT = true;
+    private final EditTaskTitleCommand editTaskTitleCommand = EditTaskTitleCommand.create(this);
+    private final ListAllTasksByProjectCommand listAllTasksByProjectCommand = ListAllTasksByProjectCommand
+            .create(this);
+    private final EditSelectedTaskCommand editSelectedTaskCommand = EditSelectedTaskCommand
+            .create(this);
+    private final ListAllTasksByDueDateCommand listAllTasksByDueDateCommand = ListAllTasksByDueDateCommand
+            .create(this);
+    private final MainMenuCommand mainMenuCommand = MainMenuCommand.create(this);
+    private final ListAllTasksCommand listAllTasksCommand = ListAllTasksCommand.create(this);
+    private final AddTaskCommand addTaskCommand = AddTaskCommand.create(this);
+    private final EditTaskProjectCommand editTaskProjectCommand = EditTaskProjectCommand.create(this);
+    private final EditTaskDueDateCommand editTaskDueDateCommand = EditTaskDueDateCommand.create(this);
+    private final EditTaskStatusCommand editTaskStatusCommand = EditTaskStatusCommand.create(this);
+    private final SaveAndQuitCommand saveAndQuitCommand = SaveAndQuitCommand.create(this);
+    private final SelectTaskOrMainMenuCommand selectTaskOrMainMenuCommand = SelectTaskOrMainMenuCommand
+            .create(this);
+    @Inject
+    private TaskManager taskManager;
+    @Inject
+    private DateParser dateParser;
 
-  @Override
-  public void mainMenu() {
+    @Override
+    public void mainMenu() {
 
-    mainMenuCommand.invoke();
-  }
+        mainMenuCommand.invoke();
+    }
 
-  @Override
-  public TaskManager getTaskManager() {
+    @Override
+    public TaskManager getTaskManager() {
 
-    return taskManager;
-  }
+        return taskManager;
+    }
 
-  @Override
-  public DateParser getDateParser() {
+    @Override
+    public DateParser getDateParser() {
 
-    return dateParser;
-  }
+        return dateParser;
+    }
 
-  public void addTask() {
+    @Override
+    public void addTask() {
 
-    addTaskCommand.invoke();
-  }
+        addTaskCommand.invoke();
+    }
 
-  @Contract(value = "_ -> param1", pure = true)
-  public String getTaskTitle(String input) {
+    @Override
+    @Contract(value = "_ -> param1", pure = true)
+    public String getTaskTitle(String input) {
 
-    return input;
-  }
+        return input;
+    }
 
-  public void listAllTasks() {
+    @Override
+    public void listAllTasks() {
 
-    listAllTasksCommand.invoke();
-  }
+        listAllTasksCommand.invoke();
+    }
 
-  public void listAllTasksByProject() {
+    @Override
+    public void listAllTasksByProject() {
 
-    listAllTasksByProjectCommand.invoke();
-  }
+        listAllTasksByProjectCommand.invoke();
+    }
 
-  public void selectTaskOrMainMenu() {
+    @Override
+    public void selectTaskOrMainMenu() {
 
-    selectTaskOrMainMenuCommand.invoke();
-  }
+        selectTaskOrMainMenuCommand.invoke();
+    }
 
-  public void editSelectedTask(Integer valueOf) {
+    @Override
+    public void editSelectedTask(Integer valueOf) {
 
-    editSelectedTaskCommand.invoke(valueOf);
-  }
+        editSelectedTaskCommand.invoke(valueOf);
+    }
 
-  public boolean isTaskIndexValid(Integer taskIndex) {
+    @Override
+    public boolean isTaskIndexValid(Integer taskIndex) {
 
-    return taskManager.isTaskIndexValid(taskIndex);
-  }
+        return taskManager.isTaskIndexValid(taskIndex);
+    }
 
-  public void editTaskDueDate(Integer taskIndex) {
+    @Override
+    public void editTaskDueDate(Integer taskIndex) {
 
-    editTaskDueDateCommand.invoke(taskIndex);
-  }
+        editTaskDueDateCommand.invoke(taskIndex);
+    }
 
-  public void editTaskProject(Integer taskIndex) {
+    @Override
+    public void editTaskProject(Integer taskIndex) {
 
-    editTaskProjectCommand.invoke(taskIndex);
-  }
+        editTaskProjectCommand.invoke(taskIndex);
+    }
 
-  public void editTaskStatus(Integer taskIndex) {
+    @Override
+    public void editTaskStatus(Integer taskIndex) {
 
-    editTaskStatusCommand.invoke(taskIndex);
-  }
+        editTaskStatusCommand.invoke(taskIndex);
+    }
 
-  public void editTaskTitle(Integer taskIndex) {
+    @Override
+    public void editTaskTitle(Integer taskIndex) {
 
-    editTaskTitleCommand.invoke(taskIndex);
-  }
+        editTaskTitleCommand.invoke(taskIndex);
+    }
 
-  public void listAllTasksByDueDate() {
+    @Override
+    public void listAllTasksByDueDate() {
 
-    listAllTasksByDueDateCommand.invoke();
-  }
+        listAllTasksByDueDateCommand.invoke();
+    }
 
-  public void saveAndQuit() {
+    @Override
+    public void saveAndQuit() {
 
-    saveAndQuitCommand.invoke();
-  }
+        saveAndQuitCommand.invoke();
+    }
 }

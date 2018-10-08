@@ -5,14 +5,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class TaskListImpl extends TaskList {
 
-  public TaskListImpl() {
+    public TaskListImpl() {
 
-  }
+    }
 
-  @NotNull
-  @Contract(" -> new")
-  public static TaskListImpl createTaskList() {
+    @NotNull
+    @Contract(" -> new")
+    public static TaskListImpl createTaskList() {
 
-    return new TaskListImpl();
-  }
+        return new TaskListImpl();
+    }
 }

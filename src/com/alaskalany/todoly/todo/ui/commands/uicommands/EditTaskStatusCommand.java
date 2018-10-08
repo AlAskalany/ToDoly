@@ -1,30 +1,55 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.UiImpl;
+import com.alaskalany.todoly.todo.ui.Ui;
+
 import java.util.Scanner;
 
-public class EditTaskStatusCommand {
+public class EditTaskStatusCommand extends Command {
 
-  public static final String TASK_STATUS_MODIFIED = "Task status modified";
-  private final UiImpl uiImpl;
+    public static final String TASK_STATUS_MODIFIED = "Task status modified";
 
-  private EditTaskStatusCommand(UiImpl uiImpl) {
+    private EditTaskStatusCommand(Ui ui) {
 
-    this.uiImpl = uiImpl;
-  }
+        super(ui);
+    }
 
-  public static EditTaskStatusCommand create(UiImpl uiImpl) {
+    public static EditTaskStatusCommand create(Ui ui) {
 
-    return new EditTaskStatusCommand(uiImpl);
-  }
+        return new EditTaskStatusCommand(ui);
+    }
 
-  public void invoke(Integer taskIndex) {
+    public void invoke(Integer taskIndex) {
 
-    System.out.print("New Status: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
-    uiImpl.getTaskManager().getTask(taskIndex).setTitle(input);
-    System.out.println(TASK_STATUS_MODIFIED);
-    uiImpl.editSelectedTask(taskIndex);
-  }
+        System.out.print("New Status: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        ui.getTaskManager().getTask(taskIndex).setTitle(input);
+        System.out.println(TASK_STATUS_MODIFIED);
+        ui.editSelectedTask(taskIndex);
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex) {
+
+    }
+
+    @Override
+    public void handleInput(Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Integer taskIndex, Ui ui) {
+
+    }
+
+    @Override
+    public void handleInput(String input, Ui ui) {
+
+    }
 }

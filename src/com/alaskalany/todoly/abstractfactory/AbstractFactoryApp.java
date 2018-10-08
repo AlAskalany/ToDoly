@@ -8,12 +8,12 @@ import com.alaskalany.todoly.abstractfactory.drinks.blue.BlueDrinkFactory;
 
 public class AbstractFactoryApp {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    DrinkFactory factory = new BlueDrinkFactory();
-    Coffee coffee = factory.createCoffee();
-    System.out.println(coffee.drink());
+        DrinkFactory factory = new BlueDrinkFactory();
+        Coffee coffee = factory.createCoffee();
+        System.out.println(coffee.drink());
 
-    System.out.println(FactoryMaker.makeFactory(DrinkType.RED).createCoffee().drink());
-  }
+        System.out.println(FactoryMaker.makeFactory(DrinkType.RED).createCoffee().drink());
+    }
 }

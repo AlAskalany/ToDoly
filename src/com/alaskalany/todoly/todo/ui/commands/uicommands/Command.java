@@ -1,28 +1,30 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.UiImpl;
+import com.alaskalany.todoly.todo.ui.Ui;
 
 public abstract class Command {
 
-  protected final UiImpl uiImpl;
+    protected final Ui ui;
 
-  public Command(UiImpl uiImpl) {
-    this.uiImpl = uiImpl;
-  }
+    public Command(Ui ui) {
 
-  public void invoke() {
-    invoke(null);
-  }
+        this.ui = ui;
+    }
 
-  public abstract void invoke(Integer valueOf);
+    public void invoke() {
 
-  public abstract void handleInput(Integer taskIndex);
+        invoke(null);
+    }
 
-  public abstract void handleInput(Integer taskIndex, UiImpl ui);
+    public abstract void invoke(Integer valueOf);
 
-  public abstract void handleInput(String input);
+    public abstract void handleInput(Integer taskIndex);
 
-  public abstract void handleInput(String input, Integer taskIndex, UiImpl ui);
+    public abstract void handleInput(Integer taskIndex, Ui ui);
 
-  public abstract void handleInput(String input, UiImpl ui);
+    public abstract void handleInput(String input);
+
+    public abstract void handleInput(String input, Integer taskIndex, Ui ui);
+
+    public abstract void handleInput(String input, Ui ui);
 }
