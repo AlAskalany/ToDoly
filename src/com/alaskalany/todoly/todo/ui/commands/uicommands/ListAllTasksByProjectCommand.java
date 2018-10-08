@@ -1,4 +1,4 @@
-package com.alaskalany.todoly.todo.ui.commands;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.project.Project;
 import com.alaskalany.todoly.todo.task.Task;

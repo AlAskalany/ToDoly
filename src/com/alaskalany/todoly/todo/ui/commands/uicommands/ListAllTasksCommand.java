@@ -1,15 +1,14 @@
-package com.alaskalany.todoly.todo.ui.commands;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.UiImpl;
 import java.util.Scanner;
 
-public class ListAllTasksCommand {
+public class ListAllTasksCommand extends Command {
 
   private final UiImpl uiImpl;
 
-  private ListAllTasksCommand(UiImpl uiImpl) {
-
-    this.uiImpl = uiImpl;
+  public ListAllTasksCommand(UiImpl uiImpl) {
+    super(uiImpl);
   }
 
   public static ListAllTasksCommand create(UiImpl uiImpl) {
@@ -26,21 +25,32 @@ public class ListAllTasksCommand {
     Scanner scanner = new Scanner(System.in);
     String input;
     input = scanner.nextLine();
-    handleListAllTasksInput(input, uiImpl);
+    handleInput(input);
   }
 
-  private void handleListAllTasksInput(String input, UiImpl ui) {
+  @Override
+  public void invoke(Integer valueOf) {
+
+  }
+
+  @Override
+  public void handleInput(String input) {
 
     switch (Integer.valueOf(input)) {
       case 1:
-        ui.listAllTasksByDueDate();
+        uiImpl.listAllTasksByDueDate();
         break;
       case 2:
-        ui.listAllTasksByProject();
+        uiImpl.listAllTasksByProject();
         break;
       default:
         break;
     }
+  }
+
+  @Override
+  public void handleInput(String input, Integer taskIndex, UiImpl ui) {
+
   }
 
   public enum ListAllTasksMenu {

@@ -1,10 +1,10 @@
-package com.alaskalany.todoly.todo.ui.commands;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.UiImpl;
 import java.util.Scanner;
 import org.jetbrains.annotations.Contract;
 
-public class MainMenuCommand {
+public class MainMenuCommand extends Command {
 
   public static final String ENTER_A_VALID_INPUT = "Enter a valid input.";
   private final UiImpl uiImpl;
@@ -32,7 +32,17 @@ public class MainMenuCommand {
     handleMainMenuInput(input, uiImpl);
   }
 
-  private void handleMainMenuInput(String input, UiImpl ui) {
+  @Override
+  public void invoke(Integer valueOf) {
+
+  }
+
+  @Override
+  public void handleInput(String input, Integer taskIndex, UiImpl ui) {
+
+  }
+
+  private void handleInput(String input, UiImpl ui) {
 
     switch (Integer.valueOf(input)) {
       case 1:

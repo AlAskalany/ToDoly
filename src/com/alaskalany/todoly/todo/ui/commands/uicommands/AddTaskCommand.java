@@ -1,18 +1,16 @@
-package com.alaskalany.todoly.todo.ui.commands;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.UiImpl;
 import java.util.Scanner;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class AddTaskCommand {
+public class AddTaskCommand extends Command{
 
   public static final String ENTER_TASK_NAME = "Enter task name:";
-  private final UiImpl uiImpl;
 
-  private AddTaskCommand(UiImpl uiImpl) {
-
-    this.uiImpl = uiImpl;
+  public AddTaskCommand(UiImpl uiImpl) {
+    super(uiImpl);
   }
 
   @NotNull
@@ -32,5 +30,10 @@ public class AddTaskCommand {
     String taskTitle = uiImpl.getTaskTitle(input);
     uiImpl.getTaskManager().addTask(taskTitle);
     uiImpl.mainMenu();
+  }
+
+  @Override
+  public void handleInput(String input) {
+
   }
 }

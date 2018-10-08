@@ -1,11 +1,11 @@
-package com.alaskalany.todoly.todo.ui.commands;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.UiImpl;
 import java.util.Scanner;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class EditSelectedTaskCommand {
+public class EditSelectedTaskCommand extends Command{
 
   private final UiImpl uiImpl;
 
@@ -35,7 +35,7 @@ public class EditSelectedTaskCommand {
           ListAllTasksByDueDateCommand.TaskListByDueDateMenu.EDIT_OR_0_FOR_MAIN_MENU.getValue());
       Scanner scanner = new Scanner(System.in);
       String input = scanner.nextLine();
-      handleEditSelectedTask(input, valueOf, uiImpl);
+      handleInput(input, valueOf, uiImpl);
     } else {
       System.out.println(SelectEditTaskOption.ENTER_A_VALID_TASK_NUMBER.getValue());
       if (UiImpl.FROM_LIST_BY_DUE_DATE) {
@@ -48,7 +48,7 @@ public class EditSelectedTaskCommand {
     }
   }
 
-  private void handleEditSelectedTask(String input, Integer taskIndex, UiImpl ui) {
+  private void handleInput(String input, Integer taskIndex, UiImpl ui) {
 
     if (ui.isTaskIndexValid(taskIndex)) {
       switch (Integer.valueOf(input)) {

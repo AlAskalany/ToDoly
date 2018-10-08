@@ -1,15 +1,12 @@
-package com.alaskalany.todoly.todo.ui.commands;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.UiImpl;
 import java.util.Scanner;
 
-public class SelectTaskOrMainMenuCommand {
-
-  private final UiImpl uiImpl;
+public class SelectTaskOrMainMenuCommand extends Command {
 
   private SelectTaskOrMainMenuCommand(UiImpl uiImpl) {
-
-    this.uiImpl = uiImpl;
+    super(uiImpl);
   }
 
   public static SelectTaskOrMainMenuCommand create(UiImpl uiImpl) {
@@ -23,10 +20,36 @@ public class SelectTaskOrMainMenuCommand {
         ListAllTasksByDueDateCommand.TaskListByDueDateMenu.EDIT_OR_0_FOR_MAIN_MENU.getValue());
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
-    handleSelectTaskOrMainMenu(input, uiImpl);
+    handleInput(input, uiImpl);
   }
 
-  private void handleSelectTaskOrMainMenu(String input, UiImpl ui) {
+  @Override
+  public void invoke(Integer valueOf) {
+
+  }
+
+  @Override
+  public void handleInput(Integer taskIndex) {
+
+  }
+
+  @Override
+  public void handleInput(Integer taskIndex, UiImpl ui) {
+
+  }
+
+  @Override
+  public void handleInput(String input) {
+
+  }
+
+  @Override
+  public void handleInput(String input, Integer taskIndex, UiImpl ui) {
+
+  }
+
+  @Override
+  public void handleInput(String input, UiImpl ui) {
 
     switch (Integer.valueOf(input)) {
       case 0:
