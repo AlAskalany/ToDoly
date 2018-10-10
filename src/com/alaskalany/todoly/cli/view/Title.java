@@ -4,17 +4,17 @@ import com.alaskalany.todoly.cli.View;
 
 public class Title extends View {
 
-    private Text text;
+  private Text text;
 
-    public Title(String text) {
+  public Title(String text) {
 
-        this.text = new Text(text);
-    }
+    this.text = new Text(text);
+  }
 
-    @Override
-    public void print() {
+  @Override
+  public void print() {
 
-        text.print();
-        System.out.println("\n_________________\n");
-    }
+    text.print();
+    System.out.println("\n_________________\n");
+  }
 }

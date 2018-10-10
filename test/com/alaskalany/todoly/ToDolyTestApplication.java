@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 
 class ToDolyTestApplication {
 
-    @BeforeEach
-    void setUp() {
-    }
+  @BeforeEach
+  void setUp() {
+  }
 
-    @AfterEach
-    void tearDown() {
-    }
+  @AfterEach
+  void tearDown() {
+  }
 
-    @Test
-    void main() {
-    }
+  @Test
+  void main() {
+  }
 }

@@ -1,51 +1,23 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import com.alaskalany.todoly.todo.ui.Ui;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-public class SaveAndQuitCommand extends Command {
+public class SaveAndQuitCommand implements Command {
 
-    public SaveAndQuitCommand(Ui ui) {
+  private SaveAndQuitCommand() {
 
-        super(ui);
-    }
+  }
 
-    public static SaveAndQuitCommand create(Ui ui) {
+  @NotNull
+  @Contract(" -> new")
+  public static SaveAndQuitCommand create() {
 
-        return new SaveAndQuitCommand(ui);
-    }
+    return new SaveAndQuitCommand();
+  }
 
-    public void invoke() {
+  public void invoke() {
 
-        System.exit(0);
-    }
-
-    @Override
-    public void invoke(Integer valueOf) {
-
-    }
-
-    @Override
-    public void handleInput(Integer taskIndex) {
-
-    }
-
-    @Override
-    public void handleInput(Integer taskIndex, Ui ui) {
-
-    }
-
-    @Override
-    public void handleInput(String input) {
-
-    }
-
-    @Override
-    public void handleInput(String input, Integer taskIndex, Ui ui) {
-
-    }
-
-    @Override
-    public void handleInput(String input, Ui ui) {
-
-    }
+    System.exit(0);
+  }
 }

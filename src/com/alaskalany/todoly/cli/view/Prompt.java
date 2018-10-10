@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Prompt {
 
-    private Text text;
+  private Text text;
 
-    public Prompt(String message) {
+  public Prompt(String message) {
 
-        this.text = new Text(message);
-    }
+    this.text = new Text(message);
+  }
 
-    public String start() {
+  public String start() {
 
-        text.print();
-        System.out.print(":>");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
+    text.print();
+    System.out.print(":>");
+    Scanner scanner = new Scanner(System.in);
+    return scanner.nextLine();
+  }
 }

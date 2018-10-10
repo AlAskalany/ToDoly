@@ -1,65 +1,46 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.Ui;
-
 import java.util.Scanner;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-public class SelectTaskOrMainMenuCommand extends Command {
+public class SelectTaskOrMainMenuCommand implements InputCommand {
 
-    private SelectTaskOrMainMenuCommand(Ui ui) {
+  private final Ui ui;
 
-        super(ui);
+  private SelectTaskOrMainMenuCommand(Ui ui) {
+
+    this.ui = ui;
+  }
+
+  @NotNull
+  @Contract("_ -> new")
+  public static SelectTaskOrMainMenuCommand create(Ui ui) {
+
+    return new SelectTaskOrMainMenuCommand(ui);
+  }
+
+  public void invoke() {
+
+    System.out.print(
+        ListAllTasksByDueDateCommand.TaskListByDueDateMenu.EDIT_OR_0_FOR_MAIN_MENU.getValue());
+    Scanner scanner = new Scanner(System.in);
+    String input = scanner.nextLine();
+    ui.setInput(input);
+    handleInput();
+  }
+
+  @Override
+  public void handleInput() {
+
+    switch (Integer.valueOf(ui.getInput())) {
+      case 0:
+        ui.mainMenu();
+        break;
+      default:
+        ui.editSelectedTask();
+        break;
     }
-
-    public static SelectTaskOrMainMenuCommand create(Ui uiImpl) {
-
-        return new SelectTaskOrMainMenuCommand(uiImpl);
-    }
-
-    public void invoke() {
-
-        System.out.print(
-                ListAllTasksByDueDateCommand.TaskListByDueDateMenu.EDIT_OR_0_FOR_MAIN_MENU.getValue());
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        handleInput(input, ui);
-    }
-
-    @Override
-    public void invoke(Integer valueOf) {
-
-    }
-
-    @Override
-    public void handleInput(Integer taskIndex) {
-
-    }
-
-    @Override
-    public void handleInput(Integer taskIndex, Ui ui) {
-
-    }
-
-    @Override
-    public void handleInput(String input) {
-
-    }
-
-    @Override
-    public void handleInput(String input, Integer taskIndex, Ui ui) {
-
-    }
-
-    @Override
-    public void handleInput(String input, Ui ui) {
-
-        switch (Integer.valueOf(input)) {
-            case 0:
-                ui.mainMenu();
-                break;
-            default:
-                ui.editSelectedTask(Integer.valueOf(input));
-                break;
-        }
-    }
+  }
 }

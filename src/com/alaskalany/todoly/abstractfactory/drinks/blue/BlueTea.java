@@ -4,11 +4,11 @@ import com.alaskalany.todoly.abstractfactory.drinks.Tea;
 
 public class BlueTea implements Tea {
 
-    static final String DESCRIPTION = "BLUE TEA";
+  static final String DESCRIPTION = "BLUE TEA";
 
-    @Override
-    public String drink() {
+  @Override
+  public String drink() {
 
-        return DESCRIPTION;
-    }
+    return DESCRIPTION;
+  }
 }

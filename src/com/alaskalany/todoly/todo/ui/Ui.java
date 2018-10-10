@@ -4,38 +4,50 @@ import com.alaskalany.todoly.parsing.DateParser;
 import com.alaskalany.todoly.todo.taskmanager.TaskManager;
 import org.jetbrains.annotations.Contract;
 
-public abstract class Ui {
+public interface Ui {
 
-    public abstract void mainMenu();
+  void mainMenu();
 
-    public abstract TaskManager getTaskManager();
+  TaskManager getTaskManager();
 
-    public abstract DateParser getDateParser();
+  DateParser getDateParser();
 
-    public abstract void addTask();
+  void addTask();
 
-    @Contract(value = "_ -> param1", pure = true)
-    public abstract String getTaskTitle(String input);
+  @Contract(value = "_ -> param1", pure = true)
+  String getTaskTitle(String input);
 
-    public abstract void listAllTasks();
+  void listAllTasks();
 
-    public abstract void listAllTasksByProject();
+  void listAllTasksByProject();
 
-    public abstract void selectTaskOrMainMenu();
+  void selectTaskOrMainMenu();
 
-    public abstract void editSelectedTask(Integer valueOf);
+  void editSelectedTask();
 
-    public abstract boolean isTaskIndexValid(Integer taskIndex);
+  boolean isTaskIndexValid();
 
-    public abstract void editTaskDueDate(Integer taskIndex);
+  void editTaskDueDate();
 
-    public abstract void editTaskProject(Integer taskIndex);
+  void editTaskProject();
 
-    public abstract void editTaskStatus(Integer taskIndex);
+  void editTaskStatus();
 
-    public abstract void editTaskTitle(Integer taskIndex);
+  void editTaskTitle();
 
-    public abstract void listAllTasksByDueDate();
+  void listAllTasksByDueDate();
 
-    public abstract void saveAndQuit();
+  void saveAndQuit();
+
+  Integer getValueOf();
+
+  void setValueOf(Integer valueOf);
+
+  Integer getTaskIndex();
+
+  void setTaskIndex(Integer taskIndex);
+
+  String getInput();
+
+  void setInput(String input);
 }

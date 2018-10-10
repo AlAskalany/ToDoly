@@ -1,164 +1,172 @@
 package com.alaskalany.todoly.todo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.alaskalany.todoly.date.DateHelper;
 import com.alaskalany.todoly.todo.project.Project;
 import com.alaskalany.todoly.todo.task.Task;
-import org.junit.jupiter.api.*;
-
 import java.time.LocalDate;
 import java.time.Month;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("Task Test")
 class TaskTest {
 
-    private Task task;
-    private Project project;
-    private LocalDate date = DateHelper.getDate(0, Month.JANUARY, 1);
+  private Task task;
+  private Project project;
+  private LocalDate date = DateHelper.getDate(0, Month.JANUARY, 1);
 
-    /**
-     *
-     */
-    @BeforeAll
-    static void initAll() {
+  /**
+   *
+   */
+  @BeforeAll
+  static void initAll() {
 
-    }
+  }
 
-    /**
-     *
-     */
-    @BeforeEach
-    void setUp() {
+  /**
+   *
+   */
+  @AfterAll
+  static void tearDownAll() {
 
-        project = new Project.Builder().title("Test project").build();
-        task = new Task.Builder().title("Test task").status(false).dueDate(date)
-                .projectId(project.getId()).build();
-    }
+  }
 
-    /**
-     *
-     */
-    @AfterEach
-    void tearDown() {
+  /**
+   *
+   */
+  @BeforeEach
+  void setUp() {
 
-    }
+    project = new Project.Builder().title("Test project").build();
+    task = new Task.Builder().title("Test task").status(false).dueDate(date)
+        .projectId(project.getId()).build();
+  }
 
-    /**
-     *
-     */
-    @AfterAll
-    static void tearDownAll() {
+  /**
+   *
+   */
+  @AfterEach
+  void tearDown() {
 
-    }
+  }
 
-    /**
-     *
-     */
-    @Test
-    @DisplayName("Create a task")
-    void createTask() {
+  /**
+   *
+   */
+  @Test
+  @DisplayName("Create a task")
+  void createTask() {
 
-        assertNotNull(task);
-    }
+    assertNotNull(task);
+  }
 
-    /**
-     *
-     */
-    @Test
-    @DisplayName("Display task label")
-    void getLabel() {
+  /**
+   *
+   */
+  @Test
+  @DisplayName("Display task label")
+  void getLabel() {
 
-        String taskLabel = task.getTitle();
-        assertEquals("Test task", taskLabel);
-    }
+    String taskLabel = task.getTitle();
+    assertEquals("Test task", taskLabel);
+  }
 
-    /**
-     *
-     */
-    @Test
-    @DisplayName("Get task date")
-    void getDate() {
+  /**
+   *
+   */
+  @Test
+  @DisplayName("Get task date")
+  void getDate() {
 
-        assertEquals(date, task.getDueDate());
-    }
+    assertEquals(date, task.getDueDate());
+  }
 
-    /**
-     *
-     */
-    @Test
-    @DisplayName("Set task label")
-    void setLabel() {
+  /**
+   *
+   */
+  @Test
+  @DisplayName("Set task label")
+  void setLabel() {
 
-        task.setTitle("Test task 2");
-        String taskLabel = task.getTitle();
-        assertEquals("Test task 2", taskLabel);
-    }
+    task.setTitle("Test task 2");
+    String taskLabel = task.getTitle();
+    assertEquals("Test task 2", taskLabel);
+  }
 
-    /**
-     *
-     */
-    @Test
-    @DisplayName("Set task date")
-    void setDate() {
+  /**
+   *
+   */
+  @Test
+  @DisplayName("Set task date")
+  void setDate() {
 
-        task.setDueDate(date);
-        assertEquals(date, task.getDueDate());
-    }
+    task.setDueDate(date);
+    assertEquals(date, task.getDueDate());
+  }
 
-    /**
-     *
-     */
-    @Test
-    @DisplayName("Finish task")
-    void finish() {
+  /**
+   *
+   */
+  @Test
+  @DisplayName("Finish task")
+  void finish() {
 
-        task.setStatusTrue();
-        assertTrue(task.getStatus());
-    }
+    task.setStatusTrue();
+    assertTrue(task.getStatus());
+  }
 
-    @Test
-    void setDone() {
+  @Test
+  void setDone() {
 
-        task.setStatusTrue();
-        assertTrue(task.getStatus().booleanValue());
-    }
+    task.setStatusTrue();
+    assertTrue(task.getStatus().booleanValue());
+  }
 
-    @Test
-    void getDoneUnfinishedTask() {
+  @Test
+  void getDoneUnfinishedTask() {
 
-        task.setStatusTrue();
-        assertTrue(task.getStatus());
-    }
+    task.setStatusTrue();
+    assertTrue(task.getStatus());
+  }
 
-    @Test
-    void getDoneFinishedTask() {
+  @Test
+  void getDoneFinishedTask() {
 
-        task.setStatusTrue();
-        assertTrue(task.getStatus());
-        task.setStatusFalse();
-        assertFalse(task.getStatus());
-    }
+    task.setStatusTrue();
+    assertTrue(task.getStatus());
+    task.setStatusFalse();
+    assertFalse(task.getStatus());
+  }
 
-    @Test
-    void getProjectNotNull() {
+  @Test
+  void getProjectNotNull() {
 
-        Project project = new Project.Builder().title("Some Project").build();
-        task.setProject(project);
-        assertNotNull(task.getProjectId());
-    }
+    Project project = new Project.Builder().title("Some Project").build();
+    task.setProject(project);
+    assertNotNull(task.getProjectId());
+  }
 
-    @Test
-    void getProjectId() {
+  @Test
+  void getProjectId() {
 
-        assertSame(project.getId(), task.getProjectId());
-    }
+    assertSame(project.getId(), task.getProjectId());
+  }
 
-    @Test
-    void setProject() {
+  @Test
+  void setProject() {
 
-        Project newProject = new Project.Builder().title("New project").build();
-        task.setProjectId(newProject.getId());
-        assertSame(newProject.getId(), task.getProjectId());
-    }
+    Project newProject = new Project.Builder().title("New project").build();
+    task.setProjectId(newProject.getId());
+    assertSame(newProject.getId(), task.getProjectId());
+  }
 }

@@ -1,66 +1,36 @@
 package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
 import com.alaskalany.todoly.todo.ui.Ui;
+import java.util.Scanner;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Scanner;
+public class AddTaskCommand implements Command {
 
-public class AddTaskCommand extends Command {
+  private static final String ENTER_TASK_NAME = "Enter task name:";
+  private final Ui ui;
 
-    public static final String ENTER_TASK_NAME = "Enter task name:";
+  private AddTaskCommand(Ui ui) {
 
-    public AddTaskCommand(Ui ui) {
+    this.ui = ui;
+  }
 
-        super(ui);
-    }
+  @NotNull
+  @Contract("_ -> new")
+  public static AddTaskCommand create(Ui ui) {
 
-    @NotNull
-    @Contract("_ -> new")
-    public static AddTaskCommand create(Ui ui) {
+    return new AddTaskCommand(ui);
+  }
 
-        return new AddTaskCommand(ui);
-    }
+  public void invoke() {
 
-    public void invoke() {
-
-        Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
-        String input;
-        System.out.print(ENTER_TASK_NAME);
-        input = scanner.next();
-        String taskTitle = ui.getTaskTitle(input);
-        ui.getTaskManager().addTask(taskTitle);
-        ui.mainMenu();
-    }
-
-    @Override
-    public void invoke(Integer valueOf) {
-
-    }
-
-    @Override
-    public void handleInput(Integer taskIndex) {
-
-    }
-
-    @Override
-    public void handleInput(Integer taskIndex, Ui ui) {
-
-    }
-
-    @Override
-    public void handleInput(String input) {
-
-    }
-
-    @Override
-    public void handleInput(String input, Integer taskIndex, Ui ui) {
-
-    }
-
-    @Override
-    public void handleInput(String input, Ui ui) {
-
-    }
+    Scanner scanner = new Scanner(System.in);
+    scanner.useDelimiter("\n");
+    String input;
+    System.out.print(ENTER_TASK_NAME);
+    input = scanner.next();
+    String taskTitle = ui.getTaskTitle(input);
+    ui.getTaskManager().addTask(taskTitle);
+    ui.mainMenu();
+  }
 }

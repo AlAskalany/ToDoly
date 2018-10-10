@@ -2,130 +2,194 @@ package com.alaskalany.todoly.todo.ui;
 
 import com.alaskalany.todoly.parsing.DateParser;
 import com.alaskalany.todoly.todo.taskmanager.TaskManager;
-import com.alaskalany.todoly.todo.ui.commands.uicommands.*;
+import com.alaskalany.todoly.todo.ui.commands.CommandFactory;
+import com.alaskalany.todoly.todo.ui.commands.CommandFactoryImpl;
+import com.alaskalany.todoly.todo.ui.commands.uicommands.Command;
+import javax.inject.Inject;
 import org.jetbrains.annotations.Contract;
 
-import javax.inject.Inject;
+public class UiImpl implements Ui {
 
-public class UiImpl extends Ui {
+  public static boolean FROM_LIST_BY_DUE_DATE = false;
+  public static boolean FROM_LIST_BY_PROJECT = true;
+  // Commands
+  private final Command editTaskTitleCommand;
+  private final Command listAllTasksByProjectCommand;
+  private final Command editSelectedTaskCommand;
+  private final Command listAllTasksByDueDateCommand;
+  private final Command mainMenuCommand;
+  private final Command listAllTasksCommand;
+  private final Command addTaskCommand;
+  private final Command editTaskProjectCommand;
+  private final Command editTaskDueDateCommand;
+  private final Command editTaskStatusCommand;
+  private final Command saveAndQuitCommand;
+  private final Command selectTaskOrMainMenuCommand;
+  @Inject
+  private TaskManager taskManager;
+  @Inject
+  private DateParser dateParser;
+  private Integer valueOf;
+  private Integer taskIndex;
+  private String input;
 
-    public static boolean FROM_LIST_BY_DUE_DATE = false;
-    public static boolean FROM_LIST_BY_PROJECT = true;
-    private final EditTaskTitleCommand editTaskTitleCommand = EditTaskTitleCommand.create(this);
-    private final ListAllTasksByProjectCommand listAllTasksByProjectCommand = ListAllTasksByProjectCommand
-            .create(this);
-    private final EditSelectedTaskCommand editSelectedTaskCommand = EditSelectedTaskCommand
-            .create(this);
-    private final ListAllTasksByDueDateCommand listAllTasksByDueDateCommand = ListAllTasksByDueDateCommand
-            .create(this);
-    private final MainMenuCommand mainMenuCommand = MainMenuCommand.create(this);
-    private final ListAllTasksCommand listAllTasksCommand = ListAllTasksCommand.create(this);
-    private final AddTaskCommand addTaskCommand = AddTaskCommand.create(this);
-    private final EditTaskProjectCommand editTaskProjectCommand = EditTaskProjectCommand.create(this);
-    private final EditTaskDueDateCommand editTaskDueDateCommand = EditTaskDueDateCommand.create(this);
-    private final EditTaskStatusCommand editTaskStatusCommand = EditTaskStatusCommand.create(this);
-    private final SaveAndQuitCommand saveAndQuitCommand = SaveAndQuitCommand.create(this);
-    private final SelectTaskOrMainMenuCommand selectTaskOrMainMenuCommand = SelectTaskOrMainMenuCommand
-            .create(this);
-    @Inject
-    private TaskManager taskManager;
-    @Inject
-    private DateParser dateParser;
+  public UiImpl() {
 
-    @Override
-    public void mainMenu() {
+    CommandFactory factory = new CommandFactoryImpl(this);
+    editTaskTitleCommand = factory.getCommand(CommandType.EDIT_TASK_TITLE);
+    listAllTasksByProjectCommand = factory.getCommand(CommandType.LIST_ALL_TASKS_BY_PROJECT);
+    editSelectedTaskCommand = factory.getCommand(CommandType.EDIT_SELECTED_TASK);
+    listAllTasksByDueDateCommand = factory.getCommand(CommandType.LIST_ALL_TASKS_BY_DUE_DATE);
+    mainMenuCommand = factory.getCommand(CommandType.MAIN_MENU);
+    listAllTasksCommand = factory.getCommand(CommandType.LIST_ALL_TASKS);
+    addTaskCommand = factory.getCommand(CommandType.ADD_TASK);
+    editTaskProjectCommand = factory.getCommand(CommandType.EDIT_TASK_PROJECT);
+    editTaskDueDateCommand = factory.getCommand(CommandType.EDIT_TASK_DUE_DATE);
+    editTaskStatusCommand = factory.getCommand(CommandType.EDIT_TASK_STATUS);
+    saveAndQuitCommand = factory.getCommand(CommandType.SAVE_AND_QUIT);
+    selectTaskOrMainMenuCommand = factory.getCommand(CommandType.SELECT_OR_MAIN_MENU);
+  }
 
-        mainMenuCommand.invoke();
-    }
+  @Override
+  public void mainMenu() {
 
-    @Override
-    public TaskManager getTaskManager() {
+    mainMenuCommand.invoke();
+  }
 
-        return taskManager;
-    }
+  @Override
+  public TaskManager getTaskManager() {
 
-    @Override
-    public DateParser getDateParser() {
+    return taskManager;
+  }
 
-        return dateParser;
-    }
+  @Override
+  public DateParser getDateParser() {
 
-    @Override
-    public void addTask() {
+    return dateParser;
+  }
 
-        addTaskCommand.invoke();
-    }
+  @Override
+  public void addTask() {
 
-    @Override
-    @Contract(value = "_ -> param1", pure = true)
-    public String getTaskTitle(String input) {
+    addTaskCommand.invoke();
+  }
 
-        return input;
-    }
+  @Override
+  @Contract(value = "_ -> param1", pure = true)
+  public String getTaskTitle(String input) {
 
-    @Override
-    public void listAllTasks() {
+    return input;
+  }
 
-        listAllTasksCommand.invoke();
-    }
+  @Override
+  public void listAllTasks() {
 
-    @Override
-    public void listAllTasksByProject() {
+    listAllTasksCommand.invoke();
+  }
 
-        listAllTasksByProjectCommand.invoke();
-    }
+  @Override
+  public void listAllTasksByProject() {
 
-    @Override
-    public void selectTaskOrMainMenu() {
+    listAllTasksByProjectCommand.invoke();
+  }
 
-        selectTaskOrMainMenuCommand.invoke();
-    }
+  @Override
+  public void selectTaskOrMainMenu() {
 
-    @Override
-    public void editSelectedTask(Integer valueOf) {
+    selectTaskOrMainMenuCommand.invoke();
+  }
 
-        editSelectedTaskCommand.invoke(valueOf);
-    }
+  @Override
+  public void editSelectedTask() {
 
-    @Override
-    public boolean isTaskIndexValid(Integer taskIndex) {
+    setValueOf(Integer.valueOf(input));
 
-        return taskManager.isTaskIndexValid(taskIndex);
-    }
+    editSelectedTaskCommand.invoke();
+  }
 
-    @Override
-    public void editTaskDueDate(Integer taskIndex) {
+  @Override
+  public boolean isTaskIndexValid() {
 
-        editTaskDueDateCommand.invoke(taskIndex);
-    }
+    setTaskIndex(taskIndex);
 
-    @Override
-    public void editTaskProject(Integer taskIndex) {
+    return taskManager.isTaskIndexValid(taskIndex);
+  }
 
-        editTaskProjectCommand.invoke(taskIndex);
-    }
+  @Override
+  public void editTaskDueDate() {
 
-    @Override
-    public void editTaskStatus(Integer taskIndex) {
+    editTaskDueDateCommand.invoke();
+  }
 
-        editTaskStatusCommand.invoke(taskIndex);
-    }
+  @Override
+  public void editTaskProject() {
 
-    @Override
-    public void editTaskTitle(Integer taskIndex) {
+    editTaskProjectCommand.invoke();
+  }
 
-        editTaskTitleCommand.invoke(taskIndex);
-    }
+  @Override
+  public void editTaskStatus() {
 
-    @Override
-    public void listAllTasksByDueDate() {
+    editTaskStatusCommand.invoke();
+  }
 
-        listAllTasksByDueDateCommand.invoke();
-    }
+  @Override
+  public void editTaskTitle() {
 
-    @Override
-    public void saveAndQuit() {
+    editTaskTitleCommand.invoke();
+  }
 
-        saveAndQuitCommand.invoke();
-    }
+  @Override
+  public void listAllTasksByDueDate() {
+
+    listAllTasksByDueDateCommand.invoke();
+  }
+
+  @Override
+  public void saveAndQuit() {
+
+    saveAndQuitCommand.invoke();
+  }
+
+  @Override
+  public Integer getValueOf() {
+
+    return valueOf;
+  }
+
+  @Override
+  public void setValueOf(Integer valueOf) {
+
+    this.valueOf = valueOf;
+  }
+
+  @Override
+  public Integer getTaskIndex() {
+
+    return valueOf;
+  }
+
+  @Override
+  public void setTaskIndex(Integer taskIndex) {
+
+    this.taskIndex = taskIndex;
+  }
+
+  @Override
+  public String getInput() {
+
+    return input;
+  }
+
+  @Override
+  public void setInput(String input) {
+
+    this.input = input;
+  }
+
+  public enum CommandType {
+    ADD_TASK, EDIT_SELECTED_TASK, EDIT_TASK_DUE_DATE, EDIT_TASK_PROJECT, EDIT_TASK_STATUS, EDIT_TASK_TITLE,
+    LIST_ALL_TASKS, LIST_ALL_TASKS_BY_DUE_DATE, LIST_ALL_TASKS_BY_PROJECT, MAIN_MENU, SAVE_AND_QUIT,
+    SELECT_OR_MAIN_MENU
+  }
 }

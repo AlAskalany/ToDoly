@@ -4,9 +4,9 @@ import com.google.inject.AbstractModule;
 
 public class TaskListDueDateMenuModule extends AbstractModule {
 
-    @Override
-    public void configure() {
+  @Override
+  public void configure() {
 
-        bind(TaskListDueDateMenu.class).to(TaskListDueDateMenuImpl.class);
-    }
+    bind(TaskListDueDateMenu.class).to(TaskListDueDateMenuImpl.class);
+  }
 }

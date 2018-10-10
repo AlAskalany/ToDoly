@@ -2,9 +2,9 @@ package com.alaskalany.todoly.abstractfactory.drinks;
 
 public interface DrinkFactory {
 
-    Coffee createCoffee();
+  Coffee createCoffee();
 
-    Coke createCoke();
+  Coke createCoke();
 
-    Tea createTea();
+  Tea createTea();
 }

@@ -7,25 +7,25 @@ import java.time.format.DateTimeFormatter;
 
 public class DateParserImpl extends DateParser {
 
-    public DateParserImpl() {
+  public DateParserImpl() {
 
+  }
+
+  @Override
+  public LocalDate getDateFromString(String inputDate) {
+
+    return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
+  }
+
+  public boolean isDateValid(String inputDate) {
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+      simpleDateFormat.parse(inputDate);
+    } catch (ParseException e) {
+      e.printStackTrace();
+      return false;
     }
-
-    @Override
-    public LocalDate getDateFromString(String inputDate) {
-
-        return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
-    }
-
-    public boolean isDateValid(String inputDate) {
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            simpleDateFormat.parse(inputDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
+    return true;
+  }
 }
