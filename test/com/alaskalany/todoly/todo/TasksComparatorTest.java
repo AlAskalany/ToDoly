@@ -1,6 +1,7 @@
 package com.alaskalany.todoly.todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.alaskalany.todoly.date.DateHelper;
 import com.alaskalany.todoly.todo.task.Task;
@@ -80,5 +81,10 @@ class TasksComparatorTest {
       Task expectedTask = expectedTasksList.get(indexOfResultTask);
       assertEquals(0, resultTask.compareTo(expectedTask));
     });
+  }
+
+  @Test
+  void compare() {
+    fail();
   }
 }

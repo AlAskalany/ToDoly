@@ -2,6 +2,7 @@ package com.alaskalany.todoly.todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.alaskalany.todoly.todo.project.Project;
 import com.alaskalany.todoly.todo.task.Task;
@@ -161,5 +162,40 @@ class ProjectTest {
     Task task = project.getTask(0);
     assertEquals("I am a task", task.getTitle());
     assertEquals(date, task.getDueDate());
+  }
+
+  @Test
+  void getTitle() {
+    fail();
+  }
+
+  @Test
+  void setTitle() {
+    fail();
+  }
+
+  @Test
+  void numTasks() {
+    fail();
+  }
+
+  @Test
+  void numFinishedTasks() {
+    fail();
+  }
+
+  @Test
+  void getAllTasks() {
+    fail();
+  }
+
+  @Test
+  void deleteFinishedTasks() {
+    fail();
+  }
+
+  @Test
+  void getId() {
+    fail();
   }
 }

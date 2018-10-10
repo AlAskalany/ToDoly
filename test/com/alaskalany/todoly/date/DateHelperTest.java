@@ -1,6 +1,7 @@
 package com.alaskalany.todoly.date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -44,5 +45,15 @@ class DateHelperTest {
   @Test
   void getFormattedDate1() {
 
+  }
+
+  @Test
+  void getFormattedDateFromLocalDate() {
+    fail();
+  }
+
+  @Test
+  void getLocalDateString() {
+    fail();
   }
 }
