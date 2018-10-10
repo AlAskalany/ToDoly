@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ToDolyTestApplication {
+class UtilsTest {
 
   @BeforeEach
   void setUp() {
@@ -17,7 +17,7 @@ class ToDolyTestApplication {
   }
 
   @Test
-  void main() {
+  void disableWarning() {
     fail();
   }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.alaskalany.todoly.date.DateHelper;
 import com.alaskalany.todoly.todo.project.Project;
@@ -75,7 +76,7 @@ class TaskTest {
    */
   @Test
   @DisplayName("Display task label")
-  void getLabel() {
+  void getTitle() {
 
     String taskLabel = task.getTitle();
     assertEquals("Test task", taskLabel);
@@ -96,7 +97,7 @@ class TaskTest {
    */
   @Test
   @DisplayName("Set task label")
-  void setLabel() {
+  void setTitle() {
 
     task.setTitle("Test task 2");
     String taskLabel = task.getTitle();
@@ -168,5 +169,46 @@ class TaskTest {
     Project newProject = new Project.Builder().title("New project").build();
     task.setProjectId(newProject.getId());
     assertSame(newProject.getId(), task.getProjectId());
+  }
+
+  @Test
+  void getDueDate() {
+    fail();
+  }
+
+  @Test
+  void setDueDate() {
+    fail();
+  }
+
+
+  @Test
+  void getStatus() {
+    fail();
+  }
+
+  @Test
+  void setStatusFalse() {
+    fail();
+  }
+
+  @Test
+  void setProjectId() {
+    fail();
+  }
+
+  @Test
+  void compareTo() {
+    fail();
+  }
+
+  @Test
+  void taskToString() {
+    fail();
+  }
+
+  @Test
+  void hasProject() {
+    fail();
   }
 }

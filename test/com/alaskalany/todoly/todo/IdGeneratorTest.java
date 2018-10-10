@@ -1,12 +1,12 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.todo;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ToDolyTestApplication {
+class IdGeneratorTest {
 
   @BeforeEach
   void setUp() {
@@ -17,7 +17,12 @@ class ToDolyTestApplication {
   }
 
   @Test
-  void main() {
+  void getRandomId() {
+    fail();
+  }
+
+  @Test
+  void getTypeRandomIdString() {
     fail();
   }
 }

@@ -1,12 +1,12 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.todo.ui.commands.uicommands;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ToDolyTestApplication {
+class InputCommandTest {
 
   @BeforeEach
   void setUp() {
@@ -17,7 +17,7 @@ class ToDolyTestApplication {
   }
 
   @Test
-  void main() {
+  void handleInput() {
     fail();
   }
 }
