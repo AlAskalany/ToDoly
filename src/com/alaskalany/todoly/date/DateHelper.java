@@ -7,8 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class DateHelper {
 
-  private static final String DATE_FORMAT = "yyyy-MM-dd";
-
   @NotNull
   public static String getFormattedDateFromLocalDate(@NotNull LocalDate date) {
 
