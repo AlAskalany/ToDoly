@@ -3,11 +3,10 @@ package com.alaskalany.todoly.todo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.alaskalany.todoly.date.DateHelper;
-import com.alaskalany.todoly.todo.task.Task;
-import com.alaskalany.todoly.todo.task.TasksComparator;
+import com.alaskalany.todoly.Utils.DateHelper;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -73,8 +72,10 @@ class TasksComparatorTest {
             .status(false)
             .build());
 
-    TasksComparator sorter = new TasksComparator();
-    ArrayList<Task> resultTasksList = sorter.sortTasks(inputTaskList);
+    Comparator<Task> sorter = (o1, o2) -> o1.getDueDate().compareTo(o2.getDueDate());
+
+    inputTaskList.sort((o1, o2) -> o1.getDueDate().compareTo(o2.getDueDate()));
+    ArrayList<Task> resultTasksList = inputTaskList;
 
     resultTasksList.forEach(resultTask -> {
       int indexOfResultTask = resultTasksList.indexOf(resultTask);

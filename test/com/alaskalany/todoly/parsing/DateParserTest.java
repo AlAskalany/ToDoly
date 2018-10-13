@@ -2,6 +2,7 @@ package com.alaskalany.todoly.parsing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.alaskalany.todoly.Utils;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.AfterEach;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class DateParserTest {
 
-  private DateParser dateParser = new DateParserImpl();
+  private Utils.DateParser dateParser = new Utils.DateParser();
 
   @BeforeEach
   void setUp() {

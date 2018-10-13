@@ -3,6 +3,7 @@ package com.alaskalany.todoly.date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import com.alaskalany.todoly.Utils;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.AfterEach;
@@ -26,7 +27,7 @@ class DateHelperTest {
     // Arrange
     String expectedDateString = "2014-02-19";
     // Act
-    String actualDateString = DateHelper.getLocalDateString(2014, Month.FEBRUARY, 19);
+    String actualDateString = Utils.DateHelper.getLocalDateString(2014, Month.FEBRUARY, 19);
     // Assert
     System.out.println(expectedDateString + " " + actualDateString);
     assertEquals(expectedDateString, actualDateString);
@@ -37,7 +38,7 @@ class DateHelperTest {
     // Arrange
     LocalDate expectedDate = LocalDate.of(2014, Month.FEBRUARY, 19);
     // Act
-    LocalDate actualDate = DateHelper.getDate(2014, Month.FEBRUARY, 19);
+    LocalDate actualDate = Utils.DateHelper.getDate(2014, Month.FEBRUARY, 19);
     // Assert
     assertEquals(0, expectedDate.compareTo(actualDate));
   }
