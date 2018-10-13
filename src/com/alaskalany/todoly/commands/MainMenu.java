@@ -1,7 +1,6 @@
 package com.alaskalany.todoly.commands;
 
 import com.alaskalany.todoly.todo.TaskManager;
-import org.jetbrains.annotations.NotNull;
 
 public class MainMenu extends Command {
 
@@ -18,7 +17,7 @@ public class MainMenu extends Command {
     printLineBreak();
 
     // prompt user for input
-    String input = getInputString();
+    String input = promptForInput("Enter a choice: ");
     handleMainMenuInput(input);
   }
 
