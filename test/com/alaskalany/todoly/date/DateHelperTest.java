@@ -22,17 +22,6 @@ class DateHelperTest {
     }
 
     @Test
-    void getFormattedDate() {
-        // Arrange
-        String expectedDateString = "2014-02-19";
-        // Act
-        String actualDateString = DateHelper.getLocalDateString(2014, Month.FEBRUARY, 19);
-        // Assert
-        System.out.println(expectedDateString + " " + actualDateString);
-        assertEquals(expectedDateString, actualDateString);
-    }
-
-    @Test
     void getDate() {
         // Arrange
         LocalDate expectedDate = LocalDate.of(2014, Month.FEBRUARY, 19);

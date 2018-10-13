@@ -19,9 +19,4 @@ public class DateHelper {
     return LocalDate.of(year, month, date);
   }
 
-  @NotNull
-  public static String getLocalDateString(int year, Month month, int date) {
-
-    return getFormattedDateFromLocalDate(getDate(year, month, date));
-  }
 }
