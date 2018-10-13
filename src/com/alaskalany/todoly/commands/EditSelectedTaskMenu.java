@@ -1,31 +1,26 @@
 package com.alaskalany.todoly.commands;
 
 import com.alaskalany.todoly.todo.TaskManager;
-import java.util.Scanner;
 
-class EditSelectedTaskMenu {
+class EditSelectedTaskMenu extends Command{
 
   private Integer taskIndex;
-  private TaskManager taskManager;
 
   public EditSelectedTaskMenu(Integer taskIndex, TaskManager taskManager) {
+    super(taskManager);
     this.taskIndex = taskIndex;
-    this.taskManager = taskManager;
   }
 
   public void invoke() {
     // print menu title
-    System.out.println("Editing Task:" + taskManager.getTaskTitle(taskIndex));
-    System.out.println("1- Title");
-    System.out.println("2- Status");
-    System.out.println("3- Project");
-    System.out.println("4- Due date");
+    print("Editing Task:" + taskManager.getTaskTitle(taskIndex));
+    print("1- Title");
+    print("2- Status");
+    print("3- Project");
+    print("4- Due date");
 
     // prompt user for input
-    // prompt user for input
-    System.out.print("Enter a choice or 0 for main menu: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+    String input = promptForInput("Enter a choice or 0 for main menu: ");
     handleEditSelectedTask(input, taskIndex);
   }
 
@@ -37,7 +32,7 @@ class EditSelectedTaskMenu {
    */
   private void handleEditSelectedTask(String input, Integer taskIndex) {
 
-    switch (Integer.valueOf(input)) {
+    switch (inputToInteger(input)) {
       case 0:
         new MainMenu(taskManager).invoke();
 

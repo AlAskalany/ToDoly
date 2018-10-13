@@ -3,22 +3,19 @@ package com.alaskalany.todoly.commands;
 import com.alaskalany.todoly.todo.TaskManager;
 import java.util.ArrayList;
 
-class ListAllTasksByDueDateMenu {
-
-  private TaskManager taskManager;
+class ListAllTasksByDueDateMenu extends Command {
 
   ListAllTasksByDueDateMenu(TaskManager taskManager) {
-    this.taskManager = taskManager;
+    super(taskManager);
   }
 
   public void invoke() {
     // print menu title
-    System.out.println("All Tasks List - By Due Date");
-    System.out.println();
-    ArrayList<String> tasks = taskManager.getAllTasksByDueDate();
-    tasks.forEach(task -> System.out.println((tasks.indexOf(task) + 1) + "- " + task));
-    System.out.println();
+    print("All Tasks List - By Due Date");
+    printLineBreak();
+    ArrayList<String> tasks = getTasksStringsByDueDate();
+    tasks.forEach(task -> printTaskWithIndex(tasks, task));
+    printLineBreak();
     new SelectTaskOrMainMenu(taskManager).invoke();
-
   }
 }
