@@ -1,4 +1,4 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.commands;
 
 class SaveAndQuit {
 

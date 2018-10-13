@@ -1,13 +1,13 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.commands;
 
 import com.alaskalany.todoly.todo.TaskManager;
 import java.util.Scanner;
 
-class MainMenu {
+public class MainMenu {
 
   private TaskManager taskManager;
 
-  MainMenu(TaskManager taskManager) {
+  public MainMenu(TaskManager taskManager) {
     this.taskManager = taskManager;
   }
 

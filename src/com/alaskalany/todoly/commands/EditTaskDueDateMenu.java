@@ -1,4 +1,4 @@
-package com.alaskalany.todoly;
+package com.alaskalany.todoly.commands;
 
 import com.alaskalany.todoly.parsing.DateParser;
 import com.alaskalany.todoly.todo.TaskManager;
