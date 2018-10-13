@@ -14,7 +14,7 @@ public class ToDoly {
    */
   public static void main(String[] args) {
 
-    Ui ui = new Ui(taskManager);
-    ui.mainMenu();
+    new MainMenu(taskManager).invoke();
+
   }
 }
