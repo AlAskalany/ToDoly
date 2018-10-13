@@ -180,9 +180,7 @@ class Ui {
   private void selectTaskOrMainMenu() {
 
     // prompt user for input
-    System.out.print("Enter task number to edit or 0 for main menu");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+    String input = promptAndGetInput("Enter task number to edit or 0 for main menu");
     handleSelectTaskOrMainMenu(input);
   }
 
@@ -218,9 +216,7 @@ class Ui {
     System.out.println("4- Due date");
 
     // prompt user for input
-    System.out.print("Enter a choice or 0 for main menu: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+    String input = promptAndGetInput("Enter a choice or 0 for main menu: ");
     handleEditSelectedTask(input, taskIndex);
   }
 
@@ -261,9 +257,7 @@ class Ui {
   private void editTaskDueDate(Integer taskIndex) {
 
     // prompt user for input
-    System.out.print("New Due date: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+    String input = promptAndGetInput("New Due date: ");
     DateParser dateParser = new DateParser();
     LocalDate dueDate = dateParser.getDateFromString(input);
     taskManager.getTask(taskIndex).setDueDate(dueDate);
@@ -279,9 +273,7 @@ class Ui {
   private void editTaskProject(Integer taskIndex) {
 
     // prompt user for input
-    System.out.print("New Project: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+    String input = promptAndGetInput("New Project: ");
     if (!taskManager.doesProjectExist(input)) {
       taskManager.createProject(input);
     }
@@ -298,9 +290,7 @@ class Ui {
   private void editTaskStatus(Integer taskIndex) {
 
     // prompt user for input
-    System.out.print("New Status: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+    String input = promptAndGetInput("New Status: ");
     taskManager.getTask(taskIndex).setTitle(input);
     System.out.println("Task title modified");
     editSelectedTask(taskIndex);
@@ -312,14 +302,18 @@ class Ui {
    * @param taskIndex Index of the task
    */
   private void editTaskTitle(Integer taskIndex) {
+    String input = promptAndGetInput("New title: ");
 
-    // prompt user for input
-    System.out.print("New title: ");
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
     taskManager.getTask(taskIndex).setTitle(input);
     System.out.println("Task title modified");
     editSelectedTask(taskIndex);
+  }
+
+  private String promptAndGetInput(String s) {
+    // prompt user for input
+    System.out.print(s);
+    Scanner scanner = new Scanner(System.in);
+    return scanner.nextLine();
   }
 
   /**
