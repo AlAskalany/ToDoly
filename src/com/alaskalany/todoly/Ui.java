@@ -9,28 +9,50 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.jetbrains.annotations.Contract;
 
+/**
+ * Console user interface for ToDoly application
+ */
 class Ui {
 
+  /**
+   * Task manager
+   */
   private final TaskManager taskManager;
 
+  /**
+   * Console user interface for ToDoly application
+   *
+   * @param taskManager {@link TaskManager} tasks manager
+   */
   Ui(@SuppressWarnings("SameParameterValue") TaskManager taskManager) {
 
     this.taskManager = taskManager;
   }
 
+  /**
+   * Show main menu to user on the console
+   */
   void mainMenu() {
 
+    // print menu title
     System.out.println("ToDoly");
     System.out.println("1- Add a task");
     System.out.println("2- List all tasks");
     System.out.println("3- Save and quit");
     System.out.println();
+
+    // prompt user for input
     System.out.print("Enter a choice: ");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.next();
     handleMainMenuInput(input);
   }
 
+  /**
+   * Handle the input from use for the main menu
+   *
+   * @param input User input from the console
+   */
   private void handleMainMenuInput(String input) {
 
     switch (Integer.valueOf(input)) {
@@ -45,17 +67,24 @@ class Ui {
         break;
       default:
         System.out.println("Enter a valid input.");
+
+        // prompt user for input
         System.out.print("Enter a choice: ");
         mainMenu();
         break;
     }
   }
 
+  /**
+   * Add a new task with a title
+   */
   private void addTask() {
 
     Scanner scanner = new Scanner(System.in);
     scanner.useDelimiter("\n");
     String input;
+
+    // prompt user for input
     System.out.print("Enter task name:");
     input = scanner.next();
     String taskTitle = getTaskTitle(input);
@@ -63,17 +92,30 @@ class Ui {
     mainMenu();
   }
 
+  /**
+   * Get the title of a task
+   *
+   * @param input Title of the task
+   *
+   * @return Title of the task
+   */
   @Contract(value = "_ -> param1", pure = true)
   private String getTaskTitle(String input) {
 
     return input;
   }
 
+  /**
+   * List all tasks
+   */
   private void listAllTasks() {
 
+    // print menu title
     System.out.println("List all tasks by:");
     System.out.println("1- Due date");
     System.out.println("2- Project");
+
+    // prompt user for input
     System.out.print("Enter a choice: ");
     Scanner scanner = new Scanner(System.in);
     String input;
@@ -81,6 +123,11 @@ class Ui {
     handleListAllTasksInput(input);
   }
 
+  /**
+   * Handle user selection of due date or project to sort tasks by
+   *
+   * @param input "1" to sort tasks by due date or "2" to sort tasks by project
+   */
   private void handleListAllTasksInput(String input) {
 
     switch (Integer.valueOf(input)) {
@@ -95,8 +142,12 @@ class Ui {
     }
   }
 
+  /**
+   * List all tasks grouped by project
+   */
   private void listAllTasksByProject() {
 
+    // print menu title
     System.out.println("All Tasks List - By Project");
     System.out.println();
     ArrayList<Project> projects;
@@ -123,14 +174,23 @@ class Ui {
     selectTaskOrMainMenu();
   }
 
+  /**
+   * Go to main menu if input is "0" or edit a task of a given index
+   */
   private void selectTaskOrMainMenu() {
 
+    // prompt user for input
     System.out.print("Enter task number to edit or 0 for main menu");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
     handleSelectTaskOrMainMenu(input);
   }
 
+  /**
+   * Go to main menu if input is "0" or edit a task of a given index
+   *
+   * @param input User input from the console
+   */
   private void handleSelectTaskOrMainMenu(String input) {
 
     switch (Integer.valueOf(input)) {
@@ -143,19 +203,33 @@ class Ui {
     }
   }
 
-  private void editSelectedTask(Integer valueOf) {
+  /**
+   * Edit the selected task
+   *
+   * @param taskIndex Index of the selected task
+   */
+  private void editSelectedTask(Integer taskIndex) {
 
-    System.out.println("Editing Task:" + taskManager.getTaskTitle(valueOf));
+    // print menu title
+    System.out.println("Editing Task:" + taskManager.getTaskTitle(taskIndex));
     System.out.println("1- Title");
     System.out.println("2- Status");
     System.out.println("3- Project");
     System.out.println("4- Due date");
+
+    // prompt user for input
     System.out.print("Enter a choice or 0 for main menu: ");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
-    handleEditSelectedTask(input, valueOf);
+    handleEditSelectedTask(input, taskIndex);
   }
 
+  /**
+   * Handle user input
+   *
+   * @param input     User input from console
+   * @param taskIndex Index of a task selected by the user
+   */
   private void handleEditSelectedTask(String input, Integer taskIndex) {
 
     switch (Integer.valueOf(input)) {
@@ -179,8 +253,14 @@ class Ui {
     }
   }
 
+  /**
+   * Edit due date of the task of a given index
+   *
+   * @param taskIndex Index of the task
+   */
   private void editTaskDueDate(Integer taskIndex) {
 
+    // prompt user for input
     System.out.print("New Due date: ");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
@@ -191,8 +271,14 @@ class Ui {
     editSelectedTask(taskIndex);
   }
 
+  /**
+   * Edit project of the task of a given index
+   *
+   * @param taskIndex Index of the task
+   */
   private void editTaskProject(Integer taskIndex) {
 
+    // prompt user for input
     System.out.print("New Project: ");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
@@ -204,8 +290,14 @@ class Ui {
     editSelectedTask(taskIndex);
   }
 
+  /**
+   * Edit status of the task of a given index
+   *
+   * @param taskIndex Index of the task
+   */
   private void editTaskStatus(Integer taskIndex) {
 
+    // prompt user for input
     System.out.print("New Status: ");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
@@ -214,8 +306,14 @@ class Ui {
     editSelectedTask(taskIndex);
   }
 
+  /**
+   * Edit title of the task of a given index
+   *
+   * @param taskIndex Index of the task
+   */
   private void editTaskTitle(Integer taskIndex) {
 
+    // prompt user for input
     System.out.print("New title: ");
     Scanner scanner = new Scanner(System.in);
     String input = scanner.nextLine();
@@ -224,8 +322,12 @@ class Ui {
     editSelectedTask(taskIndex);
   }
 
+  /**
+   * List all tasks sorted by due date
+   */
   private void listAllTasksByDueDate() {
 
+    // print menu title
     System.out.println("All Tasks List - By Due Date");
     System.out.println();
     ArrayList<String> tasks = taskManager.getAllTasksByDueDate();
@@ -234,6 +336,9 @@ class Ui {
     selectTaskOrMainMenu();
   }
 
+  /**
+   * Save changes and quit the application
+   */
   private void saveAndQuit() {
 
     System.exit(0);
