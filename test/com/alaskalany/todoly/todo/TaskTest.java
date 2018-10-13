@@ -7,9 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.alaskalany.todoly.date.DateHelper;
-import com.alaskalany.todoly.todo.project.Project;
-import com.alaskalany.todoly.todo.task.Task;
+import com.alaskalany.todoly.Utils.DateHelper;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.AfterAll;

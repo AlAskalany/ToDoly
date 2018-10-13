@@ -1,53 +1,86 @@
 package com.alaskalany.todoly.todo.ui;
 
-import com.alaskalany.todoly.parsing.DateParser;
-import com.alaskalany.todoly.todo.taskmanager.TaskManager;
-import org.jetbrains.annotations.Contract;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.ADD_TASK;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.EDIT_SELECTED_TASK;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.EDIT_TASK_DUE_DATE;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.EDIT_TASK_PROJECT;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.EDIT_TASK_STATUS;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.EDIT_TASK_TITLE;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.LIST_ALL_TASKS;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.LIST_ALL_TASKS_BY_DUE_DATE;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.LIST_ALL_TASKS_BY_PROJECT;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.MAIN_MENU;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.SAVE_AND_QUIT;
+import static com.alaskalany.todoly.todo.ui.Ui.CommandType.SELECT_OR_MAIN_MENU;
 
-public interface Ui {
+import com.alaskalany.todoly.Utils.DateParser;
+import com.alaskalany.todoly.todo.TaskManager;
+import com.alaskalany.todoly.todo.ui.commands.Command;
+import com.alaskalany.todoly.todo.ui.commands.CommandFactory;
+import java.util.HashMap;
 
-  void mainMenu();
+public class Ui {
 
-  TaskManager getTaskManager();
+  public static boolean FROM_LIST_BY_DUE_DATE = false;
+  public static boolean FROM_LIST_BY_PROJECT = true;
+  private HashMap<CommandType, Command> commands;
+  private TaskManager taskManager;
+  private DateParser dateParser;
+  private String input;
 
-  DateParser getDateParser();
+  public Ui() {
 
-  void addTask();
+    taskManager = new TaskManager();
+    dateParser = new DateParser();
 
-  @Contract(value = "_ -> param1", pure = true)
-  String getTaskTitle(String input);
+    commands = new HashMap<>();
 
-  void listAllTasks();
+    CommandFactory cmdFactory = new CommandFactory(this);
+    addCommand(cmdFactory, EDIT_TASK_TITLE);
+    addCommand(cmdFactory, LIST_ALL_TASKS_BY_PROJECT);
+    addCommand(cmdFactory, EDIT_SELECTED_TASK);
+    addCommand(cmdFactory, LIST_ALL_TASKS_BY_DUE_DATE);
+    addCommand(cmdFactory, MAIN_MENU);
+    addCommand(cmdFactory, LIST_ALL_TASKS);
+    addCommand(cmdFactory, ADD_TASK);
+    addCommand(cmdFactory, EDIT_TASK_PROJECT);
+    addCommand(cmdFactory, EDIT_TASK_DUE_DATE);
+    addCommand(cmdFactory, EDIT_TASK_STATUS);
+    addCommand(cmdFactory, SAVE_AND_QUIT);
+    addCommand(cmdFactory, SELECT_OR_MAIN_MENU);
+  }
 
-  void listAllTasksByProject();
+  public Command Command(CommandType type) {
+    return commands.get(type);
+  }
 
-  void selectTaskOrMainMenu();
+  public void addCommand(CommandFactory cmdFactory, CommandType editTaskTitle) {
+    commands.put(editTaskTitle, cmdFactory.create(editTaskTitle));
+  }
 
-  void editSelectedTask();
+  public TaskManager getTaskManager() {
 
-  boolean isTaskIndexValid();
+    return taskManager;
+  }
 
-  void editTaskDueDate();
+  public DateParser getDateParser() {
 
-  void editTaskProject();
+    return dateParser;
+  }
 
-  void editTaskStatus();
+  public String getInput() {
 
-  void editTaskTitle();
+    return input;
+  }
 
-  void listAllTasksByDueDate();
+  public void setInput(String input) {
 
-  void saveAndQuit();
+    this.input = input;
+  }
 
-  Integer getValueOf();
-
-  void setValueOf(Integer valueOf);
-
-  Integer getTaskIndex();
-
-  void setTaskIndex(Integer taskIndex);
-
-  String getInput();
-
-  void setInput(String input);
+  public enum CommandType {
+    ADD_TASK, EDIT_SELECTED_TASK, EDIT_TASK_DUE_DATE, EDIT_TASK_PROJECT, EDIT_TASK_STATUS, EDIT_TASK_TITLE,
+    LIST_ALL_TASKS, LIST_ALL_TASKS_BY_DUE_DATE, LIST_ALL_TASKS_BY_PROJECT, MAIN_MENU, SAVE_AND_QUIT,
+    SELECT_OR_MAIN_MENU
+  }
 }

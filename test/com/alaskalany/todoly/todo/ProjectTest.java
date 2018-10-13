@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.alaskalany.todoly.todo.project.Project;
-import com.alaskalany.todoly.todo.task.Task;
 import java.time.LocalDate;
 import java.util.Calendar;
 import org.junit.jupiter.api.AfterEach;
