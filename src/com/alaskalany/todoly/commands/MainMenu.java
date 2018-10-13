@@ -45,7 +45,7 @@ public class MainMenu extends Command {
         print("Enter a valid input.");
 
         // prompt user for input
-        prompt("Enter a choice: ");
+        prompt("Enter a choice");
         new MainMenu(taskManager).invoke();
 
         break;

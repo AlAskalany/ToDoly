@@ -7,6 +7,7 @@ import com.alaskalany.todoly.todo.task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Command {
@@ -24,19 +25,20 @@ public abstract class Command {
   }
 
   protected void prompt(String s) {
-    System.out.print(s);
+    System.out.print(s + ":> ");
   }
 
+  @Contract(" -> new")
   @NotNull
   private Scanner getScanner() {
     return new Scanner(System.in);
   }
 
-  private String getInput(Scanner scanner) {
+  private String getInput(@NotNull Scanner scanner) {
     return scanner.nextLine();
   }
 
-  String getInputString() {
+  private String getInputString() {
     Scanner scanner = getScanner();
     return getInput(scanner);
   }
