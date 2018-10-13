@@ -5,12 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 public class DateParser {
 
-    public DateParser() {
+  public DateParser() {
 
-    }
+  }
 
-    public LocalDate getDateFromString(String inputDate) {
+  public LocalDate getDateFromString(String inputDate) {
 
-        return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
-    }
+    return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
+  }
 }
