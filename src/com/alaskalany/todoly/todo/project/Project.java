@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Project implements Serializable {
    */
   private String title;
 
-  private Project(Builder builder) {
+  private Project(@NotNull Builder builder) {
 
     this.title = builder.title;
     this.id = UUID.randomUUID();
@@ -33,7 +34,7 @@ public class Project implements Serializable {
     setTitle(input);
   }
 
-  private static int getLastTask(ArrayList<Task> tasks) {
+  private static int getLastTask(@NotNull ArrayList<Task> tasks) {
 
     return tasks.size() - 1;
   }

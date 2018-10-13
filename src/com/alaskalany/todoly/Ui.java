@@ -7,6 +7,7 @@ import com.alaskalany.todoly.todo.task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.jetbrains.annotations.Contract;
 
 class Ui {
 
@@ -62,6 +63,7 @@ class Ui {
     mainMenu();
   }
 
+  @Contract(value = "_ -> param1", pure = true)
   private String getTaskTitle(String input) {
 
     return input;

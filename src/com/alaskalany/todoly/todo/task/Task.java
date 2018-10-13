@@ -5,6 +5,7 @@ import com.alaskalany.todoly.todo.project.Project;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Task implements Serializable, Comparable<Task> {
@@ -15,7 +16,7 @@ public class Task implements Serializable, Comparable<Task> {
   private String title;
   private transient Project project;
 
-  private Task(Builder builder) {
+  private Task(@NotNull Builder builder) {
 
     this.title = builder.title;
     this.status = builder.status;
@@ -95,6 +96,8 @@ public class Task implements Serializable, Comparable<Task> {
             getProjectOrNoProjectString(), getStatusString());
   }
 
+  @NotNull
+  @Contract(pure = true)
   private String getStatusString() {
 
     return (status != null && status) ? "Done" : "To do";
@@ -105,6 +108,7 @@ public class Task implements Serializable, Comparable<Task> {
     return (project != null) ? getTitleString() : "No project";
   }
 
+  @NotNull
   private String getDueDateOrNoDueDateString() {
 
     return (dueDate != null) ? DateHelper.getFormattedDateFromLocalDate(dueDate) : "No due date";
