@@ -13,8 +13,6 @@ class EditTaskDueDateMenu extends Command {
   }
 
   public void invoke() {
-    // prompt user for input
-
     String input = promptForInput("New Due date: ");
     LocalDate dueDate = getLocalDate(input);
     taskManager.getTask(taskIndex).setDueDate(dueDate);

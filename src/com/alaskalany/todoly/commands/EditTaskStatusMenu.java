@@ -13,12 +13,9 @@ class EditTaskStatusMenu extends Command {
   }
 
   public void invoke() {
-    // prompt user for input
-
     String input = promptForInput("New Status: ");
     taskManager.getTask(taskIndex).setTitle(input);
     print("Task title modified");
     new EditSelectedTaskMenu(taskIndex, taskManager).invoke();
-
   }
 }

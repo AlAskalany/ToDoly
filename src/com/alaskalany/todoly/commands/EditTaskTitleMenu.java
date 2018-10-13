@@ -13,10 +13,7 @@ class EditTaskTitleMenu extends Command {
   }
 
   public void invoke() {
-    // prompt user for input
-
     String input = promptForInput("New title: ");
-
     taskManager.getTask(taskIndex).setTitle(input);
     print("Task title modified");
     new EditSelectedTaskMenu(taskIndex, taskManager).invoke();

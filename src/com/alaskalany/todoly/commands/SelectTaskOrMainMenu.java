@@ -1,7 +1,6 @@
 package com.alaskalany.todoly.commands;
 
 import com.alaskalany.todoly.todo.TaskManager;
-import java.util.Scanner;
 
 class SelectTaskOrMainMenu extends Command {
 
@@ -10,9 +9,6 @@ class SelectTaskOrMainMenu extends Command {
   }
 
   public void invoke() {
-    // prompt user for input
-    // prompt user for input
-
     String input = promptForInput("Enter task number to edit or 0 for main menu");
     handleSelectTaskOrMainMenu(input);
   }
@@ -23,7 +19,6 @@ class SelectTaskOrMainMenu extends Command {
    * @param input User input from the console
    */
   private void handleSelectTaskOrMainMenu(String input) {
-
     switch (inputToInteger(input)) {
       case 0:
         new MainMenu(taskManager).invoke();

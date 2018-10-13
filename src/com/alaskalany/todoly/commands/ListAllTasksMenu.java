@@ -13,9 +13,6 @@ class ListAllTasksMenu extends Command {
     print("List all tasks by:");
     print("1- Due date");
     print("2- Project");
-
-    // prompt user for input
-
     String input = promptForInput("Enter a choice: ");
     handleListAllTasksInput(input);
   }
@@ -26,15 +23,12 @@ class ListAllTasksMenu extends Command {
    * @param input "1" to sort tasks by due date or "2" to sort tasks by project
    */
   private void handleListAllTasksInput(String input) {
-
     switch (inputToInteger(input)) {
       case 1:
         new ListAllTasksByDueDateMenu(taskManager).invoke();
-
         break;
       case 2:
         new ListAllTasksByProjectMenu(taskManager).invoke();
-
         break;
       default:
         break;

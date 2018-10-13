@@ -11,7 +11,6 @@ class ListAllTasksByProjectMenu extends Command {
   }
 
   public void invoke() {
-    // print menu title
     print("All Tasks List - By Project");
     printLineBreak();
     ArrayList<Project> projects = getProjects();

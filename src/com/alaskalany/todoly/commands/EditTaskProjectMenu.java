@@ -13,8 +13,6 @@ class EditTaskProjectMenu extends Command {
   }
 
   public void invoke() {
-    // prompt user for input
-
     String input = promptForInput("New Project: ");
     if (!projectExists(input)) {
       createProject(input);

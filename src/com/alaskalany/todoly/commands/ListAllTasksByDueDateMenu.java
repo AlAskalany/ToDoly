@@ -10,7 +10,6 @@ class ListAllTasksByDueDateMenu extends Command {
   }
 
   public void invoke() {
-    // print menu title
     print("All Tasks List - By Due Date");
     printLineBreak();
     ArrayList<String> tasks = getTasksStringsByDueDate();
