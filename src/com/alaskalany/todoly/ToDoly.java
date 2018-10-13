@@ -13,7 +13,7 @@ public class ToDoly {
    */
   public static void main(String[] args) {
     Ui ui = new Ui();
-    ui.Command(CommandType.MAIN_MENU).invoke(taskIndex);
+    ui.Command(CommandType.MAIN_MENU).invoke(null);
   }
 
 }

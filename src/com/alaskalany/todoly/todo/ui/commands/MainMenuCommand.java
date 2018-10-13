@@ -49,7 +49,7 @@ class MainMenuCommand implements InputCommand {
   @Override
   public void handleInput(Integer taskIndex) {
 
-    switch (Integer.valueOf(input)) {
+    switch (taskIndex) {
       case 1:
         ui.Command(CommandType.ADD_TASK).invoke(taskIndex);
         break;

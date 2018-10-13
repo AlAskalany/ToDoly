@@ -37,7 +37,7 @@ class ListAllTasksCommand implements InputCommand {
   @Override
   public void handleInput(Integer taskIndex) {
 
-    switch (Integer.valueOf(ui.getInput())) {
+    switch (taskIndex) {
       case 1:
         ui.Command(CommandType.LIST_ALL_TASKS_BY_DUE_DATE).invoke(taskIndex);
         break;
