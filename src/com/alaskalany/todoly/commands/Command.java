@@ -86,7 +86,7 @@ public abstract class Command {
     String projectTitle = project.getTitle();
     print(projectTitle);
     printLineBreak();
-    ArrayList<Task> allTasks = project.getAllTasks();
+    ArrayList<Task> allTasks = project.getTasks();
     allTasks
         .forEach(task -> {
           int indexOfTask = allTasks.indexOf(task);

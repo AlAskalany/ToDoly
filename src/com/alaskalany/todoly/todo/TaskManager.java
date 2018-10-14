@@ -40,9 +40,9 @@ public class TaskManager {
     return projects.containsKey(input);
   }
 
-  public void createProject(String input) {
+  public void createProject(String title) {
 
-    projects.put(input, new Project(input));
+    projects.put(title, new Project.Builder().title(title).build());
   }
 
   public void addTaskToProject(Integer taskIndex, String input) {
@@ -54,7 +54,7 @@ public class TaskManager {
 
     ArrayList<String> taskTitles = new ArrayList<>();
     tasks.forEach(task -> {
-      if (!task.hasProject()) {
+      if (task.getProject() != null) {
         taskTitles.add(task.toString());
       }
     });

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -13,10 +15,12 @@ import org.jetbrains.annotations.NotNull;
 public class Project implements Serializable {
 
   private static final long serialVersionUID = 1L;
+  private final Predicate<Task> finishedTask = Task::getStatus;
+  private final Predicate<Task> unfinishedTask = task -> !task.getStatus();
   /**
    * List of tasks in the project
    */
-  private final ArrayList<Task> tasks = new ArrayList<>();
+  private ArrayList<Task> tasks = new ArrayList<>();
   private UUID id;
   /**
    * Project title
@@ -29,25 +33,13 @@ public class Project implements Serializable {
     this.id = UUID.randomUUID();
   }
 
-  public Project(String input) {
-
-    setTitle(input);
-  }
-
-  private static int getLastTask(@NotNull ArrayList<Task> tasks) {
-
-    return tasks.size() - 1;
-  }
-
   /**
    * @param label {@link String Label of the task}
    * @param date  {@link String Due date for the task}
    */
   public void addTask(String label, LocalDate date) {
     // TODO how and where to create task id?
-    Task task = new Task.Builder().title(label).dueDate(date).status(false).projectId(this.id)
-        .build();
-    tasks.add(task);
+    new Task.Builder().title(label).dueDate(date).status(false).project(this).build();
   }
 
   /**
@@ -59,11 +51,11 @@ public class Project implements Serializable {
   }
 
   /**
-   * @param new_project_name {@link String} New project title
+   * @param title {@link String} New project title
    */
-  public void setTitle(@SuppressWarnings("SameParameterValue") String new_project_name) {
+  public void setTitle(String title) {
 
-    title = new_project_name;
+    this.title = title;
   }
 
   /**
@@ -75,42 +67,17 @@ public class Project implements Serializable {
   }
 
   /**
-   * @return {int} Number of tasks in the project
-   */
-  public int numTasks() {
-
-    return tasks.size();
-  }
-
-  /**
    * @return {int} Number of finished tasks in the project
    */
-  public int numFinishedTasks() {
-
-    int finishedTasksCount = 0;
-    for (Task task : tasks) {
-      if (task.getStatus()) {
-        finishedTasksCount += 1;
-      }
-    }
-    return finishedTasksCount;
-  }
-
-  public ArrayList<Task> getAllTasks() {
-
-    return tasks;
+  public int finishedTasksCount() {
+    return Math.toIntExact(tasks.stream().filter(finishedTask).count());
   }
 
   /**
    * Deletes all tasks in the project
    */
   public void deleteAllTasks() {
-    // Start from the last task in the tasks list
-    int i = getLastTask(tasks);
-    // Remove every task
-    while (numTasks() > 0) {
-      removeTask(i--);
-    }
+    tasks.clear();
   }
 
   /**
@@ -118,22 +85,16 @@ public class Project implements Serializable {
    */
   public int getUnfinishedTasksCount() {
     //noinspection UnnecessaryLocalVariable
-    int numUnfinishedTasks = numTasks() - numFinishedTasks();
-    return numUnfinishedTasks;
+
+    return Math.toIntExact(tasks.stream().filter(unfinishedTask).count());
   }
 
   /**
    * Deletes all finished tasks in the project
    */
   public void deleteFinishedTasks() {
-    // Start from the last task in the tasks list
-    int i = getLastTask(tasks);
-    while (i > 0) {
-      if (getTask(i).getStatus()) {
-        removeTask(i);
-      }
-      i--;
-    }
+
+    tasks = tasks.stream().filter(finishedTask).collect(Collectors.toCollection(ArrayList::new));
   }
 
   public void removeTask(int i) {
@@ -177,9 +138,4 @@ public class Project implements Serializable {
     }
   }
   // [END builder]
-
-    /*@Override
-    public String toString() {
-        return new StringBuffer(" id: ").append(this.id).append(" title: ").append(this.title).toString();
-    }*/
 }

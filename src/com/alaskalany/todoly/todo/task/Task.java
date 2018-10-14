@@ -4,14 +4,11 @@ import com.alaskalany.todoly.date.DateHelper;
 import com.alaskalany.todoly.todo.project.Project;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.UUID;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Task implements Serializable, Comparable<Task> {
 
   private LocalDate dueDate;
-  private UUID projectId;
   private Boolean status;
   private String title;
   private transient Project project;
@@ -21,14 +18,12 @@ public class Task implements Serializable, Comparable<Task> {
     this.title = builder.title;
     this.status = builder.status;
     this.dueDate = builder.dueDate;
-    this.projectId = builder.projectId;
     this.project = builder.project;
   }
 
   public void setProject(Project project) {
 
     this.project = project;
-    this.projectId = project.getId();
   }
 
   public String getTitle() {
@@ -36,9 +31,9 @@ public class Task implements Serializable, Comparable<Task> {
     return title;
   }
 
-  public void setTitle(@SuppressWarnings("SameParameterValue") String label) {
+  public void setTitle(String title) {
 
-    this.title = label;
+    this.title = title;
   }
 
   public LocalDate getDueDate() {
@@ -53,30 +48,15 @@ public class Task implements Serializable, Comparable<Task> {
   }
 
   @SuppressWarnings("WeakerAccess")
-  public void setStatusTrue() {
-
-    status = true;
-  }
-
-  @SuppressWarnings("WeakerAccess")
   public Boolean getStatus() {
 
     return status;
   }
 
-  public void setStatusFalse() {
+  @SuppressWarnings("WeakerAccess")
+  public void setStatus(boolean status) {
 
-    status = false;
-  }
-
-  public UUID getProjectId() {
-
-    return projectId;
-  }
-
-  public void setProjectId(UUID projectId) {
-
-    this.projectId = projectId;
+    this.status = status;
   }
 
   @Override
@@ -92,44 +72,22 @@ public class Task implements Serializable, Comparable<Task> {
   public String toString() {
 
     return String
-        .format("%s | %s | %s | %s", title, getDueDateOrNoDueDateString(),
-            getProjectOrNoProjectString(), getStatusString());
+        .format("%s | %s | %s | %s", title,
+            (dueDate != null) ? DateHelper.getFormattedDateFromLocalDate(dueDate) : "No due date",
+            (project != null) ? project.getTitle() : "No project",
+            (status != null && status) ? "Done" : "To do");
   }
 
-  @NotNull
-  @Contract(pure = true)
-  private String getStatusString() {
-
-    return (status != null && status) ? "Done" : "To do";
+  public Project getProject() {
+    return project;
   }
 
-  private String getProjectOrNoProjectString() {
-
-    return (project != null) ? getTitleString() : "No project";
-  }
-
-  @NotNull
-  private String getDueDateOrNoDueDateString() {
-
-    return (dueDate != null) ? DateHelper.getFormattedDateFromLocalDate(dueDate) : "No due date";
-  }
-
-  private String getTitleString() {
-
-    return project.getTitle();
-  }
-
-  public boolean hasProject() {
-
-    return project != null;
-  }
-
+  // [START builder]
   public static class Builder {
 
-    Project project;
+    private Project project;
     private String title;
     private Boolean status;
-    private UUID projectId;
     private LocalDate dueDate;
 
     public Builder title(String title) {
@@ -141,12 +99,6 @@ public class Task implements Serializable, Comparable<Task> {
     public Builder status(Boolean status) {
 
       this.status = status;
-      return this;
-    }
-
-    public Builder projectId(UUID projectId) {
-
-      this.projectId = projectId;
       return this;
     }
 
@@ -165,10 +117,10 @@ public class Task implements Serializable, Comparable<Task> {
       return this;
     }
 
-    @Override
-    public String toString() {
-
-      return String.format("%s | ", title);
+    public Builder project(Project project) {
+      this.project = project;
+      return this;
     }
   }
+  // [END builder]
 }
