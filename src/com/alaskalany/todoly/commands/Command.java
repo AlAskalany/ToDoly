@@ -74,7 +74,7 @@ public abstract class Command {
 
   ArrayList<Project> getProjects() {
     ArrayList<Project> projects;
-    projects = taskManager.getAllProjects();
+    projects = taskManager.getProjectsList();
     return projects;
   }
 
